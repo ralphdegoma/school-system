@@ -29,12 +29,19 @@
 @section('content')
 
 <div class="col-md-12">
-  <div class="wyred-box-header">
-    <h3 class="wyred-box-title"><i class="fa fa-pencil"></i>  ACADEMIC SETUP</h3>
-  </div>
-  <div class="wyred-box-body">
-  <div class="row" >
-    <div class="tabs-container">
+<div class="portlet box red">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-cogs"></i>Modal Dialogs
+              </div>
+              <div class="tools">
+
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="row" >
+              <div class="col-md-12">
+         <div class="tabs-container">
 
         <div class="tabs-left">
             <ul class="nav nav-tabs">
@@ -274,9 +281,8 @@
     </div>
      
   </div>
-</div>
-<div class="wyred-box-footer">
-  
+            </div>
+          </div>
 </div>
 </div>
 
