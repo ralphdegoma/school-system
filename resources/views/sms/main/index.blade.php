@@ -24,8 +24,18 @@
 @include('admin.jslinks.js_initial')
 @yield('js_filtered')
 
-<script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
+<script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="/assets/admin/layout4/scripts/layout.js" type="text/javascript"></script>
+<script src="/assets/admin/layout4/scripts/demo.js" type="text/javascript"></script>
+
+<script>
+jQuery(document).ready(function() {    
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+});
+</script>
 
 </body>
 </html>

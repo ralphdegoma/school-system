@@ -49,7 +49,32 @@
 <script src="/assets/plugins/chartjs/Chart.min.js"></script>
 
 <!-- TEMPLATE -->
-<script type="text/javascript" src="/assets/js/settings.js"></script>
+<!-- <script type="text/javascript" src="/assets/js/settings.js"></script>
 <script type="text/javascript" src="/assets/js/plugins.js"></script>        
 <script type="text/javascript" src="/assets/js/actions.js"></script>
-<script type="text/javascript" src="/assets/js/demo_dashboard.js"></script>
+<script type="text/javascript" src="/assets/js/demo_dashboard.js"></script> -->
+
+
+<script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+<script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="/assets/admin/layout4/scripts/layout.js" type="text/javascript"></script>
+<script src="/assets/admin/layout4/scripts/demo.js" type="text/javascript"></script>
+
+<script>
+jQuery(document).ready(function() {    
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+});
+</script>

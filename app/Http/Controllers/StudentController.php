@@ -13,6 +13,7 @@ use App\Student_Status;
 use App\Parents_Students;
 use App\Student_Images;
 use App\Relationships;
+use App\Batch;
 use Image;
 use File;
 use Storage;
@@ -32,20 +33,19 @@ class StudentController extends Controller
             $Students = new Students(); 
         }
 
-        $check = new Students(); 
-        $check = $check->where('student_id','<>',Request::input('student_id_old'))
-                            ->where('student_id',Request::input('student_id'))->get();
+    
+        $checkBatch = new Batch(); 
+        $checkBatch = $checkBatch->where('isActive','=',"1")->first();
 
-        if(count($check) > 0){
+        if(count($checkBatch) == 0){
 
             $return = new rrdReturn();
             return $return->status(false)
-                      ->message('Student ID already exist, please specify another one.')
+                      ->message('Assign first batch id , cannot save student.')
                       ->show();
         }
 
-
-        $Students->student_id        = Request::input('student_id');
+        $Students->batch_id          = $checkBatch->batch_id;
         $Students->student_status_id = '1';
         $Students->first_name        = Request::input('first_name');
         $Students->middle_name       = Request::input('middle_name');
@@ -60,7 +60,7 @@ class StudentController extends Controller
         $Students->tel_no            = Request::input('tel_no');
         $Students->save();
 
-        $StudentsId = Request::input('student_id');
+        $StudentsId = $Students->max('student_id');
 
         if(Request::input('parental') == "default"){
 
@@ -344,6 +344,38 @@ class StudentController extends Controller
         return view('sms/registrar/student-registration')
                 ->with('student',$student)
                 ->with('student_id',$student_id);
+    }
+
+    public function searchStudent(){
+
+
+        $id  = substr(Request::input('searchInput'), 3);
+
+        $students = Students::where('first_name', 'like','%'.Request::input('searchInput').'%')
+                            ->orwhere('last_name', 'like','%'.Request::input('searchInput').'%')
+                            ->orwhere('middle_name', 'like','%'.Request::input('searchInput').'%')
+                            ->orwhere('student_id', '=',$id)
+                        ->get();
+
+        if(count($students) == 0){
+            return "";
+        }
+        return view('sms.registrar.students-found')->with('students',$students);
+
+    }
+
+    public function searchStudentAlphabet(){
+
+
+        $id  = substr(Request::input('searchInput'), 3);
+
+        $students = Students::where('last_name', 'like',Request::input('searchInput').'%')->get();
+
+        if(count($students) == 0){
+            return "";
+        }
+
+        return view('sms.registrar.students-found')->with('students',$students);
     }
 
     

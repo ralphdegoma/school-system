@@ -25,7 +25,6 @@ class Students extends Model
     }
 
     public function setbirthdayAttribute($value) {
-        $value = $value;
         $birthday = date("Y/m/d", strtotime($value));
         $this->attributes['birthday'] = strtolower($birthday);
     }

@@ -32,7 +32,6 @@ class Parents extends Model
     }
 
     public function setdobAttribute($value) {
-        $value = $value;
         $birthday = date("Y/m/d", strtotime($value));
         $this->attributes['dob'] = strtolower($birthday);
     }

@@ -2,137 +2,169 @@
 
 @section('css_filtered')
 @include('admin.csslinks.css_crud')
-<link href="/assets/css/custom/studentlist.css" rel="stylesheet">
 <style type="text/css">
       
       .grid_space{
           margin-top:6px;
           margin-bottom: 3px;
       }
+      .student-panel{
+          margin-top: 10px;
+      }
+      
+
+      .profile-pic{
+          cursor: pointer;
+          border: 10px solid #fff;
+          border-bottom: 45px solid #fff;
+          -webkit-box-shadow: 3px 3px 3px #777;
+             -moz-box-shadow: 3px 3px 3px #777;
+                  box-shadow: 3px 3px 3px #777;
+      }
+
 
 </style>
 @stop
 
 @section('content')
 
-<div class="col-md-12">
-  <div class="wyred-box-header">
-    <h3 class="wyred-box-title"><i class="fa fa-user"></i> REGISTERED LIST</h3>
+
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+          
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <p>Use search to find contacts. You can students by: name, address, grade level,section. Or use the advanced search.</p>
+                      <div class="form-group">
+                          <div class="col-md-8">
+                              <div class="input-group">
+                                  <div class="input-group-addon">
+                                      <span class="fa fa-search"></span>
+                                  </div>
+                                  <input type="text" class="form-control" id="searchInput" placeholder="Who are you looking for?"/>
+                                  <div class="input-group-btn">
+                                      <button class="btn btn-primary" id="SearchBtn">Search</button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <a href="/sms/registrar/student-registration" class="btn btn-success btn-block"><span class="fa fa-plus"></span> Add new Students</a>
+                          </div>
+                      </div>
+              </div>
+          </div>
+          
+      </div>
+  </div> 
+
+
+
+<div class="row">
+      <div class="col-md-12">
+
+        <div class="text-center">
+          <ul class="pagination pagination-lg" >
+              <li class="disabled"><a href="#">«</a></li>
+              <li class="page"><a href="#">A</a></li>
+              <li class="page"><a href="#">B</a></li>
+              <li class="page"><a href="#">C</a></li>
+              <li class="page"><a href="#">D</a></li>  
+              <li class="page"><a href="#">E</a></li>
+              <li class="page"><a href="#">F</a></li>                                  
+              <li class="page"><a href="#">G</a></li>
+              <li class="page"><a href="#">H</a></li>
+              <li class="page"><a href="#">I</a></li>
+              <li class="page"><a href="#">J</a></li>
+              <li class="page"><a href="#">K</a></li>
+              <li class="page"><a href="#">L</a></li>
+              <li class="page"><a href="#">M</a></li>
+              <li class="page"><a href="#">N</a></li>
+              <li class="page"><a href="#">O</a></li>
+              <li class="page"><a href="#">P</a></li>
+              <li class="page"><a href="#">Q</a></li>
+              <li class="page"><a href="#">R</a></li>
+              <li class="page"><a href="#">S</a></li>
+              <li class="page"><a href="#">T</a></li>
+              <li class="page"><a href="#">U</a></li>
+              <li class="page"><a href="#">V</a></li>
+              <li class="page"><a href="#">W</a></li>
+              <li class="page"><a href="#">X</a></li>
+              <li class="page"><a href="#">Y</a></li>
+              <li class="page"><a href="#">Z</a></li>
+              <li class="page disabled"><a href="#">»</a></li>
+          </ul> 
+        </div>                           
+      </div>
+</div>
+
+
+
+  <div id="loading-stage" style="display: none">
+      <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar"
+              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+              <label>Processing your request. Please wait.</label>
+          </div>
+      </div>
   </div>
-  <div class="wyred-box-body">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel-group" id="accordion">
-        
 
 
-                  <div class="page-content-wrap">
+  <div class="row" id="student-body" >
+
+
+
+  @foreach($students as $student)
+
+    <?php
+          
+              $image_link = "assets/people/students/".$student->student_id."/images/medium.jpg";
+          if (File::exists($image_link)){
+              $image_link = "/assets/people/students/".$student->student_id."/images/medium.jpg";
+          }else{
+              $image_link = "/assets/img/default.png";
+          }
+
+     ?>
+
+    <div class="col-md-2 animated fadeInLeft student-panel">
+        <!-- CONTACT ITEM -->
+        <div class="panel panel-default" >
+            <div class="panel-body profile" >
+                <div class="profile-image">
+                    <img src="{{$image_link}}" class="profile-pic" style="width:100%">
+                </div>
+                <div class="profile-data">
+                    <div class="profile-data-name">
                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <p>Use search to find contacts. You can search by: name, address, phone. Or use the advanced search.</p>
-                                        <div class="form-group">
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <span class="fa fa-search"></span>
-                                                    </div>
-                                                    <input type="text" class="form-control" placeholder="Who are you looking for?"/>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-primary">Search</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <a href="/sms/registrar/student-registration"><button class="btn btn-success btn-block"><span class="fa fa-plus"></span> Add new contact</button></a>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                            
-                        </div>
+                      <b>{{$student->last_name}}, {{$student->first_name}} {{$student->middle_name}}</b>
                     </div>
-                    
-                    <div class="row">
+                    <div class="profile-data-title"><h3><b>000{{$student->student_id}}</b></h3></div>
+                </div>
+                            </div>                                
+            <div class="panel-body">                                    
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-block" id="SearchBtn"><i class="fa fa-external-link"></i> VIEW INFO</button>
+                </div>
+
+                <div class="input-group-btn">
+                    <a href="/admin/student/{{$student->student_id}}/edit"><button class="btn btn-success btn-block" ><i class="fa fa-pencil"></i> EDIT INFO</button></a>
+                </div>
+            </div>                                
+        </div>
+        <!-- END CONTACT ITEM -->
+    </div>
+    @endforeach
 
 
-                        @foreach($students as $students)
 
-                        <?php                            
-                            $age = floor((time() - strtotime($students->birthday)) / 31556926);
-                        ?>
-                        <div class="col-md-3 grid_space" >
-                            <!-- CONTACT ITEM -->
-                            <div class="panel panel-default">
-                                <div class="panel-body profile">
-                                    <div class="profile-image">
-                                        <img src="/assets/img/default.png" alt="Nadia Ali"/>
-                                    </div>
-                                    <div class="profile-data">
-                                        <div class="profile-data-name">{{$students->last_name}}, {{$students->first_name}} {{$students->middle_name}}</div>
-<!--                                         <div class="profile-data-title">Singer-Songwriter</div>
- -->                                    </div>
-                                    <div class="profile-controls">
-                                        <a href="#" class="profile-control-left"><span class="fa fa-info"></span></a>
-                                        <a href="#" class="profile-control-right"><span class="fa fa-phone"></span></a>
-                                    </div>
-                                </div>                                
-                                <div class="panel-body">                                    
-                                    <div class="contact-info">
-                                        <p><small>Age</small><br/>{{$age}}</p>
-                                        <p><small>Address</small><br/>{{$students->home_address}}</p>
-                                        <p><small>Status</small><br/>Active</p>                                   
-                                    </div>
-                                </div>                                
-                            </div>
-                            <!-- END CONTACT ITEM -->
-                        </div>
+ </div>
 
-                        @endforeach
 
 
                       
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ul class="pagination pagination-sm pull-right push-down-10 push-up-10">
-                                <li class="disabled"><a href="#">«</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>                                    
-                                <li><a href="#">»</a></li>
-                            </ul>                            
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    </div>
-    <div class="col-md-12">
-     
-      </div>
-  </div>
-</div>
-<div class="wyred-box-footer">
- 
-</div>
-</div>
 
 
 <div class="modal inmodal fade" id="enrolled-student" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -223,8 +255,94 @@
 @include('admin.jslinks.js_datatables')
 <script src ="/assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
 
+
+
     
 <script>
+
+$('.page').click(function(){
+    var alphabet = $(this).text();
+    searchStudentAlphabet(alphabet);
+});
+
+$('.profile-pic').click(function(){
+    $('selector').css( 'cursor', 'pointer' );
+});
+
+
+$('#SearchBtn').click(function(){
+    var searchInput = $('#searchInput').val();
+    searchStudent(searchInput);
+})
+
+function searchStudent(searchInput){
+
+    $('#loading-stage').show();
+    $('#student-body').html('');
+    $.ajax({
+        url: "/sms/registrar/search-student?searchInput="+searchInput,
+        type: 'GET',
+        async: false,
+        success:function(data){
+          
+          if(data != ""){
+
+
+              setTimeout(function(){ $('#loading-stage').hide(); 
+                  var response = $(data).find('.student-body');
+                  console.log(response);
+                  $('#student-body').html(response);
+              }, 1500);
+            
+
+          }else{
+
+
+              var nodata = '<div class="col-md-12 text-center"><h4> We cannot find what you are looking for, try some another keys.</h4></div>';
+              $('#student-body').html(nodata);
+              $('#loading-stage').hide();
+
+          }    
+        }
+      });
+}
+
+
+
+function searchStudentAlphabet(searchInput){
+
+    $('#loading-stage').show();
+    $('#student-body').html('');
+    $.ajax({
+        url: "/sms/registrar/search-student-alphabet?searchInput="+searchInput,
+        type: 'GET',
+        async: false,
+        success:function(data){
+          
+          if(data != ""){
+
+
+              setTimeout(function(){ $('#loading-stage').hide(); 
+                  var response = $(data).find('.student-body');
+                  console.log(response);
+                  $('#student-body').html(response);
+              }, 500);
+            
+
+          }else{
+
+
+              var nodata = '<div class="col-md-12 text-center"><h4> We cannot find what you are looking for, try some another keys.</h4></div>';
+              $('#student-body').html(nodata);
+              $('#loading-stage').hide();
+
+          }    
+        }
+
+
+      });
+}
+
 $(document).ready(function(){
     $('#summer-div').hide();
 
@@ -440,5 +558,8 @@ $(function(){
     $(newcontent).removeClass('hidden');
   });
 });
+
+
+
 </script>
 @stop

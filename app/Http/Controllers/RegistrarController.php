@@ -14,7 +14,7 @@ use DatatableFormat;
 use Validator;
 use Redirect;
 use App\RfSection;
-
+use App\DtAssignSubject;
 class RegistrarController extends Controller
 {
     //
@@ -60,7 +60,6 @@ class RegistrarController extends Controller
 	public function saveSchoolYear(){
 
 		$request = Request::all();
-
 		$schoolYear = new RfSchoolYear;
 
 		$schoolYear->sy_from = $request['syFrom'];
@@ -116,11 +115,25 @@ class RegistrarController extends Controller
 
 	}
 
-	public function removeGrade($id){
+	public function Remove($remove,$id){
 	
 	$return = new rrdReturn();
 	try{
- 		RfGradeLevel::where('grade_level_id',$id)->delete();
+		if($remove == 'section'){
+			RfSection::where('section_id',$id)->delete();
+		}
+		elseif($remove == 'grade'){
+			RfGradeLevel::where('grade_level_id',$id)->delete();
+		}
+		elseif($remove == 'year'){
+			RfSchoolYear::where('school_year_id',$id)->delete();
+		}
+		elseif($remove == 'subject'){
+			RfSubjects::where('subject_id',$id)->delete();
+		}
+		elseif($remove == 'assign-subject'){
+			DtAssignSubject::where('assign_subject_id',$id)->delete();
+		}
  		return $return->status(true)
 	                      ->message("Successfully Deleted!.")
 	                      ->show();
@@ -131,6 +144,13 @@ class RegistrarController extends Controller
 	                      ->show();
 	}
 		
+
+	}
+
+	public function Edit($id){
+		$editGrade = RfGradeLevel::where('grade_level_id',$id)->get();
+
+		return $editGrade;
 
 	}
 
@@ -158,5 +178,27 @@ class RegistrarController extends Controller
 		return $gradeType;
 
 	}
+	public function assignSubject(){
+		$request 				= Request::all();
+		$assign 				= new DtAssignSubject;
+		$assign->subject_id 	= $request['gradeSubject'];
+		$assign->grade_level_id = $request['grade_level'];
+		$assign->save();
+
+		$return = new rrdReturn();
+		return $return->status(true)
+	                      ->message("That is amazing! User has been Created!.")
+	                      ->show();
+
+	}
+	public function getAssignSubject(){
+
+		$assign = DtAssignSubject::with('getSubjects','getGradeLevel')->get();
+
+		$datatableFormat = new DatatableFormat();
+      	return $datatableFormat->format($assign);
+
+	}
+
 
 }

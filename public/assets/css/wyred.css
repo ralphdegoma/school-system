@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,500,600,700&subset=latin,latin-ext);
+
 .wyred-box-header{
 	width: 100%;
 	height: 50px!important;
@@ -21,6 +23,7 @@
 	background: #E4DADA;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+    border: 1px solid #d78184;
 }
 .wyred-button {
 	padding-top: 8px!important;
@@ -60,4 +63,39 @@ select {
 }
 .form-group {
     margin-bottom: 10px!important;
+}
+
+
+
+
+
+
+
+
+
+
+.profile .profile-image {
+    float: left;
+    width: 100%;
+    margin: 0px 0px 10px;
+    text-align: center;
+}
+.profile .profile-data {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+h3,
+.h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.security-mo-z {
+	z-index: 999999!important;
+}
+.mo-z {
+	z-index: 9999!important;
 }

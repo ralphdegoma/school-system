@@ -47,6 +47,16 @@ function modalSuccess(message){
 	modalBodyAnimation();
     return false;
 }
+
+$('input, textarea, select').click(function(){
+		var snd = new Audio("/assets/music/alert.mp3"); // buffers automatically when created
+		snd.play();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+
  $(function() {
 
         $('.wyredSaveBtn').click(function(e){
@@ -70,7 +80,34 @@ function modalSuccess(message){
 		  	formValidate.validate({
 
 		          ignoreTitle: true,
-		          debug:true
+		          debug:true,
+		          errorPlacement: function(error, element) {
+					    var errorInput = element[0].validationMessage;
+					    $(element).attr('data-toggle', "popover");
+					    $(element).attr('data-placement', "top");
+					    
+					    $(element).popover({
+
+					    	container: "body",
+						    html: true,
+						    content: function () {
+						        return '<div class="popover-message">' + errorInput + '</div>';
+						    }
+
+						    
+						});
+
+
+					    $('.popover').show();
+						$(element).popover('show');
+						$('.popover').css('background-color', '#f36a5a');
+					    $('.popover').css('color', '#fff');
+
+					    
+
+					},
+
+
 		  	});
 		 
 

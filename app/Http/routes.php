@@ -38,8 +38,8 @@ Route::get('/select-binder/get-guardian','SelectBinderController@getGuardian');
 Route::get('/sms/registrar/student-registration','MainloaderController@studentRegistration');
 Route::post('/admin/new-student/registration','StudentController@newStudentSave');
 Route::get('/admin/student/{student_id}/edit','StudentController@editStudent');
-
-
+Route::get('/sms/registrar/search-student','StudentController@searchStudent');
+Route::get('/sms/registrar/search-student-alphabet','StudentController@searchStudentAlphabet');
 
 
 //R E G I S T E R E D | L I S T
@@ -63,14 +63,22 @@ Route::get('sms/registrar/getgrade','RegistrarController@getGrade');
 Route::get('sms/registrar/year','RegistrarController@getYear');
 Route::get('sms/registrar/subject','RegistrarController@getSubject');
 Route::get('sms/registrar/get-section','RegistrarController@getSection');
+Route::get('/sms/registrar/get-assign-subject','RegistrarController@getAssignSubject');
+Route::post('sms/registrar/assign-subject','RegistrarController@assignSubject');
+
 
 Route::post('/sms/registrar/save-grade-level','RegistrarController@saveGradeLevel');
 Route::post('/sms/registrar/save-school-year','RegistrarController@saveSchoolYear');
 Route::post('/sms/registrar/save-subject','RegistrarController@saveSubject');
 Route::get('/sms/registrar/grade','RegistrarController@gradeLevel');
 
-Route::post('/sms/registrar/remove-grade/{id}', 'RegistrarController@removeGrade');
+Route::post('/sms/registrar/remove/{remove}/{id}', 'RegistrarController@Remove');
+Route::post('/sms/registrar/edit/grade/{id}', 'RegistrarController@Edit');
 Route::post('/sms/registrar/save-section','RegistrarController@saveSection');
+
+// K R O N O S
+Route::get('/sms/kronos/time-attendance','MainloaderController@timeAttendance');
+Route::get('/sms/kronos/schedulling','MainloaderController@schedulling');
 
 
 

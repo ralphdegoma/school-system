@@ -88,5 +88,14 @@ class MainloaderController extends Controller
       return view('sms.setup.academics', compact('classType','gradeType','sectionType','schoolYear','subject','gradeLevel'));
     }
 
-    
+    // K R O N O S
+
+    public function timeAttendance(){
+      return view('sms.kronos.time-attendance');
+    }
+
+    public function schedulling(){
+      return view('sms.kronos.schedulling');
+    }
+
 }
