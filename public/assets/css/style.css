@@ -1790,6 +1790,8 @@ a.DTTT_button:hover:not(.DTTT_disabled) {
   font-family: "FontAwesome";
 }
 /* INPUTS */
+
+
 .inline {
   display: inline-block !important;
 }
@@ -8169,4 +8171,103 @@ div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active
 box-shadow: none;
 }
 
+
+
+/*//CUSTOM*/
+input{
+
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+input[type=text], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+ 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+
+
+
+
+
+
+/* datatables */
+
+
+
+    
+    .slider{
+        margin:0px auto;
+        width: 90%;
+    }
+    .sliderHolder{
+        padding:10px;
+        background-color: #E0E0E0;
+        height: auto;
+    }
+
+    .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+
+      background-color: #484A49 !important;
+      border-color: #484A49 !important;
+    }
+
+
+    .list-group-item {
+      padding: 4px 15px !important;
+
+    }   
+    table.dataTable tbody td.no-padding {
+        padding: 0;
+    }
+     th{
+        text-align: center;
+        font-size: 12px;
+    }
+    .header-th {
+        background: #212A34!important;
+        color: #FFFFFF;
+    }
+    div.slider {
+    display: none;
+    }
+
+
+    td.details-control {
+      background: url('/assets/system/icons/plus.png') no-repeat center center;
+      cursor: pointer;
+    }
+   
+     tr.shown  td.details-control {
+        background: url('/assets/system/icons/minus.png') no-repeat center center;
+    }
+    .ref_provider_details{
+     /* background-color: #CDCDCD;
+      width: 90%;
+      border:1px solid black;*/
+      border-radius: 5px;
+      padding: 5px;
+
+    }
+    .ref_provider_details td{
+    /*  border:1px solid black;
+      padding: 10px;
+      margin:20px;*/
+    }
+    .table-detail{
+        background-color: #CDCDCD;
+    }
 

@@ -49,9 +49,7 @@ class MainloaderController extends Controller
       return view('sms.registrar.student-registration');
     }
 
-    public function registeredList(){
-      return view('sms.registrar.registered-list');
-    }
+    
 
     public function enrollment(){
       $classType  = RfClassType::all();

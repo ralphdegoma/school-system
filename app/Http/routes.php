@@ -34,17 +34,16 @@ Route::get('/select-binder/get-guardian','SelectBinderController@getGuardian');
 
 
 
-
-
-
 //R E G I S T R A R
 Route::get('/sms/registrar/student-registration','MainloaderController@studentRegistration');
 Route::post('/admin/new-student/registration','StudentController@newStudentSave');
 
 
-
 //R E G I S T E R E D | L I S T
-Route::get('/sms/registrar/registered-list','MainloaderController@registeredList');
+Route::get('/sms/registrar/registered-list','StudentListController@registeredList');
+Route::get('/sms/registrar/get-students','StudentListController@getStudents');
+
+
 
 //E N R O L L M E NT
 Route::get('/sms/registrar/enrollment','MainloaderController@enrollment');
