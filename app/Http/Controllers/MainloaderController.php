@@ -46,6 +46,7 @@ class MainloaderController extends Controller
     }
 
     public function studentRegistration(){
+      
       return view('sms.registrar.student-registration');
     }
 
@@ -83,6 +84,7 @@ class MainloaderController extends Controller
       $schoolYear   = RfSchoolYear::all();
       $subject      = RfSubjects::all();
       $gradeLevel   = RfGradeLevel::all();
+      
       return view('sms.setup.academics', compact('classType','gradeType','sectionType','schoolYear','subject','gradeLevel'));
     }
 

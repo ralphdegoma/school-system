@@ -47,3 +47,4 @@
 <script src ="/assets/plugins/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
 <script src ="/assets/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
 <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+

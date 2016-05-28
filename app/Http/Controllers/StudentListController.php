@@ -15,8 +15,8 @@ class StudentListController extends Controller
 
     public function getStudents(Request $request){
 
-    	$Students = Students::all();
-
+	    $Students = Students::with('Parents_Students','Parents_Students.Parents')
+	            ->get();
 
     	$datatableFormat = new DatatableFormat();
       	return $datatableFormat->format($Students);

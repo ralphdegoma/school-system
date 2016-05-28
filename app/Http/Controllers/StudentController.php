@@ -12,7 +12,7 @@ use App\Students;
 use App\Student_Status;
 use App\Parents_Students;
 use App\Student_Images;
-use App\Relationship;
+use App\Relationships;
 use Image;
 use File;
 use Storage;
@@ -24,8 +24,17 @@ class StudentController extends Controller
     
     public function newStudentSave(){
 
-        $Students                    = new Students(); 
-        $check = $Students->find(Request::input('student_id'));
+
+        if(Request::input('student_id_old') != ""){
+            $Students = Students::find(Request::input('student_id_old'));
+            Parents_Students::where('student_id' , Request::input('student_id_old'))->delete();
+        }else{
+            $Students = new Students(); 
+        }
+
+        $check = new Students(); 
+        $check = $check->where('student_id','<>',Request::input('student_id_old'))
+                            ->where('student_id',Request::input('student_id'))->get();
 
         if(count($check) > 0){
 
@@ -35,10 +44,12 @@ class StudentController extends Controller
                       ->show();
         }
 
+
         $Students->student_id        = Request::input('student_id');
         $Students->student_status_id = '1';
         $Students->first_name        = Request::input('first_name');
         $Students->middle_name       = Request::input('middle_name');
+        $Students->nick_name         = Request::input('nick_name');
         $Students->last_name         = Request::input('last_name');
         $Students->name_extension    = Request::input('name_extension');
         $Students->gender            = Request::input('gender');
@@ -86,7 +97,7 @@ class StudentController extends Controller
             $this->saveNewGuardian($StudentsId);
         }
 
-        if(Request::input('image_upload') != ""){
+        if(Request::file('image_upload') != ""){
            $this->saveImage($StudentsId); 
         }
         
@@ -103,8 +114,12 @@ class StudentController extends Controller
 
         if(!File::exists($storagePath)) {
 
-            File::makeDirectory($storagePath, 0755, true);
-
+            if(Request::input('student_id_old') != ""){
+                    Storage::deleteDirectory($storagePath);
+                    File::makeDirectory($storagePath, 0755, true);
+            }else{
+                    File::makeDirectory($storagePath, 0755, true);
+            }
         }
         
         $small  = Image::make(Request::file('image_upload'));
@@ -153,50 +168,67 @@ class StudentController extends Controller
         $Parents_Students->save();
     }
 
-    public function assignGuardian(){
+    public function assignGuardian($StudentsId){
+
+        $Relationships = Relationships::firstOrNew(['relationship_name' => Request::input('relationship_name')]);
+        $Relationships->save(['relationship_name' => Request::input('relationship_name')]);
+        $RelationshipData = Relationships::where('relationship_name', '=', Request::input('relationship_name'))->first();
+
 
         $Parents_Students = new Parents_Students;
         $Parents_Students->student_id       = $StudentsId;
         $Parents_Students->parent_id        = Request::input('guardian_id');
-        $Parents_Students->relationship_id  = "3";
+        $Parents_Students->relationship_id  = $RelationshipData->relationship_id;
+        $Parents_Students->parental_type_id = '3';
         $Parents_Students->save();
     }
 
     public function saveNewGuardian($StudentsId){
 
-        $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('mothers_nationality')]);
-        $Nationality->save(['nationality_name' => Request::input('mothers_nationality')]);
-        $NationalityData = Nationality::where('nationality_name', '=', Request::input('mothers_nationality'))->first();
+        $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('guardian_nationality')]);
+        $Nationality->save(['nationality_name' => Request::input('guardian_nationality')]);
+        $NationalityData = Nationality::where('nationality_name', '=', Request::input('guardian_nationality'))->first();
 
-        $Relationship = Relationship::firstOrNew(['relationship_name' => Request::input('relationship_name')]);
-        $Relationship->save(['relationship_name' => Request::input('relationship_name')]);
-        $RelationshipData = Relationship::where('relationship_name', '=', Request::input('relationship_name'))->first();
+        $Relationships = Relationships::firstOrNew(['relationship_name' => Request::input('relationship_name')]);
+        $Relationships->save(['relationship_name' => Request::input('relationship_name')]);
+        $RelationshipData = Relationships::where('relationship_name', '=', Request::input('relationship_name'))->first();
 
-        $Religion = Religion::firstOrNew(['religion_name' => Request::input('mothers_religion')]);
-        $Religion->save(['religion_name' => Request::input('mothers_religion')]);
-        $ReligionData = Religion::where('religion_name', '=', Request::input('mothers_religion'))->first();
+        $Religion = Religion::firstOrNew(['religion_name' => Request::input('guardian_religion')]);
+        $Religion->save(['religion_name' => Request::input('guardian_religion')]);
+        $ReligionData = Religion::where('religion_name', '=', Request::input('guardian_religion'))->first();
 
-        $Occupation = Occupation::firstOrNew(['designation_name' => Request::input('mothers_occupation')]);
-        $Occupation->save([Request::input('designation_name') => 'mothers_occupation']);
-        $OccupationData = Occupation::where('designation_name', '=', Request::input('mothers_occupation'))->first();
- 
-        $Guardian                     = new Parents; 
+        $Occupation = Occupation::firstOrNew(['designation_name' => Request::input('guardian_occupation')]);
+        $Occupation->save(['designation_name' => Request::input('guardian_occupation')]);
+        $OccupationData = Occupation::where('designation_name', '=', Request::input('guardian_occupation'))->first();
+        
+
+        if(Request::input('guardian_parent_id') != ""){
+            $Guardian = Parents::find(Request::input('guardian_parent_id'));
+        }else{
+            $Guardian = new Parents();
+        }
+
         $Guardian->parents_name       = Request::input('guardian_name');
         $Guardian->dob                = Request::input('guardian_birthday');
         $Guardian->firm_employer_name = Request::input('guardian_firm');
         $Guardian->residence_tel      = Request::input('guardian_residence_tel');
         $Guardian->office_tel         = Request::input('guardian_office_tel');
+        $Guardian->home_address       = Request::input('guardian_home_address');
         $Guardian->nationality_id     = $NationalityData->nationality_id;
         $Guardian->religion_id        = $ReligionData->religion_id;
         $Guardian->occupation_id      = $OccupationData->occupation_id;
         $Guardian->save();
 
-        $ParentsId = Parents::max('parent_id');
+        if(Request::input('guardian_parent_id') != ""){
+            $parent_id = Request::input('guardian_parent_id');
+        }else{
+            $parent_id = $Guardian->max('parent_id');
+        }
     
         $Parents_Students = new Parents_Students;
         $Parents_Students->student_id       = $StudentsId;
-        $Parents_Students->parent_id        = $ParentsId;
-        $Parents_Students->relationship_id  = $ReligionData->relationship_id;
+        $Parents_Students->parent_id        = $parent_id;
+        $Parents_Students->relationship_id  = $RelationshipData->relationship_id;
         $Parents_Students->parental_type_id = '3';
         $Parents_Students->save();
     }
@@ -212,25 +244,38 @@ class StudentController extends Controller
         $ReligionData = Religion::where('religion_name', '=', Request::input('mothers_religion'))->first();
 
         $Occupation = Occupation::firstOrNew(['designation_name' => Request::input('mothers_occupation')]);
-        $Occupation->save([Request::input('designation_name') => 'mothers_occupation']);
+        $Occupation->save(['designation_name' => Request::input('designation_name')]);
         $OccupationData = Occupation::where('designation_name', '=', Request::input('mothers_occupation'))->first();
 
-        $Mother                     = new Parents; 
+        
+
+        if(Request::input('mother_parent_id') != ""){
+            $Mother = Parents::find(Request::input('mother_parent_id'));
+        }else{
+            $Mother = new Parents; 
+        }
+
         $Mother->parents_name       = Request::input('mothers_name');
         $Mother->dob                = Request::input('mothers_dob');
         $Mother->firm_employer_name = Request::input('mothers_firm');
         $Mother->residence_tel      = Request::input('mothers_residence_tel');
         $Mother->office_tel         = Request::input('mothers_office_tel');
+        $Mother->home_address       = Request::input('mothers_home_address');
         $Mother->nationality_id     = $NationalityData->nationality_id;
         $Mother->religion_id        = $ReligionData->religion_id;
         $Mother->occupation_id      = $OccupationData->occupation_id;
         $Mother->save();
 
-        $ParentsId = Parents::max('parent_id');
-    
+
+        if(Request::input('mother_parent_id') != ""){
+            $parent_id = Request::input('mother_parent_id');
+        }else{
+            $parent_id = $Mother->max('parent_id');
+        }
+
         $Parents_Students = new Parents_Students;
         $Parents_Students->student_id       = $StudentsId;
-        $Parents_Students->parent_id        = $ParentsId;
+        $Parents_Students->parent_id        = $parent_id;
         $Parents_Students->relationship_id  = "1";
         $Parents_Students->parental_type_id = '1';
         $Parents_Students->save();
@@ -248,29 +293,57 @@ class StudentController extends Controller
         $ReligionData = Religion::where('religion_name', '=', Request::input('fathers_religion'))->first();
 
         $Occupation = Occupation::firstOrNew(['designation_name' => Request::input('fathers_occupation')]);
-        $Occupation->save([Request::input('designation_name') => 'fathers_occupation']);
+        $Occupation->save(['designation_name' => Request::input('fathers_occupation') ]);
         $OccupationData = Occupation::where('designation_name', '=', Request::input('fathers_occupation'))->first();
 
-        $Father                     = new Parents; 
+
+        if(Request::input('father_parent_id') != ""){
+            $Father = Parents::find(Request::input('father_parent_id'));
+        }else{
+            $Father = new Parents; 
+        }
+
         $Father->parents_name       = Request::input('fathers_name');
         $Father->dob                = Request::input('fathers_dob');
         $Father->firm_employer_name = Request::input('fathers_firm');
         $Father->residence_tel      = Request::input('fathers_residence_tel');
         $Father->office_tel         = Request::input('fathers_office_tel');
         $Father->nationality_id     = $NationalityData->nationality_id;
+        $Father->home_address       = Request::input('fathers_home_address');
         $Father->religion_id        = $ReligionData->religion_id;
         $Father->occupation_id      = $OccupationData->occupation_id;
         $Father->save();
 
-        $ParentsId = Parents::max('parent_id');
+        if(Request::input('father_parent_id') != ""){
+            $parent_id = Request::input('father_parent_id');
+        }else{
+            $parent_id = $Father->max('parent_id');
+        }
 
         $Parents_Students = new Parents_Students;
         $Parents_Students->student_id       = $StudentsId;
-        $Parents_Students->parent_id        = $ParentsId;
+        $Parents_Students->parent_id        = $parent_id;
         $Parents_Students->parental_type_id = '2';
         $Parents_Students->relationship_id  = "1";
         $Parents_Students->save();
 
+    }
+
+
+    public function editStudent($student_id){
+
+        $student = Students::with('Parents_Students','Parents_Students.Parents',
+                                  'Parents_Students.Parents.Nationality',
+                                  'Parents_Students.Parents.Occupation',
+                                  'Parents_Students.Parents.Religion',
+                                  'Parents_Students.Relationships')
+                        ->where('student_id',$student_id)
+                        ->first();
+
+
+        return view('sms/registrar/student-registration')
+                ->with('student',$student)
+                ->with('student_id',$student_id);
     }
 
     

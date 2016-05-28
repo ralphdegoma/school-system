@@ -13,4 +13,8 @@ class Parents_Students extends Model
     public function Parents(){
     	return $this->belongsTo('App\Parents','parent_id','parent_id');
     }
+
+    public function Relationships(){
+    	return $this->belongsTo('App\Relationships','relationship_id','relationship_id');
+    }
 }

@@ -1,4 +1,4 @@
-<div class="modal inmodal " id="wyredSaveModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal inmodal fadeIn"  style="z-index:99999" id="wyredSaveModal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content animated flipInX">
         <div class="modal-header">

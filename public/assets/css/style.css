@@ -8215,7 +8215,7 @@ input[type=text]:focus, textarea:focus {
     }
     .sliderHolder{
         padding:10px;
-        background-color: #E0E0E0;
+        /*background-color: #E0E0E0;*/
         height: auto;
     }
 
@@ -8270,4 +8270,6 @@ input[type=text]:focus, textarea:focus {
     .table-detail{
         background-color: #CDCDCD;
     }
+
+    
 

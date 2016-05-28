@@ -47,10 +47,11 @@ class RegistrarController extends Controller
 
 	public function getGrade(){
 
-		$grade = RfGradeLevel::with('getGradeType')->get();
+		$grade = RfGradeLevel::with("getGradeType")->get();
 
-		$datatableFormat = new DatatableFormat();
-      	return $datatableFormat->format($grade);
+		
+		 $datatableFormat = new DatatableFormat();
+  		 	return $datatableFormat->format($grade);
 
 	}
 
@@ -138,7 +139,7 @@ class RegistrarController extends Controller
 		$request = Request::all();
 		$section = new RfSection;
 		$section->section_name 		= $request['section_name'];
-		$section->grade_level_id 	= $request['gradeLevel'];
+		$section->grade_level_id 	= $request['grade_level'];
 		$section->section_type_id	= $request['sectionType'];
 		$section->save();
 

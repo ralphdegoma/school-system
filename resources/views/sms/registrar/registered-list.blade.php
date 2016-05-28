@@ -2,8 +2,8 @@
 
 @section('css_filtered')
 @include('admin.csslinks.css_crud')
-<link href="/assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-<link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="/assets/css/custom/studentlist.css" rel="stylesheet">
+
 @stop
 
 @section('content')
@@ -54,12 +54,12 @@
         <thead>
           <tr>
               <th>More</th>
+              <th>Image</th>
               <th>Student ID</th>
               <th>Student Name</th>
               <th>Age</th>
               <th>Home Address</th>
               <th>Cel. Number</th>
-              <th>Tel. Number</th>
               <th class="center">Action</th>
               <th class="center">Action</th>
           </tr>
@@ -242,9 +242,9 @@ $(document).ready(function(){
               "url": sSource,
               "data": aoData,
               "success": function (data) {
-                subjectTable = data;
-                console.log(subjectTable);
-                fnCallback(subjectTable);           
+                studentList = data;
+                console.log(studentList);
+                fnCallback(studentList);           
               }
             });
           },
@@ -263,8 +263,16 @@ $(document).ready(function(){
                       "data":           null,
                       "defaultContent": ''
               },
+              { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<img src="/assets/people/students/'+oData.student_id+'/images/small.jpg"  style="margin:auto;width:70px;height:auto;"/>');
+                }
+              },
               { "mData": "student_id", sDefaultContent: ""},
-              { "mData": "full_name", sDefaultContent: ""},
+              { "mRender" : function ( data, type, full ) { 
+                        return full.last_name+ ", " + full.first_name + " " +full.middle_name; 
+              }
+              },
               { "mData": "home_address", sDefaultContent: ""},
               { "mData": "cp_no", sDefaultContent: ""},
               { "mData": "tel_no", sDefaultContent: ""},
@@ -276,7 +284,7 @@ $(document).ready(function(){
 
               { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/admin/student/'+oData.student_id+'/edit" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                 }
               },  
           ]
@@ -297,12 +305,10 @@ $(document).ready(function(){
               } );
               }
               else {
-                  // Open this row
                   var prop_id_name = $(tr).attr("data-id");
                   row.child( format(row_id)).show();
                   $('div.slider', row.child()).slideDown();
                   tr.addClass('shown');
-                  //ref_serial(prop_id_name);
               }
 
           } );
@@ -311,28 +317,81 @@ $(document).ready(function(){
 
 
     function format (row_id) {
-              console.log(studentTableData[row_id]);
-              return false;
+        
                return '<div class="sliderHolder"><div class="slider" style="">'+
-                '<div class="list-group" style="margin-top:20px;background-color:#FFFFFF;">'+
-                  '<a href="#" class="list-group-item active" style="text-align:left">DETAILED INFORMATION</a>'+
-                  '<a href="#" class="list-group-item "><b>Full Name </b>: '+removeNull(studentTableData[row_id].student_id)+ " "+ removeNull(farmer_data[row_id].first_name)+", "+removeNull(farmer_data[row_id].middle_name)+'</a>'+
-                  '<a href="#" class="list-group-item "><b>Age </b>: '+ removeNull(studentTableData[row_id].age) +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Gender </b>: '+ removeNull(studentTableData[row_id].gender) +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Religion </b>: '+ removeNull(studentTableData[row_id].religion_name) +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Spouse(if any) </b>: '+ removeNull(studentTableData[row_id].spouse) +'</a>'+
-                  '<a href="#" class="list-group-item "><b>Organization </b>: '+ removeNull(studentTableData[row_id].organization_name) +'</a>'+
-                '</div>'+
-              '</div></div>';  
-      // return '<ul  class=" table table-bordered table-stripes">'+
-      //         '<li>TVET Provider Address</li>'+
-      //         '<li>Region:'+ ' ' +ref_provider_table[row_id].region_name+'</li>'+
-      //         '<li>Province:'+ ' ' +ref_provider_table[row_id].province_name+'</li>'+
-      //         '<li>District:'+ ' ' +ref_provider_table[row_id].district_name+'</li>'+
-      //         '<li>Municipality:'+ ' ' +ref_provider_table[row_id].munipality_name+'</li>'+
-      //         '<li>Address:'+ ' ' +ref_provider_table[row_id].address+'</li>'+
-      //       '</ul>';
+                        
+                                '<div class="col-lg-12">'
+                                    +'<div class="tabs-container">'
+                                        +'<ul class="nav nav-tabs">'
+                                            +'<li class="active"><a data-toggle="tab" href="#tab-3"> <i class="fa fa-laptop"></i></a></li>'
+                                            +'<li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-desktop"></i></a></li>'
+                                            +'<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-database"></i></a></li>'
+                                        +'</ul>'
+                                        +'<div class="tab-content">'
+                                            +'<div id="tab-3" class="tab-pane active">'
+                                                +'<div class="panel-body">'
+                                                    +'<strong>Lorem ipsum dolor sit amet, consectetuer adipiscing</strong>'
+
+                                                    +'<p>A wonderfusssssssl serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of'
+                                                        +'existence in this spot, which was created for the bliss of souls like mine.</p>'
+
+                                                    +'<p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at'
+                                                        'the present moment; and yet I feel that I never was a greater artist than now. When.</p>'
+                                                +'</div>'
+                                            +'</div>'
+                                            +'<div id="tab-4" class="tab-pane">'
+                                                +'<div class="panel-body">'
+                                                    +'<strong>Donec quam felis</strong>'
+
+                                                    +'<p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects'
+                                                        +'and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>'
+
+                                                    +'<p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite'
+                                                        'sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>'
+                                                +'</div>'
+                                            +'</div>'
+                                            +'<div id="tab-5" class="tab-pane">'
+                                                +'<div class="panel-body">'
+                                                    +'<strong>Donec quam felis</strong>'
+
+                                                    +'<p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects'
+                                                        +'and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>'
+
+                                                    +'<p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite'
+                                                        +'sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>'
+                                                +'</div>'
+                                            +'</div>'
+                                        +'</div>'
+                                    +'</div>'
+                                +'</div>'
+
+
+
+
+
+
+                      +'</div></div>';  
+      
     }
 </script>
 
+
+
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
 @stop

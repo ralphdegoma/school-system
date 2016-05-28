@@ -282,9 +282,9 @@
 
 
 
-<div class="modal inmodal fade" id="add-grade-level" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal inmodal fade" id="add-grade-level">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content">
+        <div class="modal-content animated flipInX">
 
             <form id="setupGradeLevel">
               <div class="wyred-box-header" style="margin-top:-10px;">
@@ -334,6 +334,7 @@
               <form id="addSection">
                <label>GRADE TYPE</label>
                <select class="form-control input-sm" name="gradeType" onchange="changeGradeLevel()" id="gradeType" required>
+                <option></option>
                    @foreach($gradeType as $keyVal)
                     <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
                    @endforeach
@@ -341,10 +342,8 @@
                 </div>
                 <div class="form-group">
                  <label>GRADE LEVEL</label>
-                  <select class="form-control input-sm" name="gradeLevel" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevels" required>
-                  
+                  <select class="form-control input-sm" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevels" required>
                 </select>
-                  </select>
                 </div>
                <div class="form-group">
                  <label>SECTION TYPE</label>
@@ -457,7 +456,8 @@
               <div class="col-md-12">
                 <div class="form-group">
                <label>GRADE TYPE</label>
-               <select class="form-control input-sm" name="gradeType" onclick="changeGradeLevel()" id="gradeType" required>
+               <select class="form-control input-sm" name="gradeTypeSubject" onchange="changeGradeLevelSubject()" id="gradeTypeSubject" required>
+                <option></option>
                    @foreach($gradeType as $keyVal)
                     <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
                    @endforeach
@@ -465,9 +465,17 @@
                 </div>
                 <div class="form-group">
                  <label>GRADE LEVEL</label>
-                  <select class="form-control input-sm" name="gradeLevel" id="gradeLevel" required>
-                  </select>
+                  <select class="form-control input-sm" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevelSubject" required>
+                </select>
                 </div>
+               <div class="form-group">
+                 <label>SECTION TYPE</label>
+                  <select class="form-control input-sm" name="sectionType">
+                    @foreach($sectionType as $keyVal)
+                      <option value="{{$keyVal->section_type_id}}">{{$keyVal->section_type}}</option>
+                     @endforeach
+                  </select>
+              </div>
                  <label class="tex-red">
                   <input type="checkbox"  id="available-sub" checked="">
                     AVAILABLE FOR ALL SECTION TYPE
@@ -482,6 +490,9 @@
                  <div class="form-group">
                  <label>SUBJECT</label>
                   <select class="form-control input-sm" name="gradeLevel" id="gradeLevel" required>
+                  @foreach($subject as $subjects)
+                    <option value="{{$subjects->subject_id}}">{{$subjects->subject_name}}</option>
+                  @endforeach
                   </select>
                 </div>
               </div>
@@ -635,7 +646,6 @@
         </div>
     </div>
 </div>
-@include('admin.modal-forms.security')
 
 @stop
 @section('js_filtered')
@@ -659,7 +669,7 @@ $(document).ready(function(){
     gradeTableFunc();
     schoolYearFunc();
     
-    //subjectTableFunc();
+    subjectTableFunc();
     sectionTableFunc();
 
     $('.clockpicker').clockpicker({
@@ -753,6 +763,14 @@ $(document).ready(function(){
         gradeTableFunc();
       });
 
+      $('#add-school-year').on('hidden.bs.modal',function(){
+        schoolYearFunc();
+      });
+
+       $('#add-section').on('hidden.bs.modal',function(){
+        sectionTableFunc();
+      });
+       
 
     function gradeTableFunc(){
       
@@ -782,7 +800,7 @@ $(document).ready(function(){
             });
           },
                      
-          "sAjaxSource": "/sms/registrar/grade",
+          "sAjaxSource": "/sms/registrar/getgrade",
           "sAjaxDataProp": "",
           "iDisplayLength": 10,
           "scrollCollapse": false,
@@ -1122,12 +1140,26 @@ function changeGradeLevel(){
 
       $('#gradeType').val({{ $keyVal->grade_type_id or  ''}});
       var selInst = $('#gradeLevels');
+
       var selValue = $('#gradeType').val();
 
       $('#gradeLevels').select_binder(selValue);
 
       //orgBinder(selInst,selValue);
   }
+
+function changeGradeLevelSubject(){
+
+      $('#gradeTypeSubject').val({{ $keyVal->grade_type_id or  ''}});
+      var selInst = $('#gradeLevelSubject');
+      
+      var selValue = $('#gradeTypeSubject').val();
+
+      $('#gradeLevelSubject').select_binder(selValue);
+
+      //orgBinder(selInst,selValue);
+  }
+
   function orgBinder(reference,selVal){
 
           $.ajax( {
@@ -1157,6 +1189,63 @@ function changeGradeLevel(){
 
           });
   }
+    function subjectTableFunc(){
+      
+      $('#subjectTable').dataTable().fnClearTable();
+      $("#subjectTable").dataTable().fnDestroy();
+
+          var subjectTable = $('#subjectTable').DataTable({
+          responsive: true,
+          bAutoWidth:false,
+
+          "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            nRow.setAttribute('data-id',aData.row_id);
+            nRow.setAttribute('class','ref_provider_info_class');
+          },
+
+          "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+            oSettings.jqXHR = $.ajax( {
+              "dataType": 'json',
+              "type": "GET",
+              "url": sSource,
+              "data": aoData,
+              "success": function (data) {
+                subjectTable = data;
+                console.log(subjectTable);
+                fnCallback(subjectTable);           
+              }
+            });
+          },
+                     
+          "sAjaxSource": "/sms/registrar/subject",
+          "sAjaxDataProp": "",
+          "iDisplayLength": 10,
+          "scrollCollapse": false,
+          "paging":         true,
+          "searching": true,
+
+          "columns": [
+             
+
+              { "mData": "subject_id", sDefaultContent: ""},
+
+               { "mData": "subject_name", sDefaultContent: ""},
+
+                { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="/sms/registrar/remove-grade/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                  }
+                },  
+
+               { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                  }
+                },  
+          ]
+      });
+
+    }
 
 
 
