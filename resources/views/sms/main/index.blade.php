@@ -24,6 +24,9 @@
 @include('admin.jslinks.js_initial')
 @yield('js_filtered')
 
+<script src="/assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+
 </body>
 </html>
 

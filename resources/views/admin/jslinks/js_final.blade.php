@@ -48,3 +48,8 @@
 <script src ="/assets/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
 <script src="/assets/plugins/chartjs/Chart.min.js"></script>
 
+<!-- TEMPLATE -->
+<script type="text/javascript" src="/assets/js/settings.js"></script>
+<script type="text/javascript" src="/assets/js/plugins.js"></script>        
+<script type="text/javascript" src="/assets/js/actions.js"></script>
+<script type="text/javascript" src="/assets/js/demo_dashboard.js"></script>
