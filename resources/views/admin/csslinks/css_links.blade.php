@@ -3,5 +3,6 @@
 <link href="{{ URL::asset('/assets/css/style.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('/assets/css/wyred.css') }}" rel="stylesheet">
 <link href="/assets/css/atlanta.css" rel="stylesheet">
+<link href="/assets/css/plugins/animate/animate.css" rel="stylesheet">
 
 
