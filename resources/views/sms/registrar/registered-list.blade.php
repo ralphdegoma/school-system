@@ -3,7 +3,14 @@
 @section('css_filtered')
 @include('admin.csslinks.css_crud')
 <link href="/assets/css/custom/studentlist.css" rel="stylesheet">
+<style type="text/css">
+      
+      .grid_space{
+          margin-top:6px;
+          margin-bottom: 3px;
+      }
 
+</style>
 @stop
 
 @section('content')
@@ -16,69 +23,109 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h5 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Advanced Filter Search</a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                 <div class="col-md-6">
-                    <div class="form-group">
-                     <label>GENDER</label>
-                      <select class="form-control input-sm">
-                        <option>Male</option>
-                        <option>Female</option>
-                      </select>
+        
+
+
+                  <div class="page-content-wrap">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <p>Use search to find contacts. You can search by: name, address, phone. Or use the advanced search.</p>
+                                        <div class="form-group">
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <span class="fa fa-search"></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Who are you looking for?"/>
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-primary">Search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="/sms/registrar/student-registration"><button class="btn btn-success btn-block"><span class="fa fa-plus"></span> Add new contact</button></a>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
+                    
+                    <div class="row">
+
+
+                        @foreach($students as $students)
+
+                        <?php                            
+                            $age = floor((time() - strtotime($students->birthday)) / 31556926);
+                        ?>
+                        <div class="col-md-3 grid_space" >
+                            <!-- CONTACT ITEM -->
+                            <div class="panel panel-default">
+                                <div class="panel-body profile">
+                                    <div class="profile-image">
+                                        <img src="/assets/img/default.png" alt="Nadia Ali"/>
+                                    </div>
+                                    <div class="profile-data">
+                                        <div class="profile-data-name">{{$students->last_name}}, {{$students->first_name}} {{$students->middle_name}}</div>
+<!--                                         <div class="profile-data-title">Singer-Songwriter</div>
+ -->                                    </div>
+                                    <div class="profile-controls">
+                                        <a href="#" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                        <a href="#" class="profile-control-right"><span class="fa fa-phone"></span></a>
+                                    </div>
+                                </div>                                
+                                <div class="panel-body">                                    
+                                    <div class="contact-info">
+                                        <p><small>Age</small><br/>{{$age}}</p>
+                                        <p><small>Address</small><br/>{{$students->home_address}}</p>
+                                        <p><small>Status</small><br/>Active</p>                                   
+                                    </div>
+                                </div>                                
+                            </div>
+                            <!-- END CONTACT ITEM -->
+                        </div>
+
+                        @endforeach
+
+
+                      
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="pagination pagination-sm pull-right push-down-10 push-up-10">
+                                <li class="disabled"><a href="#">«</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>                                    
+                                <li><a href="#">»</a></li>
+                            </ul>                            
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                     <label>STUDENT STATUS</label>
-                      <select class="form-control input-sm">
-                        <option>New</option>
-                        <option>Old</option>
-                        <option>In-Active</option>
-                      </select>
-                    </div>
-                  </div>
+
                 </div>
-            </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
     </div>
     <div class="col-md-12">
-     <div class="table-responsive">
-        <table id="student-table-list" class="table table-striped table-bordered table-hover dataTables-example" >
-        <thead>
-          <tr>
-              <th>More</th>
-              <th>Image</th>
-              <th>Student ID</th>
-              <th>Student Name</th>
-              <th>Age</th>
-              <th>Home Address</th>
-              <th>Cel. Number</th>
-              <th class="center">Action</th>
-              <th class="center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr class="gradeX">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="center"></td>
-            <td class="center"></td>
-        </tr>
-        </tbody>
-        </table>
-      </div>
+     
       </div>
   </div>
 </div>

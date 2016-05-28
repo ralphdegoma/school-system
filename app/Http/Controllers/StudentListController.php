@@ -10,15 +10,15 @@ use DatatableFormat;
 class StudentListController extends Controller
 {
     public function registeredList(){
-      	return view('sms.registrar.registered-list');
+
+    	$students = Students::with('Parents_Students','Parents_Students.Parents')->get();
+
+      	return view('sms.registrar.registered-list')->with('students',$students);
     }
 
     public function getStudents(Request $request){
 
-	    $Students = Students::with('Parents_Students','Parents_Students.Parents')
-	            ->get();
+	    
 
-    	$datatableFormat = new DatatableFormat();
-      	return $datatableFormat->format($Students);
     }
 }
