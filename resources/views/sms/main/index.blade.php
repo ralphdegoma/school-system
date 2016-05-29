@@ -16,7 +16,7 @@
 
 </head>
 
-<body class="pace-done mini-navbar">
+<body class="page-header-fixed page-sidebar-closed-hide-logo">
     
 @include('admin.bodywrapper.body_wrapper')
 
