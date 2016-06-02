@@ -26,6 +26,7 @@ class StudentController extends Controller
     public function newStudentSave(){
 
 
+
         if(Request::input('student_id_old') != ""){
             $Students = Students::find(Request::input('student_id_old'));
             Parents_Students::where('student_id' , Request::input('student_id_old'))->delete();

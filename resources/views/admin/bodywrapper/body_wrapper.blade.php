@@ -3,9 +3,9 @@
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <div class="page-logo text-center">
             <a href="index.html">
-            <img src="../../assets/admin/layout4/img/logo-light.png" alt="logo" class="logo-default"/>
+            <h1><b>SMS</b></h1>
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -516,30 +516,12 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;">
+                    <a href="{{substr_replace(Request::root(), "", -2)}}83" target="_blank">
                     <i class="fa fa-clock-o"></i>
                     <span class="title">Kronos</span>
-                    <span class="arrow open"></span>
                     </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="/sms/kronos/time-attendance">
-                            Time & Attendance</a>
-                        </li>
-                        <li>
-                            <a href="/sms/kronos/schedulling">
-                            Scheduling</a>
-                        </li>
-                        <li>
-                            <a href="/sms/setup/academics">
-                            Absence Management</a>
-                        </li>
-                        <li>
-                            <a href="/sms/setup/academics">
-                            HR & Payroll</a>
-                        </li>
-                    </ul>
                 </li>
+                
               
                
                

@@ -58,7 +58,7 @@
                         <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm"  data-toggle="modal" data-target="#add-grade-level"><i class="fa fa-plus"></i> ADD NEW GRADE LEVEL</button>
+                                <button class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#add-grade-level"><i class="fa fa-plus"></i> ADD NEW GRADE LEVEL</button>
                               </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#add-section"><i class="fa fa-plus"></i> ADD NEW SECTION</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-section"><i class="fa fa-plus"></i> ADD NEW SECTION</button>
                               </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#add-school-year"><i class="fa fa-plus"></i> ADD NEW SCHOOL YEAR</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-school-year"><i class="fa fa-plus"></i> ADD NEW SCHOOL YEAR</button>
                               </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#add-subject"><i class="fa fa-plus"></i> ADD NEW SUBJECT</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-subject"><i class="fa fa-plus"></i> ADD NEW SUBJECT</button>
                               </div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#add-assignsubject"><i class="fa fa-plus"></i> ASSIGN NEW SUBJECT</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-assignsubject"><i class="fa fa-plus"></i> ASSIGN NEW SUBJECT</button>
                               </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#add-schedule"><i class="fa fa-plus"></i> ADD NEW SCHEDULE</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-schedule"><i class="fa fa-plus"></i> ADD NEW SCHEDULE</button>
                               </div>
                             </div>
                         </div>
@@ -262,10 +262,10 @@
                                       Explorer 4.0
                                   </td>
                                   <td class="center">
-                                      <button class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#enrolled-student"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>
+                                      <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#enrolled-student"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>
                                   </td>
                                   <td class="center">
-                                      <button class="btn btn-info btn-block btn-sm" data-toggle="modal" data-target="#enrolled-student"><b class="pull-left"><i class="fa fa-pencil"></i></b> <b class="pull-right">EDIT</b></button>
+                                      <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#enrolled-student"><b class="pull-left"><i class="fa fa-pencil"></i></b> <b class="pull-right">EDIT</b></button>
                                   </td>
                               </tr>
                               </tbody>
@@ -288,18 +288,16 @@
 
 
 
-<div class="modal inmodal fade" id="add-grade-level">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content animated flipInX">
-
-            <form id="setupGradeLevel">
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> NEW GRADE LEVEL</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-               <div class="form-group">
+<div class="modal fade draggable-modal mo-z drag-me" id="add-grade-level" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupGradeLevel">
+         <div class="form-group">
                  <label>GRADE TYPE</label>
                   <select class="form-control input-sm" name="class_type">
                     @foreach($gradeType as $keyVal)
@@ -311,34 +309,29 @@
                  <label>GRADE LEVEL</label>
                   <input type="text" class="form-control input-sm" name="grade_level" required>
                 </div>
-              </div>
-              </form>
-             </div>
-             </div>
-             <div class="wyred-box-footer">
-               <div class="pull-right wyred-button col-md-4 ">
-                <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-grade-level" data-form="setupGradeLevel" data-target="#wyredSaveModal" id="gradeTableFunc()">SAVE</button>
-              </div>
-            </div>
-          
-        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-grade-level" data-form="setupGradeLevel" data-target="#wyredSaveModal" id="gradeTableFunc()">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
-<div class="modal inmodal fade" id="add-section" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> NEW SECTION</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-              <div class="form-group">
-              <form id="addSection">
-               <label>GRADE TYPE</label>
+<div class="modal fade draggable-modal mo-z drag-me" id="add-section" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="addSection">
+         <div class="form-group">
+                <label>GRADE TYPE</label>
                <select class="form-control input-sm" name="gradeType" onchange="changeGradeLevel()" id="gradeType" required>
                 <option></option>
                    @foreach($gradeType as $keyVal)
@@ -353,7 +346,7 @@
                 </div>
                <div class="form-group">
                  <label>SECTION TYPE</label>
-                  <select class="form-control input-sm" name="sectionType">
+                 <select class="form-control input-sm" name="sectionType">
                     @foreach($sectionType as $keyVal)
                       <option value="{{$keyVal->section_type_id}}">{{$keyVal->section_type}}</option>
                      @endforeach
@@ -363,32 +356,29 @@
                  <label>SECTION NAME</label>
                   <input type="text" class="form-control input-sm" name="section_name" required>
                 </div>
-              </div>
-             </div>
-              </form>
-             </div>
-             <div class="wyred-box-footer">
-                <div class="wyred-button pull-right col-md-4">
-                    <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
-                </div>
-            </div>
- 
-        </div>
+               </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
-<div class="modal inmodal fade" id="add-school-year" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
 
-              <form id="setupSchoolYear">
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> NEW SCHOOL YEAR</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-               <div class="form-group">
+<div class="modal fade draggable-modal mo-z drag-me" id="add-school-year" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupSchoolYear">
+           <div class="form-group">
                   <label>FROM</label>
                   <div class="input-group date">
                     <span class="input-group-addon">
@@ -406,61 +396,54 @@
                     <input type="text" class="form-control input-sm" name="syTo" id="syTo" maxlength="4" required="">
                   </div>
               </div>
-              </div>
-             </div>
-             </div>
-             </form>
-             <div class="wyred-box-footer">
-                <div class="wyred-button pull-right col-md-4">
-                    <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-school-year" data-form="setupSchoolYear" data-target="#wyredSaveModal">SAVE</button>
-                </div>
-            </div>
- 
-        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
-<div class="modal inmodal fade" id="add-subject" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
 
-              <form id="setupSubject">
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> NEW SUBJECT</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                 <label>SUBJECT NAME</label>
-                  <input type="text" class="form-control input-sm" name="subjectName">
-                </div>
-              </div>
-             </div>
-             </div>
-             </form>
-             <div class="wyred-box-footer">
-                <div class="wyred-button pull-right col-md-4">
-                    <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
-                </div>
-            </div>
- 
-        </div>
+<div class="modal fade draggable-modal mo-z drag-me" id="add-subject" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupSchoolYear">
+          <div class="form-group">
+             <label>SUBJECT NAME</label>
+              <input type="text" class="form-control input-sm" name="subjectName">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
-<div class="modal inmodal fade" id="add-assignsubject" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-              <form id="setupSubject">
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> ASSIGN SUBJECT</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
+<div class="modal fade draggable-modal mo-z drag-me" id="add-assignsubject" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupSubject">
+          <div class="form-group">
                <label>GRADE TYPE</label>
                <select class="form-control input-sm" name="gradeTypeSubject" onchange="changeGradeLevelSubject()" id="gradeTypeSubject" required>
                 <option></option>
@@ -474,25 +457,6 @@
                   <select class="form-control input-sm" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevelSubject" required>
                 </select>
                 </div>
-               <div class="form-group">
-                 <label>SECTION TYPE</label>
-                  <select class="form-control input-sm" name="sectionType">
-                    @foreach($sectionType as $keyVal)
-                      <option value="{{$keyVal->section_type_id}}">{{$keyVal->section_type}}</option>
-                     @endforeach
-                  </select>
-              </div>
-                 <label class="tex-red">
-                  <input type="checkbox"  id="available-sub" checked="">
-                    AVAILABLE FOR ALL SECTION TYPE
-                </label>
-                <div id="sec-div-sub">
-                  <div class="form-group">
-                   <label>SECTION</label>
-                    <select class="form-control input-sm" name="gradeLevel" id="gradeLevel" required>
-                    </select>
-                  </div>
-                </div>
                  <div class="form-group">
                  <label>SUBJECT</label>
                   <select class="form-control input-sm" name="gradeLevel" id="gradeLevel" required>
@@ -501,32 +465,32 @@
                   @endforeach
                   </select>
                 </div>
-              </div>
-             </div>
-             </div>
-             </form>
-             <div class="wyred-box-footer">
-                <div class="wyred-button pull-right col-md-4">
-                    <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
-                </div>
-            </div>
- 
-        </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
 
-<div class="modal inmodal fade" id="add-schedule" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-plus"></i> NEW CLASS SCHEDULE</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-6">
+<div class="modal fade draggable-modal mo-z drag-me" id="add-schedule" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Request Slot</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupSubject">
+         <div class="row">
+          <div class="col-md-6">
                <div class="form-group">
                  <label>SCHOOL YEAR</label>
                   <select class="form-control input-sm">
@@ -558,41 +522,15 @@
                     <option>Summer Class</option>
                   </select>
                 </div>
-                 <div class="form-group">
-                 <label>SECTION TYPE</label>
-                  <select class="form-control input-sm">
-                    <option >Regular Class</option>
-                    <option>Summer Class</option>
-                  </select>
-                </div>
-                <div id="summer-div">
-                 <div class="form-group">
-                 <label class="text-red">SUBJECT</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-                </div>
-              <div id="section-div">
-               <div class="form-group">
-                 <label>SECTION TYPE</label>
-                  <select class="form-control input-sm">
-                    @foreach($sectionType as $keyVal)
-                      <option value="{{$keyVal->section_type_id}}">{{$keyVal->section_type}}</option>
-                     @endforeach
-                  </select>
-              </div>
-              <div class="form-group">
+               </div>
+               <div class="col-md-6">
+                <div class="form-group">
                  <label>SECTION NAME</label>
                   <select class="form-control input-sm">
                     <option >Regular Class</option>
                     <option>Summer Class</option>
                   </select>
                </div>
-               </div>
-               </div>
-               <div class="col-md-6">
                <div class="form-group">
                  <label>CLASS ADVISER</label>
                   <select class="form-control input-sm">
@@ -601,57 +539,94 @@
                   </select>
                </div>
                 <div class="form-group">
-                 <label>START TIME</label><br>
-                 <label>
-                <input type="radio" id="default" value="AM" name="start_time">
-                AM 
-                </label>
-                <label>
-                <input type="radio" id="default" value="PM" name="start_time">
-                PM 
-                </label>
-               
-                <div class="input-group clockpicker" data-autoclose="true">
-                    <input type="text" class="form-control" value="09:30" >
-                    <span class="input-group-addon">
-                        <span class="fa fa-clock-o"></span>
-                    </span>
-                </div>
-                </div>
-                  <div>
-                 <label>END TIME</label><br>
-                <label>
-                <input type="radio" id="default" value="AM" name="end_time">
-                AM 
-                </label>
-                <label for="inlineRadio1">
-                <input type="radio" id="default" value="PM" name="end_time">
-                PM 
-                </label>
-                <div class="input-group clockpicker" data-autoclose="true">
-                    <input type="text" class="form-control" value="09:30" >
-                    <span class="input-group-addon">
-                        <span class="fa fa-clock-o"></span>
-                    </span>
-                </div>
-                </div>
-                <div class="form-group">
                  <label>SLOT</label>
                   <input type="number" class="form-control input-sm" id="slot">
                 </div>
 
               </div>
-             </div>
-             </div>
-             <div class="wyred-box-footer">
-                <div class="wyred-button pull-right col-md-4">
-                    <button class="btn btn-info btn-block">SAVE</button>
-                </div>
-            </div>
- 
-        </div>
+               <div class="col-md-12">
+                   <div class="table-responsive">
+                      <table id="subjectTable" class="table table-striped table-bordered table-hover " >
+                      <thead>
+                        <tr>
+                            <th>SUBJECT NAME</th>
+                            <th>SUBJECT TEACHER</th>
+                            <th>START TIME</th>
+                            <th>END TIME</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td>MATH</td>
+                          <td>
+                             <div class="form-group">
+                             <label>SECTION NAME</label>
+                              <select class="form-control input-sm">
+                                <option >Regular Class</option>
+                                <option>Summer Class</option>
+                              </select>
+                           </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                             <label>
+                            <input type="radio" id="default" value="AM" name="start_time">
+                            AM 
+                            </label>
+                            <label>
+                            <input type="radio" id="default" value="PM" name="start_time">
+                            PM 
+                            </label>
+                           
+                            <div class="input-group clockpicker" data-autoclose="true">
+                                <input type="text" class="form-control" value="09:30" >
+                                <span class="input-group-addon">
+                                    <span class="fa fa-clock-o"></span>
+                                </span>
+                            </div>
+                            </div>
+                          </td>
+                          <td>
+                              <div class="form-group">
+                               <label>
+                              <input type="radio" id="default" value="AM" name="start_time">
+                              AM 
+                              </label>
+                              <label>
+                              <input type="radio" id="default" value="PM" name="start_time">
+                              PM 
+                              </label>
+                             
+                              <div class="input-group clockpicker" data-autoclose="true">
+                                  <input type="text" class="form-control" value="09:30" >
+                                  <span class="input-group-addon">
+                                      <span class="fa fa-clock-o"></span>
+                                  </span>
+                              </div>
+                              </div>
+                          </td>
+                      </tr>
+                      </tbody>
+                      </table>
+                    </div>
+                  </div> 
+                   </div> 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
+
+
+
+
+
 
 @stop
 @section('js_filtered')
@@ -763,7 +738,9 @@ $(document).ready(function(){
     });
 });
 
-
+      $(".drag-me").draggable({
+       handle: ".modal-header"
+      });
 
       $('#add-grade-level').on('hidden.bs.modal',function(){
         gradeTableFunc();
@@ -823,13 +800,13 @@ $(document).ready(function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<button data-url="/sms/registrar/remove-grade/'+oData.grade_level_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-grade-level-id="'+oData.grade_level_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                      $(nTd).html('<button data-url="/sms/registrar/remove-grade/'+oData.grade_level_id+'" class="btn btn-danger btn-sm w-b laddaRemove" data-grade-level-id="'+oData.grade_level_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
                   }
                 },  
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]
@@ -905,13 +882,13 @@ $(document).ready(function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-renove/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-renove/'+oData.seminar_id+'" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]
@@ -963,13 +940,13 @@ $(document).ready(function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-renove/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-renove/'+oData.seminar_id+'" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]
@@ -1026,13 +1003,13 @@ $(document).ready(function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                      $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
                   }
                 },  
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]
@@ -1144,14 +1121,8 @@ function removeNull(Val){
 
 function changeGradeLevel(){
 
-      $('#gradeType').val({{ $keyVal->grade_type_id or  ''}});
-      var selInst = $('#gradeLevels');
-
       var selValue = $('#gradeType').val();
-
       $('#gradeLevels').select_binder(selValue);
-
-      //orgBinder(selInst,selValue);
   }
 
 function changeGradeLevelSubject(){
@@ -1239,13 +1210,13 @@ function changeGradeLevelSubject(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/sms/registrar/remove-grade/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="/sms/registrar/remove-grade/'+oData.seminar_id+'" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]

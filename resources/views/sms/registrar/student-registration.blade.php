@@ -104,59 +104,30 @@
     <div class="col-md-12">
       <div class="form-group form-md-radios">
         <label>Parents Options</label>
-        <div class="md-radio-list">
-          <div class="md-radio">
-            <input type="radio" id="default" value="default" name="parental" class="md-radiobtn">
+          <div class="form-group">
+            <input type="radio" id="default" value="default" name="parental" checked class="radio-primary">
             <label for="radio1">
-            <span></span>
-            <span class="check"></span>
-            <span class="box"></span>
             Default </label>
           </div>
-          <div class="md-radio">
+          <div class="form-group">
             <input type="radio" id="checkParents" value="checkParents" name="parental" class="md-radiobtn">
             <label for="radio">
-            <span></span>
-            <span class="check"></span>
-            <span class="box"></span>
             Both Parents Already Exist </label>
           </div>
-            <div class="md-radio">
+            <div class="form-group">
             <input type="radio" id="with-out-father" value="with-out-father" name="parental" class="md-radiobtn">
             <label for="radio">
-            <span></span>
-            <span class="check"></span>
-            <span class="box"></span>
             Only Mother Already Exist </label>
           </div>
-          <div class="md-radio">
+          <div class="form-group">
             <input type="radio" id="with-out-mother" value="with-out-mother" name="parental" class="md-radiobtn">
             <label for="radio">
-            <span></span>
-            <span class="check"></span>
-            <span class="box"></span>
             Only Father Already Exist </label>
           </div>
 
 
-        </div>
       </div>
-     <!--  <div class="form-group">
-        <label>Parents Options</label><br>
-        <label class="radio-inline">
-          <input type="radio" id="default" value="default" name="parental" checked=""><span>  Default</span>
-        </label>
-        <label class="radio-inline">
-          <input type="radio" id="checkParents" value="checkParents" name="parental"><span> Both Parents Already Exist</span>
-        </label>
-        <label class="radio-inline">
-          <input type="radio" id="with-out-father" value="with-out-father" name="parental"><span> Only Mother Already Exist</span>
-        </label>
-        <label class="radio-inline">
-          <input type="radio" id="with-out-mother" value="with-out-mother" name="parental"><span> Only Father Already Exist</span>
-        </label>
-         
-      </div> -->
+
     </div>
 
 

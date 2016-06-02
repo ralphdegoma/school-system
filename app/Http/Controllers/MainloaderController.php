@@ -98,4 +98,8 @@ class MainloaderController extends Controller
       return view('sms.kronos.schedulling');
     }
 
+   public function hr(){
+      return view('sms.kronos.human-resource');
+    }
+
 }
