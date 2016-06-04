@@ -132,7 +132,7 @@
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">
                               <div class="pull-right pull-bottom">
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-school-year"><i class="fa fa-plus"></i> ADD NEW SCHOOL YEAR</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add-school-year"><i class="fa fa-plus"></i>ADD NEW SCHOOL YEAR</button>
                               </div>
                             </div>
                         </div>
@@ -212,13 +212,17 @@
                               <thead>
                                 <tr>
                                     <th>SUBJECT CODE</th>
-                                    <th>SUBJECT NAME</th>
+                                    <th>SUBJECT</th>
+                                    <th>GRADE LEVEL</th>
+                                    <th>SECTION TYPE</th>
                                     <th>ACTION</th>
                                     <th>ACTION</th>
                                 </tr>
                               </thead>
                               <tbody>
                               <tr>
+                                  <td></td>
+                                  <td></td>
                                   <td></td>
                                   <td></td>
                                   <td></td>
@@ -374,7 +378,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Request Slot</h4>
+        <h4 class="modal-title">School Year</h4>
       </div>
       <div class="modal-body">
         <form id="setupSchoolYear">
@@ -400,7 +404,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-school-year" data-form="setupSchoolYear" data-target="#wyredSaveModal">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -414,10 +418,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Request Slot</h4>
+        <h4 class="modal-title">Subect</h4>
       </div>
       <div class="modal-body">
-        <form id="setupSchoolYear">
+        <form id="addSubject">
           <div class="form-group">
              <label>SUBJECT NAME</label>
               <input type="text" class="form-control input-sm" name="subjectName">
@@ -426,7 +430,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-section" data-form="addSection" data-target="#wyredSaveModal">SAVE</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal"  data-url="/sms/registrar/save-subject" data-form="addSubject" data-target="#wyredSaveModal">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -434,12 +438,12 @@
   <!-- /.modal-dialog -->
 </div>
 
-<div class="modal fade draggable-modal mo-z drag-me" id="add-assignsubject" tabindex="-1" role="basic" aria-hidden="true">
+<div class="modal fade draggable-modal mo-z drag-me" id="add-assignsubject"  role="basic" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Request Slot</h4>
+        <h4 class="modal-title">Assign Subject</h4>
       </div>
       <div class="modal-body">
         <form id="setupSubject">
@@ -457,9 +461,17 @@
                   <select class="form-control input-sm" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevelSubject" required>
                 </select>
                 </div>
+                <div class="form-group">
+                 <label>Section Type</label>
+                  <select class="form-control input-sm" name="section_type" required>
+                    @foreach($sectionType as $section)
+                        <option value="{{$section->section_type_id}}">{{$section->section_type}}</option>
+                    @endforeach
+                </select>
+                </div>
                  <div class="form-group">
                  <label>SUBJECT</label>
-                  <select class="form-control input-sm" name="gradeLevel" id="gradeLevel" required>
+                  <select class="form-control input-sm select2" multiple="multiple" name="gradeSubject[]" id="gradeLevel" required>
                   @foreach($subject as $subjects)
                     <option value="{{$subjects->subject_id}}">{{$subjects->subject_name}}</option>
                   @endforeach
@@ -471,7 +483,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/assign-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -652,6 +664,7 @@ $(document).ready(function(){
     
     subjectTableFunc();
     sectionTableFunc();
+    assignTableFunc();
 
     $('.clockpicker').clockpicker({
     defaultTime: 'value',
@@ -753,7 +766,9 @@ $(document).ready(function(){
        $('#add-section').on('hidden.bs.modal',function(){
         sectionTableFunc();
       });
-       
+       $('#add-subject').on('hidden.bs.modal',function(){
+        subjectTableFunc();
+      });
 
     function gradeTableFunc(){
       
@@ -1017,6 +1032,67 @@ $(document).ready(function(){
 
     }
 
+    function assignTableFunc(){
+      
+      $('#sectionTable').dataTable().fnClearTable();
+      $("#sectionTable").dataTable().fnDestroy();
+
+          var subjectTable = $('#sectionTable').DataTable({
+          responsive: true,
+          bAutoWidth:false,
+
+          "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            nRow.setAttribute('data-id',aData.row_id);
+            nRow.setAttribute('class','ref_provider_info_class');
+          },
+
+          "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+            oSettings.jqXHR = $.ajax( {
+              "dataType": 'json',
+              "type": "GET",
+              "url": sSource,
+              "data": aoData,
+              "success": function (data) {
+                subjectTable = data;
+                console.log(subjectTable);
+                fnCallback(subjectTable);           
+              }
+            });
+          },
+                     
+          "sAjaxSource": "/sms/registrar/get-section",
+          "sAjaxDataProp": "",
+          "iDisplayLength": 10,
+          "scrollCollapse": false,
+          "paging":         true,
+          "searching": true,
+
+          "columns": [
+             
+
+              { "mData": "section_id", sDefaultContent: ""},
+
+               { "mData": "get_grade_level.grade_level", sDefaultContent: ""},
+
+               { "mData": "section_name", sDefaultContent: ""},
+
+               { "mData": "get_section_type.section_type", sDefaultContent: ""},
+
+                { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                  }
+                },  
+
+               { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="/bis/seminar-edit/'+oData.seminar_id+'" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                  }
+                },  
+          ]
+      });
+
+    }
 
     function format (row_id) {
 
@@ -1127,7 +1203,6 @@ function changeGradeLevel(){
 
 function changeGradeLevelSubject(){
 
-      $('#gradeTypeSubject').val({{ $keyVal->grade_type_id or  ''}});
       var selInst = $('#gradeLevelSubject');
       
       var selValue = $('#gradeTypeSubject').val();

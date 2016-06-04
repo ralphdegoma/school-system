@@ -180,10 +180,14 @@ class RegistrarController extends Controller
 	}
 	public function assignSubject(){
 		$request 				= Request::all();
+		foreach ($request['gradeSubject'] as $subject) {
 		$assign 				= new DtAssignSubject;
-		$assign->subject_id 	= $request['gradeSubject'];
+		$assign->subject_id 	= $subject;
+		$assign->section_type_id = $request['section_type'];
 		$assign->grade_level_id = $request['grade_level'];
 		$assign->save();
+		}
+		
 
 		$return = new rrdReturn();
 		return $return->status(true)

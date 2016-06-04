@@ -513,6 +513,29 @@
                             <a href="/sms/setup/academics">
                             Academics</a>
                         </li>
+                        <li>
+                            <a href="#">
+                            Billing
+                            <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="/kronos/hris/schedulling">
+                                    <i class="fa fa-circle"></i>
+                                    Setup Schedule </a>
+                                </li>
+                                <li>
+                                    <a href="/kronos/hris/assign-schedule">
+                                    <i class="fa fa-circle"></i>
+                                    Assign Schedule </a>
+                                </li>
+                                <li>
+                                    <a href="/kronos/hris/schedule-list">
+                                    <i class="fa fa-circle"></i>
+                                    Schedule List </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>

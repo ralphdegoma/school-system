@@ -35,6 +35,8 @@ jQuery(document).ready(function() {
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
 });
+
+
 </script>
 
 </body>
