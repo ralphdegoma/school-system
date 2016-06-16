@@ -35,7 +35,14 @@ jQuery(document).ready(function() {
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
 });
-
+$(document).ready(function(){
+	$('#billingMenu').click(function(){
+        $('#academicsMenu').removeClass('active'); 
+    });
+    $('#academicsMenu').click(function(){
+        $('#billingMenu').removeClass('active'); 
+    });
+});
 
 </script>
 

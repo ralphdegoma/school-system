@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
-use App\PropertyStatus;
-use App\Building;
-use App\Storey;
-use App\Section;
-use App\Category;
-use App\SubCategory;
-use App\PropModel;
-use App\Classification;
-use App\Group;
-
+use App\Parents;
+use App\Parents_Students;
+use App\Religion;
+use App\Nationality;
+use App\Occupation;
 
 class AutoSuggestController extends Controller
 {
@@ -29,95 +24,51 @@ class AutoSuggestController extends Controller
 
 	}
 
+    public function getFather(){
 
-	public function getStorey(){
+        $data = Parents::whereHas('Parents_Students', function($q){
 
-		$data  = Storey::where('storey_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('storey_name','asc')
-    		->get();
+            $q->where('parental_type_id', '=', '2');
 
-    	return $data;
+        })->where('parents_name', 'like', '%'.Request::input('inputVal').'%')->get();
 
-	}
+        return $data;
 
-	public function getSection(){
+    } 
 
-		$data  = Section::where('section_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('section_name','asc')
-    		->get();
+    public function getMother(){
 
-    	return $data;
+        $data = Parents::whereHas('Parents_Students', function($q){
 
-	}
+            $q->where('parental_type_id', '=', '1');
 
-	public function getCategory(){
+        })->where('parents_name', 'like', '%'.Request::input('inputVal').'%')->get();
 
-		$data  = Category::where('category_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('category_name','asc')
-    		->get();
+        return $data;
 
-    	return $data;
+    } 
 
-	}
+    public function getReligiion(){
 
+        $data = Religion::where('religion_name', 'like', '%'.Request::input('inputVal').'%')->get();
 
-	public function getSubCategory(){
+        return $data;
 
-		$data  = SubCategory::where('subcat_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('subcat_name','asc')
-    		->get();
+    }    
 
-    	return $data;
+    public function getNationality(){
 
-	}
+        $data = Nationality::where('nationality_name', 'like', '%'.Request::input('inputVal').'%')->get();
+        return $data;
 
-	public function getModel(){
+    } 
 
-		$data  = Model::where('model_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('model_name','asc')
-    		->get();
+    public function getOccupation(){
 
-    	return $data;
+        $data = Occupation::where('designation_name', 'like', '%'.Request::input('inputVal').'%')->get();
+        return $data;
 
-	}
-
-	public function getBrand(){
-
-		$data  = Brand::where('brand_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('brand_name','asc')
-    		->get();
-
-    	return $data;
-
-	}
-
-	public function getClassification(){
-
-		$data  = Classification::where('classification_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('classification_name','asc')
-    		->get();
-
-    	return $data;
-
-	}
-
-	public function getGroup(){
-
-		$data  = Group::where('group_name', 'like', '%'.Request::input('inputVal').'%')
-    		->take(5)
-    		->orderby('group_name','asc')
-    		->get();
-
-    	return $data;
-
-	}
+    }     
 
     
 }

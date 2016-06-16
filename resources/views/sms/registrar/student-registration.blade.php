@@ -146,7 +146,7 @@
               <div id="father-div">
              <div class="form-group form-md-line-input">
                   <input type="hidden" value="{{$parents->parents->parent_id or ""}}" class="form-control input-sm"  name="father_parent_id" >
-                  <input type="text" value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm"  name="fathers_name" required>
+                  <input type="text"  value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm father_input" name="fathers_name" required>
                  <label>FATHER NAME</label>
                </div>
                <div class="form-group form-md-line-input bday">
@@ -159,15 +159,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
+                  <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
                   <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
                   <label>OCCUPATION</label>
                </div>
                 <div class="form-group form-md-line-input">
@@ -204,7 +204,7 @@
   @else<!-- BLANK TEMPLATE -->
       <div class="col-md-6">
             <div class="form-group form-md-line-input" id="father-select">
-                <select class="form-control input-sm select2 father_id" required data-url="/select-binder/get-father" data-id="parent_id" data-name='parents_name' name="father_id">
+                <select class="form-control input-sm select2 father_id" required  name="father_id">
                   <option></option>
                 </select>
                 <label>FATHER NAME</label>
@@ -212,7 +212,7 @@
 
               <div id="father-div">
              <div class="form-group form-md-line-input">
-                  <input type="text" value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm" required name="fathers_name" required="">
+                  <input type="text" value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm father_input"  data-display='parents_name' name="fathers_name" required name="fathers_name" required="">
                   <label>FATHER NAME</label>
                </div>
                <div class="form-group form-md-line-input bday">
@@ -225,15 +225,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
+                  <input type="text" class="form-control input-sm religion_input"  value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
                  <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>                
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>                
                  <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
                 <label>OCCUPATION</label>
                </div>
                 <div class="form-group form-md-line-input">
@@ -282,7 +282,7 @@
               <div id="mother-div">
              <div class="form-group form-md-line-input">
                   <input type="hidden" value="{{$parents->parents->parent_id or ""}}" class="form-control input-sm"  name="mother_parent_id" >
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
+                  <input type="text" class="form-control input-sm mother_input" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
                 <label>MOTHER NAME</label>
                </div>
                <div class="form-group form-md-line-input bday">
@@ -295,15 +295,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
+                  <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
                 <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
                 <label>OCCUPATION</label>
                </div>
                 <div class="form-group form-md-line-input">
@@ -347,7 +347,7 @@
               </div>
               <div id="mother-div">
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
+                  <input type="text" class="form-control input-sm mother_input" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
                  <label>MOTHER NAME</label>
                </div>
                <div class="form-group form-md-line-input bday">
@@ -360,15 +360,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
+                  <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
                 <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
                    <label>OCCUPATION</label>
                </div>
                 <div class="form-group form-md-line-input">
@@ -412,7 +412,7 @@
   <div class="col-md-12">
       
       <div class="checkbox checkbox-primary">
-          <input type="checkbox" id="guardian_check" name="guardian_check" click>
+          <input type="checkbox" checked id="guardian_check" name="guardian_check" >
           <label for="guardian_check">GUARDIAN NAME ALREADY EXIST</label>
       </div>
   </div>
@@ -421,6 +421,8 @@
 
 
 @if(!empty($student))
+
+  @if(empty($student->parents_students))
     @foreach($student->parents_students as $parents)
         @if($parents->parental_type_id == '3')<!-- guardian -->
             <div class="col-md-6">
@@ -451,15 +453,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
+                  <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
                  <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
                    <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >
                    <label>OCCUPATION</label>
                </div>
               </div>
@@ -499,11 +501,88 @@
               </div>
             </div>
             </div>
-            
-        @endif
-    @endforeach
+       
+    @endif
+  @endforeach
+  @else
 
-    @else
+            <div class="col-md-6">
+            <div class="form-group form-md-line-input" id="guardian-select">
+                <select class="form-control input-sm select2 guardian_id" name="guardian_id" name="guardian_id" data-url="/select-binder/get-guardian" data-id="parent_id" data-name='parents_name' >
+                  <option></option>
+                </select>
+                <label>GUARDIAN NAME</label>
+              </div>
+
+            <div class="form-group form-md-line-input">
+                <input type="text" class="form-control input-sm" value="" name="relationship_name" >
+               <label>RELATIONSHIP</label>
+             </div>
+            <div class="guardian-div">
+             <div class="form-group form-md-line-input">
+                  <input type="text" class="form-control input-sm" name="guardian_name" value="" >
+                 <label>GUARDIAN NAME</label>
+               </div>
+               <div class="form-group form-md-line-input bday">
+                <div class="input-group date">
+                  <span class="input-group-addon">
+                   <i class="fa fa-calendar"></i>
+                  </span>
+                  <input type="text" class="form-control input-sm" name="guardian_birthday" value="">
+                   <label>BIRTHDAY</label>
+                </div>
+            </div>
+             <div class="form-group form-md-line-input">
+                  <input type="text" class="form-control input-sm religion_input" value="" name="guardian_religion" >
+                  <label>RELIGION</label>
+               </div>
+                <div class="form-group form-md-line-input">
+                  <input type="text" class="form-control input-sm nationality_input"  value="" name="guardian_nationality" >
+                    <label>NATIONALITY</label>
+               </div>
+                <div class="form-group form-md-line-input">
+                  <input type="text" class="form-control input-sm occupation_input" value="" name="guardian_occupation" >                 
+                 <label>OCCUPATION</label>
+               </div>
+              </div>
+               </div>
+
+               <div class="col-md-6">
+                <div class="guardian-div">
+                <div class="form-group form-md-line-input">
+                  <input type="text" class="form-control input-sm" value=""  name="guardian_firm">
+                  <label>NAME OF FIRM OR EMPLOYER</label>
+               </div>
+               <div class="form-group form-md-line-input">
+                <div class="input-group date">
+                  <span class="input-group-addon">
+                   <i class="fa fa-calendar"></i>
+                  </span>
+                  <input type="text" class="form-control input-sm" value="" name="guardian_residence_tel" >
+                  <label>TEL. NO. (RESIDENCE)</label>
+                </div>
+            </div>
+            <div class="form-group form-md-line-input">
+                <div class="input-group date">
+                  <span class="input-group-addon">
+                   <i class="fa fa-calendar"></i>
+                  </span>
+                  <input type="text" class="form-control input-sm" name="guardian_office_tel" value="">
+                   <label>TEL. NO. (OFFICE)</label>
+                </div>
+            </div>
+
+
+
+                <div class="form-group form-md-line-input">
+                <textarea class="form-control input-sm" rows="2" name="guardian_home_address" ></textarea>
+                 <label>HOME ADDRESS</label>
+              </div>
+            </div>
+            </div>
+
+  @endif
+@else
           <div class="col-md-6">
             <div class="form-group form-md-line-input" id="guardian-select">
                 <select class="form-control input-sm select2 guardian_id" name="guardian_id" name="guardian_id" data-url="/select-binder/get-guardian" data-id="parent_id" data-name='parents_name' >
@@ -531,15 +610,15 @@
                 </div>
             </div>
              <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
+                  <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
                   <label>RELIGION</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
+                  <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
                     <label>NATIONALITY</label>
                </div>
                 <div class="form-group form-md-line-input">
-                  <input type="text" class="form-control input-sm" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >                 
+                  <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >                 
                  <label>OCCUPATION</label>
                </div>
               </div>
@@ -635,10 +714,35 @@
 <script src ="/assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="/assets/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/assets/js/plugins/switchery/switchery.js"></script>
+
 <script>
 
 $(document).on('ready', function() {
 
+    $('.religion_input').autosuggest({
+          data_url :"/autosuggest/getReligiion",
+          data_display : 'religion_name'
+    });
+
+    $('.father_input').autosuggest({
+          data_url :"/autosuggest/getFather",
+          data_display : 'parents_name'
+    });
+
+    $('.nationality_input').autosuggest({
+          data_url :"/autosuggest/getNationality",
+          data_display : 'nationality_name'
+    });
+
+    $('.occupation_input').autosuggest({
+          data_url :"/autosuggest/getOccupation",
+          data_display : 'designation_name'
+    });
+
+    $('.mother_input').autosuggest({
+          data_url :"/autosuggest/getMother",
+          data_display : 'parents_name'
+    });
 
     @if(!empty($student))
 
@@ -659,6 +763,11 @@ $(document).on('ready', function() {
 
           overwriteInitial: true,
           maxFileSize: 1500,
+          maxImageWidth: 200,
+          maxImageHeight: 150,
+          resizePreference: 'height',
+          maxFileCount: 1,
+          resizeImage: true,
           showClose: false,
           showCaption: false,
           browseLabel: '',

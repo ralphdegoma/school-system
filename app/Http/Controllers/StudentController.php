@@ -25,8 +25,6 @@ class StudentController extends Controller
     
     public function newStudentSave(){
 
-
-
         if(Request::input('student_id_old') != ""){
             $Students = Students::find(Request::input('student_id_old'));
             Parents_Students::where('student_id' , Request::input('student_id_old'))->delete();
@@ -34,7 +32,6 @@ class StudentController extends Controller
             $Students = new Students(); 
         }
 
-    
         $checkBatch = new Batch(); 
         $checkBatch = $checkBatch->where('isActive','=',"1")->first();
 
@@ -45,6 +42,20 @@ class StudentController extends Controller
                       ->message('Assign first batch id , cannot save student.')
                       ->show();
         }
+
+        /*$checkStudents = new Students(); 
+        $checkStudents = $checkStudents
+                        ->where('first_name',Request::input('first_name'))
+                        ->where('middle_name',Request::input('middle_name'))
+                        c
+                        ->get();
+
+        if(count($checkStudents) > 0){
+            $return = new rrdReturn();
+            return $return->status(false)
+                      ->message('Student Already exists, please specify another one.')
+                      ->show();
+        }*/
 
         $Students->batch_id          = $checkBatch->batch_id;
         $Students->student_status_id = '1';
@@ -68,21 +79,17 @@ class StudentController extends Controller
             $this->saveNewFather($StudentsId);
             $this->saveNewMother($StudentsId);
         }
-
         else if(Request::input('parental') == "checkParents"){  
 
             $this->assignMother($StudentsId);
             $this->assignFather($StudentsId);
         }
-
         else if(Request::input('parental') == "with-out-father"){  
 
             $this->assignMother($StudentsId);
             $this->saveNewFather($StudentsId);
         }
-
         else if(Request::input('parental') == "with-out-mother"){  
-
             $this->saveNewMother($StudentsId);
             $this->assignFather($StudentsId);
         }
@@ -102,10 +109,9 @@ class StudentController extends Controller
            $this->saveImage($StudentsId); 
         }
         
-
         $return = new rrdReturn();
         return $return->status(true)
-                      ->message("New Property Type has been saved!")
+                      ->message("Awesome!, Student has been saved!")
                       ->show();
     }
 
@@ -186,6 +192,18 @@ class StudentController extends Controller
 
     public function saveNewGuardian($StudentsId){
 
+        $checkParents = new Parents(); 
+        $checkParents = $checkParents
+                        ->where('parents_name',Request::input('guardian_name'))
+                        ->get();
+
+        if(count($checkParents) > 0){
+            $return = new rrdReturn();
+            return $return->status(false)
+                      ->message('Person Already exists, Check it on the list and try again.')
+                      ->show();
+        }
+
         $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('guardian_nationality')]);
         $Nationality->save(['nationality_name' => Request::input('guardian_nationality')]);
         $NationalityData = Nationality::where('nationality_name', '=', Request::input('guardian_nationality'))->first();
@@ -236,6 +254,18 @@ class StudentController extends Controller
 
     public function saveNewMother($StudentsId){
 
+        $checkParents = new Parents(); 
+        $checkParents = $checkParents
+                        ->where('parents_name',Request::input('mothers_name'))
+                        ->get();
+
+        if(count($checkParents) > 0){
+            $return = new rrdReturn();
+            return $return->status(false)
+                      ->message('The person you specified as a mother already exists, Check it on the list and try again.')
+                      ->show();
+        }
+
         $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('mothers_nationality')]);
         $Nationality->save(['nationality_name' => Request::input('mothers_nationality')]);
         $NationalityData = Nationality::where('nationality_name', '=', Request::input('mothers_nationality'))->first();
@@ -283,6 +313,18 @@ class StudentController extends Controller
     }
 
     public function saveNewFather($StudentsId){
+
+        $checkParents = new Parents(); 
+        $checkParents = $checkParents
+                        ->where('parents_name',Request::input('fathers_name'))
+                        ->get();
+
+        if(count($checkParents) > 0){
+            $return = new rrdReturn();
+            return $return->status(false)
+                      ->message('The person you specified as a father already exists, Check it on the list and try again.')
+                      ->show();
+        }
 
         $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('fathers_nationality')]);
             

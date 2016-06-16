@@ -6,62 +6,44 @@
 <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
  <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 <link href="/assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
-<style>
 
-</style>
 @stop
 
 @section('content')
 
 <div class="col-md-8">
-  <div class="wyred-box-header">
-    <h3 class="wyred-box-title"><i class="fa fa-file-text-o"></i> EXISTING FEES LIST</h3>
-  </div>
-  <div class="wyred-box-body">
-  <div class="row" >
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h5 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Advanced Filter Search</a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-                <div class="panel-body">
-                 <div class="col-md-6">
-                    <div class="form-group">
-                     <label>GENDER</label>
-                      <select class="form-control input-sm">
-                        <option>Male</option>
-                        <option>Female</option>
-                      </select>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                     <label>STUDENT STATUS</label>
-                      <select class="form-control input-sm">
-                        <option>New</option>
-                        <option>Old</option>
-                        <option>In-Active</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
+  <div class="portlet box red">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-user"></i>ENROLLED STUDENT'S
     </div>
-    <div style="height: 380px;overflow-y: scroll;">
+    <div class="tools">
+    
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="row">
+     <div class="col-md-4">
+      <div class="form-group">
+       <label>School Year</label>
+        <select class="form-control input-sm">
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+     </div>
+   
+    <div class="col-md-12">
+    <div style="height: 425px;overflow-y: scroll;">
      <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover dataTables-example" >
         <thead>
         <tr>
-            <th>GRADE LEVEL</th>
-            <th>FEES</th>
-            <th>AMOUNTS</th>
-            <th>RECEIPTS ACCOUNTS</th>
-            <th class="text-center">ACTION</th>
-            <th class="text-center">ACTION</th>
+            <th>Rendering engine</th>
+            <th>Browser</th>
+            <th>Platform(s)</th>
+            <th>Engine version</th>
+            <th>CSS grade</th>
         </tr>
         </thead>
         <tbody>
@@ -72,148 +54,180 @@
             </td>
             <td>Win 95+</td>
             <td class="center">4</td>
-             <td class="center">
-            <button class="btn btn-danger btn-block btn-sm"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>
+            <td class="center">X</td>
+        </tr>
+        <tr class="gradeC">
+            <td>Trident</td>
+            <td>Internet
+                Explorer 5.0
             </td>
-            <td class="center">
-            <button class="btn btn-info btn-block btn-sm" data-toggle="modal" data-target="#edit-fees"><b class="pull-left"><i class="fa fa-pencil"></i></b> <b class="pull-right">EDIT</b></button>
+            <td>Win 95+</td>
+            <td class="center">5</td>
+            <td class="center">C</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Trident</td>
+            <td>Internet
+                Explorer 5.5
             </td>
-            
+            <td>Win 95+</td>
+            <td class="center">5.5</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Trident</td>
+            <td>Internet
+                Explorer 6
+            </td>
+            <td>Win 98+</td>
+            <td class="center">6</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Trident</td>
+            <td>Internet Explorer 7</td>
+            <td>Win XP SP2+</td>
+            <td class="center">7</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Trident</td>
+            <td>AOL browser (AOL desktop)</td>
+            <td>Win XP</td>
+            <td class="center">6</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Gecko</td>
+            <td>Firefox 1.0</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.7</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Gecko</td>
+            <td>Firefox 1.5</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
+            <td class="center">A</td>
+        </tr>
+        <tr class="gradeA">
+            <td>Gecko</td>
+            <td>Firefox 2.0</td>
+            <td>Win 98+ / OSX.2+</td>
+            <td class="center">1.8</td>
+            <td class="center">A</td>
         </tr>
         </tbody>
         </table>
       </div>
       </div>
+      </div>
+      <div class="col-md-12">
+       <div class="pull-right" style="padding-right:10px;padding-top:10px;">
+        <button class="btn btn-info"><i class="fa fa-reply"></i> Recall Previous SY Account's</button>
+       </div>
+      </div>
+   </div>
   </div>
-</div>
-<div class="wyred-box-footer">
-  <div class="pull-right wyred-button col-md-6 ">
-    <button class="btn btn-info btn-block"><i class="fa fa-plus"></i> ADD PREVIOUS SCHOOL YEAR ACCOUNTS </button>
-  </div>
-</div>
+ </div>
 </div>
 
 <div class="col-md-4">
-  <div class="wyred-box-header">
-    <h3 class="wyred-box-title"><i class="fa fa-money"></i> SETUP NEW FEE</h3>
-  </div>
-  <div class="wyred-box-body">
-  <div class="row">
-  <div class="col-md-12">
-   <div class="form-group">
-     <label>CLASS TYPE</label>
-      <select class="form-control input-sm" id="classType">
+<div class="portlet box red">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-info"></i> Grade Fee's Information
+    </div>
+    <div class="tools">
       
-      </select>
     </div>
-    <div class="form-group">
-     <label>GRADE TYPE</label>
-      <select class="form-control input-sm">
-       
-      </select>
-    </div>
-   <div class="form-group">
-     <label>GRADE LEVEL</label>
-      <select class="form-control input-sm">
-        <option>Male</option>
-        <option>Female</option>
-      </select>
-    </div>
-     <div class="form-group" id="section-div">
-     <label>FEES</label>
-      <select class="form-control input-sm">
-        <option>Male</option>
-        <option>Female</option>
-      </select>
-    </div>
-    <div class="form-group" id="section-div">
-     <label>AMOUNT</label>
-    <input type="text" class="form-control input-sm" name="">
-    </div>
-     <div class="form-group" id="section-div">
-     <label>RECEIPTS ACCOUNTS</label>
-      <select class="form-control input-sm">
-        <option>Male</option>
-        <option>Female</option>
-      </select>
-    </div>
-    <p class="text-red">
-      Notes: Please add Tuition Fees for all levels.
-    </p>
+  </div>
+  <div class="portlet-body">
+    <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+          <b><label>School Year: 2016 - 2017</label></b>
+      </div>
+      <div class="form-group">
+       <label>Grade Type</label>
+        <select class="form-control input-sm">
+         
+        </select>
+      </div>
+      <div class="form-group">
+         <label>Grade Level</label>
+           <select class="form-control input-sm">
+           
+           </select>
+         </div>
+       <div class="form-group">
+        <label>Fees</label>
+          <select class="form-control input-sm" id="feesSelect">
+          <option></option>
+          <option value="add-fees">+ Add Fees</option>
+        </select>
+        </div>
+       <div class="form-group">
+         <label>Amount</label>
+           <input type="text" class="form-control input-sm" name="">
+       </div>
+       </div>  
+      <div class="col-md-12">
+      <button class="btn btn-info btn-block"><i class="fa fa-reply"></i> Setup Fee</button>
+      </div>
+   </div>
   </div>
  </div>
- </div>
- <div class="wyred-box-footer">
-    <div class="wyred-button col-md-12">
-        <button class="btn btn-info btn-block">ADD FEE</button>
-    </div>
 </div>
- </div>
 
 
-<div class="modal inmodal fade" id="edit-fees" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
 
-
-               <div class="wyred-box-header" style="margin-top:-10px;">
-                  <h3 class="wyred-box-title"><i class="fa fa-pencil"></i> EDIT FEE</h3>
-                </div>
-                <div class="wyred-box-body">
-                <div class="row">
-                <div class="col-md-12">
-                 <div class="form-group">
-                   <label>CLASS TYPE</label>
-                    <select class="form-control input-sm" id="classType">
-                    
-                    </select>
-                  </div>
-                  <div class="form-group">
-                   <label>GRADE TYPE</label>
-                    <select class="form-control input-sm">
-                     
-                    </select>
-                  </div>
-                 <div class="form-group">
-                   <label>GRADE LEVEL</label>
-                    <select class="form-control input-sm">
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                   <div class="form-group" id="section-div">
-                   <label>FEES</label>
-                    <select class="form-control input-sm">
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                  <div class="form-group" id="section-div">
-                   <label>AMOUNT</label>
-                  <input type="text" class="form-control input-sm" name="">
-                  </div>
-                   <div class="form-group" id="section-div">
-                   <label>RECEIPTS ACCOUNTS</label>
-                    <select class="form-control input-sm">
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                  <p class="text-red">
-                    Notes: Please add Tuition Fees for all levels.
-                  </p>
-                </div>
-               </div>
-               </div>
-               <div class="wyred-box-footer">
-                  <div class="wyred-button col-md-12">
-                      <button class="btn btn-info btn-block">ADD FEE</button>
-                  </div>
-              </div>
- 
-        </div>
+<div class="modal fade draggable-modal mo-z drag-me" id="add-fees" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Fees</h4>
+      </div>
+      <div class="modal-body">
+        <form id="setupSubject">
+         <div class="form-group">
+           <label>Reciept Account</label>
+            <select class="form-control input-sm">
+              <option></option>
+              <option></option>
+            </select>
+            <small>
+              Note: If you want to add new Charts of Account. Please proceed to Pythagoras Accounting Management System. or click this icon <a href="{{substr_replace(Request::root(), "", -2)}}84" target="_blank"><i class="fa fa-mail-forward"></i></a>
+            </small>
+          </div>
+           <div class="form-group">
+           <label>Fee Categories</label>
+            <select class="form-control input-sm">
+              <option></option>
+              <option></option>
+            </select>
+          </div>
+          <div class="form-group">
+           <label>Fees Name</label>
+             <input type="text" class="form-control input-sm" name="">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
+
+
+
+
 
 @stop
 @section('js_filtered')
@@ -227,24 +241,36 @@
     
 <script>
 $(document).ready(function(){
+
+
+    $('#setupMenu').addClass('active');
+    $('#billingMenu').addClass('active');
+    $('#gradelevelfeeMenu').addClass('active');
+
+
+
     $('#summer-div').hide();
     $('#summer-div-request').hide();
+
+    $(".drag-me").draggable({
+       handle: ".modal-header"
+    });
 
     $('#year').datepicker( {
         format: " yyyy", // Notice the Extra space at the beginning
         viewMode: "years", 
         minViewMode: "years"
     });
-   
-     $('#classType').change(function(){
-      if(this.value == '2'){
-        $('#summer-div').show();
-        $('#section-div').hide();
-      }else if(this.value == '1'){
-        $('#summer-div').hide();
-         $('#section-div').show();
-      }
+
+    $('#feesSelect').change(function () {
+        if ($(this).val() == "add-fees") {
+             $('#add-fees').modal({
+                show: true
+            }); 
+        }
+         this.value = "";
     });
+   
 
      $('#classTypeR').change(function(){
       if(this.value == 'SUMMER CLASS'){

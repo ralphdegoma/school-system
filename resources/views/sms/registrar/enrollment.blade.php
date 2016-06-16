@@ -23,17 +23,17 @@
   </div>
   <div class="portlet-body">
     <div class="row">
+    <form id="enroll_form">
     <div class="col-md-12">
     <div class="form-group">
        <label>STUDENT</label>
-        <select class="form-control input-sm">
-          <option>Ralph Degoma</option>
-          <option>Bridgett Lloren</option>
+        <select required name="student_id" class="form-control input-sm students" data-id="student_id" data-name="full_name" data-url="/select-binder/get-students">
+          <option></option>
         </select>
       </div>
      <div class="form-group">
        <label>CLASS TYPE</label>
-        <select class="form-control input-sm" id="classType">
+        <select class="form-control input-sm" id="classType" required name="class_type">
           @foreach($classType as $keyVal)
           <option value="{{$keyVal->class_type_id}}">{{$keyVal->class_type}}</option>
           @endforeach
@@ -41,7 +41,7 @@
       </div>
       <div class="form-group">
        <label>GRADE TYPE</label>
-        <select class="form-control input-sm">
+        <select class="form-control input-sm gradeType" required name="grade_type">
           @foreach($gradeType as $keyVal)
           <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
          @endforeach
@@ -49,35 +49,32 @@
       </div>
      <div class="form-group">
        <label>GRADE LEVEL</label>
-        <select class="form-control input-sm">
-          <option>Male</option>
-          <option>Female</option>
+        <select  class="form-control input-sm grade-level" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" required>
+          <option></option>
         </select>
       </div>
        <div class="form-group">
        <label>TIME</label>
-        <select class="form-control input-sm">
-          <option>Male</option>
-          <option>Female</option>
+        <select  class="form-control input-sm section-time" name="time" data-id="time" data-name="time" data-url="/select-binder/get-section-time" required>
+          <option></option>
         </select>
       </div>
        <div class="form-group">
        <label>SECTION</label>
-        <select class="form-control input-sm">
-          <option>Male</option>
-          <option>Female</option>
+        <select  class="form-control input-sm section" name="schedule_id" data-id="schedule_id" data-name="section_name" data-url="/select-binder/get-section" required> 
+          <option></option>
         </select>
       </div>
-      <div class="form-group">
+<!--       <div class="form-group">
        <label>REQUIREMENTS</label>
         <select class="form-control input-sm">
-          <option>Male</option>
-          <option>Female</option>
+          <option></option>
         </select>
-      </div>
+      </div> -->
        </div>  
+       </form>
       <div class="col-md-12">
-      <button class="btn btn-info btn-block"><i class="fa fa-child"></i> ENROLL STUDENT</button>
+      <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal"  data-url="/admin/sms/new-enroll" data-form="enroll_form" data-target="#wyredSaveModal"><i class="fa fa-child"></i> ENROLL STUDENT</button>
       </div>
    </div>
   </div>
@@ -249,7 +246,27 @@
 
     
 <script>
+
+$('.gradeType').change(function(){
+      var selValue = $(this).val();
+      $('.grade-level').select_binder(selValue);
+});
+
+$('.grade-level').change(function(){
+      var selValue = $(this).val();
+      $('.section-time').select_binder(selValue);
+});
+
+$('.section-time').change(function(){
+      var selValue = $(this).val();
+      $('.section').select_binder(selValue);
+});
+
 $(document).ready(function(){
+
+    $('.students').select_binder();
+
+
     $('#summer-div').hide();
     $('#summer-div-request').hide();
 

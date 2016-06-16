@@ -64,5 +64,9 @@
         background-color: #CDCDCD;
     }
 
+    td{
+      text-align: center;
+    }
+
 </style>
 

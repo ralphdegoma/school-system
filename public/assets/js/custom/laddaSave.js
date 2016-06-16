@@ -1,4 +1,15 @@
- $.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run before each request
+
+
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+$.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run before each request
     var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
 
     if (token) {
@@ -10,6 +21,8 @@
 $('.wyredModalCallback').click(function(){
 
 	$('.loading').hide();
+	$('.wyredSaveBtn').show();
+    $('.wyred-btn-close').show();
 	form = $(this).attr('data-form');
 	url  = $(this).attr('data-url');
 	
@@ -48,10 +61,6 @@ function modalSuccess(message){
     return false;
 }
 
-$('input, textarea, select').click(function(){
-		var snd = new Audio("/assets/music/alert.mp3"); // buffers automatically when created
-		snd.play();
-});
 
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
@@ -71,10 +80,7 @@ $(document).ready(function(){
           	var form    = $("#"+form_id);
           	var data = new FormData($(form)[0]);
 	      	
-
-
 	      	console.log(form);
-
 	      	formValidate = $(form);
 
 		  	formValidate.validate({
@@ -82,19 +88,16 @@ $(document).ready(function(){
 		          ignoreTitle: true,
 		          debug:true,
 		          errorPlacement: function(error, element) {
+					    
 					    var errorInput = element[0].validationMessage;
 					    $(element).attr('data-toggle', "popover");
 					    $(element).attr('data-placement', "top");
-					    
 					    $(element).popover({
-
 					    	container: "body",
 						    html: true,
 						    content: function () {
 						        return '<div class="popover-message">' + errorInput + '</div>';
 						    }
-
-						    
 						});
 
 
@@ -113,6 +116,8 @@ $(document).ready(function(){
 
           if(!formValidate.valid()){
           		$('.loading').hide();
+          		$('.wyredSaveBtn').hide();
+              	$('.wyred-btn-close').show();
 				message = 'Some input fields is highly required. Please write something to resume.';
           		var errorInput = $(formValidate).find("input.error")[0];
           		modalError(message);
@@ -146,17 +151,16 @@ $(document).ready(function(){
 	        contentType: false,
 	        success:function(data){
            		
-           		
-
               	if(data[0] == true){
-
+              		$('.wyredSaveBtn').hide();
+              		$('.wyred-btn-close').show();
             		$('.loading').hide();
            			modalSuccess(data[1]);
            			var snd = new Audio("/assets/music/success.wav"); // buffers automatically when created
 					snd.play();
-                	
-
               	}else if(data[0] == false){
+              		$('.wyredSaveBtn').hide();
+              		$('.wyred-btn-close').show();
               		$('.loading').hide();
               		modalError(data[1]);
               		var snd = new Audio("/assets/music/error.wav"); // buffers automatically when created
@@ -180,6 +184,12 @@ $(document).ready(function(){
               }
 
         });
+
+          	setTimeout(function(){
+
+	  		 	$('#wyredSaveModal').modal('hide');
+
+	  		}, 2000);
 
     	});
     });
@@ -283,3 +293,87 @@ $(document).ready(function(){
 
 		toastr["warning"](message)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*DELETION*/
+
+function softDeleteCallback(rmvBtn){
+
+	$('.modalMessage').text('');
+  	$('.loading').hide();
+	
+	data_id = $(rmvBtn).attr('data-id');
+	url  = $(rmvBtn).attr('data-url');
+	$('.wyredDeleteBtn').attr('data-id',data_id);
+	$('.wyredDeleteBtn').attr('data-url',url);
+
+	$('.modalMessage').addClass('text-warning');
+	$('.modalMessage').removeClass('text-danger');
+	message = 'Are you sure you want to delete this temporarily?';
+	$('.modalMessage').text(message);
+	$('.wyred-btn-close').show();
+	$('.wyredDeleteBtn').show();
+	$('.wyred-modal-footer').show();
+}
+
+
+ $(function() {
+
+        $('.wyredDeleteBtn').click(function(e){
+
+        	var data_id = $(this).attr('data-id');
+        	var url  = $(this).attr('data-url');
+
+        	$.ajax( {	
+
+	        url: url+"?id="+data_id,
+	        type: 'get',
+	        processData: false,
+	        contentType: false,
+	        success:function(data){
+           	
+
+              	if(data[0] == true){
+              		
+              		$('.wyredDeleteBtn').hide();
+              		$('.wyred-btn-close').show();
+            		$('.loading').hide();
+           			modalSuccess(data[1]);
+           			var snd = new Audio("/assets/music/success.wav"); // buffers automatically when created
+					snd.play();
+                	
+
+              	}else if(data[0] == false){
+              		
+              		$('.wyredDeleteBtn').hide();
+              		$('.wyred-btn-close').show();
+              		$('.loading').hide();
+              		modalError(data[1]);
+              		var snd = new Audio("/assets/music/error.wav"); // buffers automatically when created
+					snd.play();
+
+              	}
+
+              
+            },
+              error: function (error) {
+          		return false;
+              }
+
+        });
+
+        });
+});

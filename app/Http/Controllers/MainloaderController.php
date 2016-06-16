@@ -64,18 +64,7 @@ class MainloaderController extends Controller
     }
 
 
-    //B I L L I N G and F E E S
-
-    public function studentBill(){
-      return view('sms.billing.student-bill');
-    }
-
-    public function levelFees(){
-      return view('sms.setup.grade-level-fees');
-    }
-
-
-    // S E T U P
+    // A C A D E M I C S
 
     public function academicsSetup(){
       $classType    = RfClassType::all();
@@ -87,6 +76,78 @@ class MainloaderController extends Controller
       
       return view('sms.setup.academics', compact('classType','gradeType','sectionType','schoolYear','subject','gradeLevel'));
     }
+
+    public function schoolYear(){
+      return view('sms.setup.school-year');
+    }
+
+    public function symonthTemplate(){
+      return view('sms.setup.sy-month-template');
+    }
+
+    public function gradeLevel(){
+
+      $gradeType    = RfGradeType::all();
+      return view('sms.setup.grade-level',compact('gradeType'));
+    }
+
+    public function section(){
+
+      $gradeType    = RfGradeType::all();
+      $sectionType  = RfSectionType::all();
+      return view('sms.setup.section',compact('gradeType','sectionType'));
+    }
+
+    public function subject(){
+      return view('sms.setup.subject');
+    }
+
+    public function assignSubject(){
+      $gradeType    = RfGradeType::all();
+      $sectionType  = RfSectionType::all();
+      $subject      = RfSubjects::all();
+      return view('sms.setup.assign-subject',compact('subject','gradeType','sectionType'));
+    }
+
+    public function schedule(){
+      $classType    = RfClassType::all();
+      $gradeType    = RfGradeType::all();
+      $schoolYear   = RfSchoolYear::all();
+      return view('sms.setup.schedule',compact('gradeType','schoolYear','classType'));
+    }
+
+    //B I L L I N G and F E E S
+
+    public function studentBill(){
+      return view('sms.billing.student-bill');
+    }
+
+    public function categoryFee(){
+      return view('sms.setup.fee-category');
+    }
+
+    public function setupFees(){
+      return view('sms.setup.fees');
+    }
+
+    public function levelFees(){
+      return view('sms.setup.grade-level-fees');
+    }
+
+    public function paymentTypeSchedules(){
+      return view('sms.setup.payment-type-schedule');
+    }
+
+    public function tuitionReference(){
+      return view('sms.setup.tuition-reference');
+    }
+
+    public function dueDates(){
+      return view('sms.setup.due-dates');
+    }
+
+
+
 
     // K R O N O S
 

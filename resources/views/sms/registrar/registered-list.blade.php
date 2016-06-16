@@ -37,7 +37,7 @@
           
           <div class="panel panel-default">
               <div class="panel-body">
-                  <p>Use search to find contacts. You can students by: name, address, grade level,section. Or use the advanced search.</p>
+                  <p>Use search to find Students. You can search by: name, address, grade level,section. Or use the advanced search.</p>
                       <div class="form-group">
                           <div class="col-md-8">
                               <div class="input-group">
@@ -54,6 +54,40 @@
                               <a href="/sms/registrar/student-registration" class="btn btn-success btn-block"><span class="fa fa-plus"></span> Add new Students</a>
                           </div>
                       </div>
+                      <div class="col-md-12" style="margin-top:10px;">
+                       <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Advanced Filter Search</a>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                         <label>GENDER</label>
+                                          <select class="form-control input-sm">
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                          </select>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        <div class="form-group">
+                                         <label>STUDENT STATUS</label>
+                                          <select class="form-control input-sm">
+                                            <option>New</option>
+                                            <option>Old</option>
+                                            <option>In-Active</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
               </div>
           </div>
           
@@ -66,7 +100,7 @@
       <div class="col-md-12">
 
         <div class="text-center">
-          <ul class="pagination pagination-lg" >
+          <ul class="pagination pagination-md" >
               <li class="disabled"><a href="#">«</a></li>
               <li class="page"><a href="#">A</a></li>
               <li class="page"><a href="#">B</a></li>
@@ -128,24 +162,30 @@
 
          ?>
 
-        <div class="col-md-3" style="border: 1px solid black;background:white;padding:15px;">
+        <div class="col-md-3 col-sm-3 col-lg-3 student-body" >
               <div class="col-md-12 text-center" >
-                  <div class="form-group">
-                      <img src="{{$image_link}}" class="profile-pic" style="width:100%">
-                  </div>
-                  <div class="form-group">
-                      <br>
+                    <div class="col-md-12 text-center" >
+                      <img src="{{$image_link}}" class="profile-pic img-responsive text-center" style="height:240px;width:auto">
+                      
+                    </div>
+                  
+                  <div class="col-md-12 text-center">
+                     <br>
                       <label><b>{{$student->last_name}}, {{$student->first_name}} {{$student->middle_name}}</b></label><br>
                       <label><b>000{{$student->student_id}}</b></label>
+                  
+
                   </div>
-                  <div class="form-group">
-                      <button class="btn btn-primary btn-block" id="SearchBtn"><i class="fa fa-external-link"></i> VIEW INFO</button>
+                  <div class="col-md-12 text-center"  style="margin-top: 5px">
+                      <button class="btn btn-primary  btn-block box-gui" id="SearchBtn"><i class="fa fa-external-link"></i> VIEW INFO</button>
                   </div>
-                  <div class="form-group">
-                      <a href="/admin/student/{{$student->student_id}}/edit"><button class="btn btn-primary btn-block" id="SearchBtn"><i class="fa fa-external-link"></i> EDIT INFO</button></a>
+                  <div class="col-md-12 text-center">
+                      <a href="/admin/student/{{$student->student_id}}/edit"><button class="btn btn-success btn-block box-gui" id="SearchBtn"><i class="fa fa-external-link"></i> EDIT INFO</button></a>
                   </div>
+
               </div>
-          </div>
+
+              </div>
         @endforeach
 
     </div>

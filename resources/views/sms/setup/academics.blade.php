@@ -2,6 +2,7 @@
 
 @section('css_filtered')
 @include('admin.csslinks.css_crud')
+
 <link href="/assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
 <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -22,6 +23,12 @@
 }
 #gradeTable td {
   text-transform:uppercase;
+}
+.class-schedule {
+    background: #E6E6E6!important;
+    height: auto;
+    width: 100%;
+    padding: 20px 20px 20px 20px;
 }
 </style>
 @stop
@@ -208,7 +215,7 @@
                         </div>
                         <div class="col-md-12">
                            <div class="table-responsive">
-                              <table id="subjectTable" class="table table-striped table-bordered table-hover " >
+                              <table id="assignTable" class="table table-striped table-bordered table-hover " >
                               <thead>
                                 <tr>
                                     <th>SUBJECT CODE</th>
@@ -438,6 +445,9 @@
   <!-- /.modal-dialog -->
 </div>
 
+
+
+
 <div class="modal fade draggable-modal mo-z drag-me" id="add-assignsubject"  role="basic" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -446,7 +456,7 @@
         <h4 class="modal-title">Assign Subject</h4>
       </div>
       <div class="modal-body">
-        <form id="setupSubject">
+          <form id="setupSubject">
           <div class="form-group">
                <label>GRADE TYPE</label>
                <select class="form-control input-sm" name="gradeTypeSubject" onchange="changeGradeLevelSubject()" id="gradeTypeSubject" required>
@@ -464,6 +474,7 @@
                 <div class="form-group">
                  <label>Section Type</label>
                   <select class="form-control input-sm" name="section_type" required>
+                        <option value="all">All except Summer</option>
                     @foreach($sectionType as $section)
                         <option value="{{$section->section_type_id}}">{{$section->section_type}}</option>
                     @endforeach
@@ -477,8 +488,6 @@
                   @endforeach
                   </select>
                 </div>
-
-
         </form>
       </div>
       <div class="modal-footer">
@@ -492,6 +501,11 @@
 </div>
 
 
+
+
+
+
+
 <div class="modal fade draggable-modal mo-z drag-me" id="add-schedule" tabindex="-1" role="basic" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -500,12 +514,12 @@
         <h4 class="modal-title">Request Slot</h4>
       </div>
       <div class="modal-body">
-        <form id="setupSubject">
+        <form id="subject_saving_with_section">
          <div class="row">
           <div class="col-md-6">
                <div class="form-group">
                  <label>SCHOOL YEAR</label>
-                  <select class="form-control input-sm">
+                  <select class="form-control input-sm" name="school_year_id">
                    @foreach($schoolYear as $keyVal)
                     <option value="{{$keyVal->school_year_id}}">{{$keyVal->sy_from}} - {{$keyVal->sy_to}}</option>
                    @endforeach
@@ -513,7 +527,7 @@
               </div>
                <div class="form-group">
                  <label>CLASS TYPE</label>
-                  <select class="form-control input-sm" id="classType">
+                  <select class="form-control input-sm" name="class_type_id" id="classType">
                     @foreach($classType as $keyVal)
                       <option value="{{$keyVal->class_type_id}}">{{$keyVal->class_type}}</option>
                      @endforeach
@@ -521,7 +535,7 @@
                 </div>
                <div class="form-group">
                  <label>GRADE TYPE</label>
-                  <select class="form-control input-sm">
+                  <select class="form-control input-sm gradeType" >
                      @foreach($gradeType as $keyVal)
                       <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
                      @endforeach
@@ -529,105 +543,75 @@
                 </div>
                 <div class="form-group">
                  <label>GRADE LEVEL</label>
-                  <select class="form-control input-sm">
-                    <option >Regular Class</option>
-                    <option>Summer Class</option>
+                  <select class="form-control input-sm gradelevel" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel">
+                    <option ></option>
                   </select>
                 </div>
                </div>
                <div class="col-md-6">
                 <div class="form-group">
                  <label>SECTION NAME</label>
-                  <select class="form-control input-sm">
-                    <option >Regular Class</option>
-                    <option>Summer Class</option>
+                  <select class="form-control input-sm sectionName" name="section_id" data-id="section_id" data-name="section_name" data-url="/select-binder/get-sectionName"> 
+                    <option ></option>
                   </select>
                </div>
                <div class="form-group">
                  <label>CLASS ADVISER</label>
-                  <select class="form-control input-sm">
-                    <option >Regular Class</option>
-                    <option>Summer Class</option>
+                  <select class="form-control input-sm kronosEmployees" name="adviser" data-id="employee_id" data-name="first_name" data-url="/select-binder/get-KronosEmployee">
+                    <option ></option>
                   </select>
                </div>
                 <div class="form-group">
                  <label>SLOT</label>
-                  <input type="number" class="form-control input-sm" id="slot">
+                  <input type="number" class="form-control input-sm"  name="slot" id="slot">
                 </div>
-
+               <div class="class-schedule">
+                <div class="form-group">
+                 <label>Start Time</label>
+                   <label>
+                    <input type="radio" checked class="clockpicker" value="AM" name="section_start_time_type">
+                    AM 
+                  </label>
+                  <label>
+                    <input type="radio" class="clockpicker" value="PM" name="section_start_time_type" >
+                    PM 
+                  </label>
+                  <div class="input-group clockpicker" data-autoclose="true">
+                      <input type="text" class="form-control" value="09:30" name="section_start_time">
+                      <span class="input-group-addon">
+                          <span class="fa fa-clock-o"></span>
+                      </span>
+                  </div>
+                </div>
+                 <div class="form-group">
+                 <label>End Time</label>
+                   <label>
+                    <input type="radio"  class="clockpicker" value="AM" name="section_end_time_type">
+                    AM 
+                  </label>
+                  <label>
+                    <input type="radio" checked class="clockpicker" value="PM" name="section_end_time_type">
+                    PM 
+                  </label>
+                  <div class="input-group clockpicker" data-autoclose="true">
+                      <input type="text" class="form-control" value="09:30" name="section_end_time">
+                      <span class="input-group-addon">
+                          <span class="fa fa-clock-o"></span>
+                      </span>
+                  </div>
+                </div>
+                </div>
               </div>
-               <div class="col-md-12">
-                   <div class="table-responsive">
-                      <table id="subjectTable" class="table table-striped table-bordered table-hover " >
-                      <thead>
-                        <tr>
-                            <th>SUBJECT NAME</th>
-                            <th>SUBJECT TEACHER</th>
-                            <th>START TIME</th>
-                            <th>END TIME</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                          <td>MATH</td>
-                          <td>
-                             <div class="form-group">
-                             <label>SECTION NAME</label>
-                              <select class="form-control input-sm">
-                                <option >Regular Class</option>
-                                <option>Summer Class</option>
-                              </select>
-                           </div>
-                          </td>
-                          <td>
-                            <div class="form-group">
-                             <label>
-                            <input type="radio" id="default" value="AM" name="start_time">
-                            AM 
-                            </label>
-                            <label>
-                            <input type="radio" id="default" value="PM" name="start_time">
-                            PM 
-                            </label>
-                           
-                            <div class="input-group clockpicker" data-autoclose="true">
-                                <input type="text" class="form-control" value="09:30" >
-                                <span class="input-group-addon">
-                                    <span class="fa fa-clock-o"></span>
-                                </span>
-                            </div>
-                            </div>
-                          </td>
-                          <td>
-                              <div class="form-group">
-                               <label>
-                              <input type="radio" id="default" value="AM" name="start_time">
-                              AM 
-                              </label>
-                              <label>
-                              <input type="radio" id="default" value="PM" name="start_time">
-                              PM 
-                              </label>
-                             
-                              <div class="input-group clockpicker" data-autoclose="true">
-                                  <input type="text" class="form-control" value="09:30" >
-                                  <span class="input-group-addon">
-                                      <span class="fa fa-clock-o"></span>
-                                  </span>
-                              </div>
-                              </div>
-                          </td>
-                      </tr>
-                      </tbody>
-                      </table>
-                    </div>
-                  </div> 
-                   </div> 
-        </form>
+
+               <div class="col-md-12" id="section_subjects" style="margin-top:20px;">
+               </div> 
+
+          </form>
+        </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">SAVE</button>
+       <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/academics/assign-subjects/to-sections" data-form="subject_saving_with_section" data-target="#wyredSaveModal">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -654,6 +638,8 @@
     
 <script>
 $(document).ready(function(){
+
+    $('.kronosEmployees').select_binder();
     $('#summer-div').hide();
     $('#sec-div-sub').hide();
 
@@ -667,11 +653,11 @@ $(document).ready(function(){
     assignTableFunc();
 
     $('.clockpicker').clockpicker({
-    defaultTime: 'value',
-    minuteStep: 1,
-    disableFocus: true,
-    template: 'dropdown',
-    showMeridian:false
+        defaultTime: 'value',
+        minuteStep: 1,
+        disableFocus: true,
+        template: 'dropdown',
+        showMeridian:false
     });
    
     $('#syFrom').datepicker( {
@@ -751,9 +737,7 @@ $(document).ready(function(){
     });
 });
 
-      $(".drag-me").draggable({
-       handle: ".modal-header"
-      });
+      
 
       $('#add-grade-level').on('hidden.bs.modal',function(){
         gradeTableFunc();
@@ -766,7 +750,8 @@ $(document).ready(function(){
        $('#add-section').on('hidden.bs.modal',function(){
         sectionTableFunc();
       });
-       $('#add-subject').on('hidden.bs.modal',function(){
+
+      $('#add-subject').on('hidden.bs.modal',function(){
         subjectTableFunc();
       });
 
@@ -815,7 +800,7 @@ $(document).ready(function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<button data-url="/sms/registrar/remove-grade/'+oData.grade_level_id+'" class="btn btn-danger btn-sm w-b laddaRemove" data-grade-level-id="'+oData.grade_level_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                      $(nTd).html('<button data-url="/sms/registrar/remove/grade-level/'+oData.grade_level_id+'" class="btn btn-danger btn-sm w-b laddaRemove" data-grade-level-id="'+oData.grade_level_id+'"data-toggle="modal" data-target="#wyredSaveModal" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
                   }
                 },  
 
@@ -1034,10 +1019,10 @@ $(document).ready(function(){
 
     function assignTableFunc(){
       
-      $('#sectionTable').dataTable().fnClearTable();
-      $("#sectionTable").dataTable().fnDestroy();
+      $('#assignTable').dataTable().fnClearTable();
+      $("#assignTable").dataTable().fnDestroy();
 
-          var subjectTable = $('#sectionTable').DataTable({
+          var subjectTable = $('#assignTable').DataTable({
           responsive: true,
           bAutoWidth:false,
 
@@ -1060,7 +1045,7 @@ $(document).ready(function(){
             });
           },
                      
-          "sAjaxSource": "/sms/registrar/get-section",
+          "sAjaxSource": "/sms/registrar/get-assign-subject",
           "sAjaxDataProp": "",
           "iDisplayLength": 10,
           "scrollCollapse": false,
@@ -1070,11 +1055,11 @@ $(document).ready(function(){
           "columns": [
              
 
-              { "mData": "section_id", sDefaultContent: ""},
+              { "mData": "get_subjects.subject_id", sDefaultContent: ""},
+
+               { "mData": "get_subjects.subject_name", sDefaultContent: ""},
 
                { "mData": "get_grade_level.grade_level", sDefaultContent: ""},
-
-               { "mData": "section_name", sDefaultContent: ""},
 
                { "mData": "get_section_type.section_type", sDefaultContent: ""},
 
@@ -1199,7 +1184,44 @@ function changeGradeLevel(){
 
       var selValue = $('#gradeType').val();
       $('#gradeLevels').select_binder(selValue);
-  }
+}
+
+$('.gradeType').change(function(){
+      var selValue = $(this).val();
+      $('.gradelevel').select_binder(selValue);
+});
+
+$('.gradelevel').change(function(){
+      var selValue = $(this).val();
+      $('.sectionName').select_binder(selValue);
+      getSubjectsWithFilters();//call change of subjects
+});
+
+$('.sectionName').change(function(){
+      getSubjectsWithFilters();//call change of subjects
+});
+
+function getSubjectsWithFilters(){
+
+      var gradelevel = $('.gradelevel').val();
+      var sectionName = $('.sectionName').val();
+
+      $.ajax({
+            url: "/sms/get-subjects/with-filters?gradelevel="+gradelevel+"&sectionName="+sectionName,
+            type: 'GET',
+            async: false,
+            success:function(data){
+                
+                var response = $(data).find('#section_subjects');
+                console.log(response);
+                $('#section_subjects').html(data);
+                  
+            }
+
+      });
+      
+}
+
 
 function changeGradeLevelSubject(){
 

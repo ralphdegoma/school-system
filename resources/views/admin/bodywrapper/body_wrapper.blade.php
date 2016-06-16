@@ -5,7 +5,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo text-center">
             <a href="index.html">
-            <h1><b>SMS</b></h1>
+             <img src="/assets/img/athena.png" alt="logo" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -18,39 +18,7 @@
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN PAGE ACTIONS -->
         <!-- DOC: Remove "hide" class to enable the page header actions -->
-        <div class="page-actions">
-            <div class="btn-group">
-                <button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                <span class="hidden-sm hidden-xs">Actions&nbsp;</span><i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="javascript:;">
-                        <i class="icon-docs"></i> New Post </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                        <i class="icon-tag"></i> New Comment </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                        <i class="icon-share"></i> Share </a>
-                    </li>
-                    <li class="divider">
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                        <i class="icon-flag"></i> Comments <span class="badge badge-success">4</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                        <i class="icon-users"></i> Feedbacks <span class="badge badge-danger">2</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        
         <!-- END PAGE ACTIONS -->
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
@@ -435,7 +403,7 @@
            
             <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                 <li class="start ">
-                    <a href="index.html">
+                    <a href="/">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>
                     </a>
@@ -469,70 +437,105 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="javascript:;">
-                    <i class="fa fa-money"></i>
-                    <span class="title">Cashier/Billing</span>
-                    <span class="arrow open"></span>
+                 <li >
+                    <a href="/sms/billing/student-bill">
+                    <i class="fa fa-desktop"></i>
+                    <span class="title">Billing</span>
                     </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="layout_sidebar_reversed.html">
-                            <span class="badge badge-warning">new</span>Right Sidebar Page</a>
-                        </li>
-                        <li>
-                            <a href="layout_sidebar_fixed.html">
-                            Sidebar Fixed Page</a>
-                        </li>
-                        <li>
-                            <a href="layout_sidebar_closed.html">
-                            Sidebar Closed Page</a>
-                        </li>
-                        <li class="active">
-                            <a href="layout_blank_page.html">
-                            Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="layout_boxed_page.html">
-                            Boxed Page</a>
-                        </li>
-                        <li>
-                            <a href="layout_language_bar.html">
-                            Language Switch Bar</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
+                 </li>   
+                <li id="setupMenu">
+                    <a href="#">
                     <i class="fa fa-cogs"></i>
                     <span class="title">Setup</span>
                     <span class="arrow open"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li>
+                        <li id="academicsMenu">
                             <a href="/sms/setup/academics">
-                            Academics</a>
+                            Academics
+                            <span class="arrow open"></span>
+                            </a>
+                             <ul class="sub-menu">
+                                <li id="schoolyearMenu">
+                                    <a href="/sms/setup/academics/school-year">
+                                    <i class="fa fa-circle"></i>
+                                    School Year </a>
+                                </li>
+                                 <li id="gradelevelMenu">
+                                    <a href="/sms/setup/academics/sy-month-template">
+                                    <i class="fa fa-circle"></i>
+                                    SY Month Template </a>
+                                </li>
+                                <li id="gradelevelMenu">
+                                    <a href="/sms/setup/academics/grade-level">
+                                    <i class="fa fa-circle"></i>
+                                    Grade Level </a>
+                                </li>
+                                <li id="sectionMenu">
+                                    <a href="/sms/setup/academics/section">
+                                    <i class="fa fa-circle"></i>
+                                    Section</a>
+                                </li>
+                                <li id="subjectMenu">
+                                    <a href="/sms/setup/academics/subject">
+                                    <i class="fa fa-circle"></i>
+                                    Subject</a>
+                                </li>
+                                <li id="assignMenu">
+                                    <a href="/sms/setup/academics/assign-subject">
+                                    <i class="fa fa-circle"></i>
+                                    Assign Subjects</a>
+                                </li>
+                                <li id="scheduleMenu">
+                                    <a href="/sms/setup/academics/schedule">
+                                    <i class="fa fa-circle"></i>
+                                    Schedule</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
+                        <li id="billingMenu">
                             <a href="#">
                             Billing
                             <span class="arrow open"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="/kronos/hris/schedulling">
-                                    <i class="fa fa-circle"></i>
-                                    Setup Schedule </a>
+                                <li id="feesMenu">
+                                    <a href="#">
+                                     <i class="fa fa-circle"></i>
+                                     <span class="arrow open"></span>
+                                    Setup Fees </a>
+                                    <ul class="sub-menu">
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="/sms/setup/billing/fee-category">
+                                        <i class="fa fa-circle"></i>
+                                          Fee Category</a>
+                                      </li>
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="/sms/setup/billing/fees">
+                                        <i class="fa fa-circle"></i>
+                                          Fees </a>
+                                      </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a href="/kronos/hris/assign-schedule">
+                                <li id="gradelevelfeeMenu">
+                                    <a href="/sms/setup/billing/grade-level-fees">
                                     <i class="fa fa-circle"></i>
-                                    Assign Schedule </a>
+                                    Grade Level Fees </a>
                                 </li>
-                                <li>
-                                    <a href="/kronos/hris/schedule-list">
+                                 <li id="paymenttypeMenu">
+                                    <a href="/sms/setup/billing/payment-type-schedule">
                                     <i class="fa fa-circle"></i>
-                                    Schedule List </a>
+                                    Payment Type Schedule</a>
+                                </li>
+                                <li id="tuitionrefMenu">
+                                    <a href="/sms/setup/billing/tuition-reference">
+                                    <i class="fa fa-circle"></i>
+                                    Tuition Reference </a>
+                                </li>
+                                <li id="duedatesMenu">
+                                    <a href="/sms/setup/billing/due-dates">
+                                    <i class="fa fa-circle"></i>
+                                    Due Dates </a>
                                 </li>
                             </ul>
                         </li>
@@ -542,6 +545,12 @@
                     <a href="{{substr_replace(Request::root(), "", -2)}}83" target="_blank">
                     <i class="fa fa-clock-o"></i>
                     <span class="title">Kronos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{substr_replace(Request::root(), "", -2)}}84" target="_blank">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span class="title">Pythagoras</span>
                     </a>
                 </li>
                 

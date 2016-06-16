@@ -16,6 +16,8 @@ class Students extends Model
         return $birthday;
     }
 
+    
+
    	public function Father(){
     	return $this->belongsTo('App\Father','parent_id','parent_id');
     }
