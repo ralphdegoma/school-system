@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DtAssignSubject extends Model
 {
     //
+
+
+    use SoftDeletes;
 
     protected $table = 'dt_assign_subject';
 
@@ -19,6 +23,8 @@ class DtAssignSubject extends Model
     public function getSectionType(){
     	return $this->belongsTo('App\RfSectionType','section_type_id','section_type_id');
     }
+
+
 
 
 

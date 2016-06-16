@@ -217,7 +217,7 @@
               </div>
                <div class="form-group">
                  <label>CLASS TYPE</label>
-                  <select class="form-control input-sm" disabled name="class_type_id" id="edit_class_type">
+                  <select class="form-control input-sm"  name="class_type_id" id="edit_class_type">
                     @foreach($classType as $keyVal)
                       <option value="{{$keyVal->class_type_id}}">{{$keyVal->class_type}}</option>
                      @endforeach
@@ -225,7 +225,7 @@
                 </div>
                <div class="form-group">
                  <label>GRADE TYPE</label>
-                  <select class="form-control input-sm gradeType" disabled id="edit_grade_type">
+                  <select class="form-control input-sm gradeType"   id="edit_grade_type">
                      @foreach($gradeType as $keyVal)
                       <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
                      @endforeach
@@ -233,7 +233,7 @@
                 </div>
                 <div class="form-group">
                  <label>GRADE LEVEL</label>
-                  <select class="form-control input-sm gradelevel" disabled id="edit_grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel">
+                  <select class="form-control input-sm gradelevel"  id="edit_grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel">
                     <option ></option>
                   </select>
                 </div>
@@ -241,7 +241,7 @@
                <div class="col-md-6">
                 <div class="form-group">
                  <label>SECTION NAME</label>
-                  <select class="form-control input-sm sectionName edit_section_id" readonly data-id="section_id" data-name="section_name" data-url="/select-binder/get-sectionName"> 
+                  <select class="form-control input-sm sectionName edit_section_id"  data-id="section_id" data-name="section_name" data-url="/select-binder/get-sectionName"> 
                     <option ></option>
                   </select>
                </div>
@@ -342,7 +342,7 @@ function getSubjectsWithFilters(){
       $.ajax({
             url: "/sms/get-subjects/with-filters?gradelevel="+gradelevel+"&sectionName="+sectionName,
             type: 'GET',
-            async: false,
+            async: true,
             success:function(data){
                 
                 var response = $(data).find('#section_subjects');

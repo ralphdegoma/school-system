@@ -8,9 +8,9 @@
     }
     .sliderHolder{
         padding:10px;
-        background-color: #E0E0E0;
-        height: auto;
+        height: 100%;
     }
+
 
     .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
 

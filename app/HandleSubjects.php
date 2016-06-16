@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HandleSubjects extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'dt_handle_subject';
     protected $primaryKey = 'handle_subject_id';
+
 
     public function setstartTimeAttribute($value) {
         $startTime = date('H:i:s', strtotime($value));

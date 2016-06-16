@@ -457,10 +457,9 @@ class RegistrarController extends Controller
 	
 		$request = Request::all();
 
-		DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+		/*DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
 						->where('section_type_id',Request::input('section_type_id'))
-						->delete();
-
+						->delete();*/
 
 		$checkAssignSub = new DtAssignSubject;
 		$checkAssignSub = $checkAssignSub
@@ -479,29 +478,124 @@ class RegistrarController extends Controller
                       ->show();
         }
 
+
+
+        //GET ALL SUBJECT ID COMPARE IT FROM USER DELETE IT IF NOT MATCH
+        $existingSubjects = new DtAssignSubject;
+		$existingSubjects = $existingSubjects
+                ->where('grade_level_id','=',$request['grade_level_id'])
+                ->where('section_type_id','=',$request['section_type_id'])
+                ->get();
+
+
+        $deleteArray = [];
+
+
+
+        foreach ($existingSubjects as $subjectsExisting) {
+
+        	$arrCount = 0;
+
+        	foreach ($request['gradeSubject'] as $checkSubject) {
+
+        		if($subjectsExisting->subject_id == $checkSubject){
+        			$arrCount++;
+        		}
+        	}
+
+        	if($arrCount == 0){
+        		$deleteArray[] = $subjectsExisting->subject_id;
+        	}
+
+
+        }
+
+
 		foreach ($request['gradeSubject'] as $subject) {
 
-			
+
 
 			if($request['section_type'] != "all"){
-				$assign 				= new DtAssignSubject;
-				$assign->subject_id 	= $subject;
-				$assign->section_type_id = $request['section_type'];
-				$assign->grade_level_id = $request['grade_level'];
-				$assign->save();
-			}else{
-				$assign 				= new DtAssignSubject;
-				$assign->subject_id 	= $subject;
-				$assign->section_type_id = '2';
-				$assign->grade_level_id = $request['grade_level'];
-				$assign->save();
 
-				$assign 				= new DtAssignSubject;
-				$assign->subject_id 	= $subject;
-				$assign->section_type_id = '3';
-				$assign->grade_level_id = $request['grade_level'];
-				$assign->save();
+				/* NOW WE HAVE TO DELETE SUBJECTS NOT PRESENT IN CLIENT */
+		        foreach ($deleteArray as $subjectToDelete) {
+		        	
+			        DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+									->where('section_type_id',Request::input('section_type_id'))
+									->where('subject_id',$subjectToDelete)
+									->delete();
+
+
+					$assignedSub = DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+									->where('section_type_id',Request::input('section_type_id'))
+									->where('subject_id',$subjectToDelete)
+									->first();				
+
+					$assignedSub->find($assignedSub->assign_subject_id);
+					$assignedSub->HandleSubjects->delete();
+
+				
+				}
+
+				$checkSub = DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+							->where('section_type_id',Request::input('section_type_id'))
+							->where('subject_id',$subject)
+							->get();
+
+				if(count($checkSub) == 0){
+
+					$assign                  = new DtAssignSubject;
+					$assign->subject_id      = $subject;
+					$assign->section_type_id = $request['section_type'];
+					$assign->grade_level_id  = $request['grade_level'];
+					$assign->save();
+				}
+
+			}else{
+
+				/* NOW WE HAVE TO DELETE SUBJECTS NOT PRESENT IN CLIENT */
+		        foreach ($deleteArray as $subjectToDelete) {
+		        	
+			        DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+									->where('section_type_id','2')
+									->where('section_type_id','3')
+									->where('subject_id',$subjectToDelete)
+									->delete();
+				}
+
+
+				$checkSub2 = DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+							->where('section_type_id','2')
+							->where('subject_id',$subject)
+							->get();
+
+				if(count($checkSub2) == 0){
+
+					$assign                 = new DtAssignSubject;
+					$assign->subject_id 	= $subject;
+					$assign->section_type_id = '2';
+					$assign->grade_level_id = $request['grade_level'];
+					$assign->save();
+				}
+
+				$checkSub3 = DtAssignSubject::where('grade_level_id' , Request::input('grade_level_id'))
+							->where('section_type_id','3')
+							->where('subject_id',$subject)
+							->get();
+
+				if(count($checkSub3) == 0){
+
+					$assign 				= new DtAssignSubject;
+					$assign->subject_id 	= $subject;
+					$assign->section_type_id = '3';
+					$assign->grade_level_id = $request['grade_level'];
+					$assign->save();
+
+				}
+
 			}
+
+
 		}
 
 		$return = new rrdReturn();
@@ -581,7 +675,10 @@ class RegistrarController extends Controller
 								    $query->orwhere('schedule_id', Request::input('schedule_id'));
 								})->get();
 		
-		$section = RfSection::where('section_id',Request::input('sectionName'))->first();
+		$schedule =  Schedule::find(Request::input('schedule_id'));						
+
+
+		$section = RfSection::where('section_id',$schedule->section_id)->first();
 		
 		$defaultSubjects = DtAssignSubject::with('getSubjects')
 								->where('grade_level_id',Request::input('gradelevel'))

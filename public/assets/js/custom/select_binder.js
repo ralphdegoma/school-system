@@ -15,7 +15,7 @@ $.fn.select_binder = function(filter_id){
       $.ajax( {
         url: url,
         type: 'get',
-        async: false,
+        async: true,
         data: {"filter_id": filter_id},
 
         success:function(data){

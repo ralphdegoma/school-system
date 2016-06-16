@@ -40,11 +40,11 @@
                           <td class="text-center">
                             <div class="form-group">
                              <label>
-                            <input type="radio" checked class="clockpicker" value="AM" name="start_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
+                            <input type="radio" checked class="" value="AM" name="start_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
                             AM 
                             </label>
                             <label>
-                            <input type="radio" class="clockpicker" value="PM" name="start_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
+                            <input type="radio" class="" value="PM" name="start_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
                             PM 
                             </label>
                            
@@ -59,11 +59,11 @@
                           <td class="text-center">
                               <div class="form-group">
                                <label>
-                              <input type="radio" class="clockpicker" value="AM" name="end_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
+                              <input type="radio" class="" value="AM" name="end_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
                               AM 
                               </label>
                               <label>
-                              <input type="radio" checked class="clockpicker" value="PM" name="end_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
+                              <input type="radio" checked class="" value="PM" name="end_time_type{{$week->weekdays_id}}{{$subjects->assign_subject_id}}">
                               PM 
                               </label>
                              

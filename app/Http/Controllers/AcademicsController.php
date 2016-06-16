@@ -36,9 +36,6 @@ class AcademicsController extends Controller
 
     public function subjectAssigningSections(){
 
-
-
-
         if(Request::input('schedule_id') != ""){
             return $this->updateSubjectAssigningSections();
         }
@@ -100,32 +97,54 @@ class AcademicsController extends Controller
     public function updateSubjectAssigningSections(){
 
 
+       
+
         $Schedule                 = Schedule::find(Request::input('schedule_id'));
+        $Schedule->section_id     = Request::input('section_id');
         $Schedule->employee_id    = Request::input('adviser');
-        $Schedule->section_id     =  Request::input('section_id');
         $Schedule->slot           = Request::input('slot');
         $Schedule->start_time     = Request::input('section_start_time').":00 ".Request::input('section_start_time_type');
         $Schedule->end_time       = Request::input('section_end_time').":00 ".Request::input('section_end_time_type');
+        $Schedule->class_type_id  = Request::input('class_type_id');
         $Schedule->school_year_id = Request::input('school_year_id');
         $Schedule->save();
 
+        $ScheduleId = Request::input('schedule_id');
+        HandleSubjects::where('schedule_id',Request::input('schedule_id'))->delete();
 
-        $ScheduleId = Request::input("schedule_id");
+        $count  = 0;
 
-        HandleSubjects::where('schedule_id',$ScheduleId)->delete();
+        for($h = 0; $h <= count(Request::input('weekdays'))-1 ; $h++){
 
-        for($i = 0; $i <= count(Request::input('assign_subject_id'))-1 ; $i++){
+            for($i = 0; $i <= count(Request::input('assign_subject_id'.Request::input('weekdays')[$h]))-1 ; $i++){
+                
+                $weekdays_id = Request::input('weekdays')[$h];
+                $assignSubjectId = Request::input('assign_subject_id'.$weekdays_id)[$i];
+                $uniqueCombo = $weekdays_id.$assignSubjectId;
+                $checkId = "check".$weekdays_id.$assignSubjectId;
+                $employee_id = Request::input('employee_id'.$uniqueCombo);
+                $start_time_type = Request::input('start_time_type'.$uniqueCombo);
+                $start_time = Request::input('start_time'.$uniqueCombo).":00 ".$start_time_type;
+                $end_time_type = Request::input('end_time_type'.$uniqueCombo);
+                $end_time = Request::input('end_time'.$uniqueCombo).":00 ".$end_time_type;
 
 
-            
-            $HandleSubjects                    = new HandleSubjects();
-            $HandleSubjects->assign_subject_id = Request::input('assign_subject_id')[$i];
-            $HandleSubjects->start_time        = Request::input('start_time')[$i].":00 ".Request::input('start_time_type'.Request::input('assign_subject_id')[$i]);
-            $HandleSubjects->end_time          = Request::input('end_time')[$i].":00 ".Request::input('end_time_type'.Request::input('assign_subject_id')[$i]);
-            $HandleSubjects->schedule_id       = Request::input('schedule_id');
-            $HandleSubjects->employee_id       = Request::input('employee_id')[$i];
-            $HandleSubjects->save();
+                if(Request::input($checkId) == "true"){
 
+                    $count++; 
+                    $HandleSubjects                    = new HandleSubjects();
+                    $HandleSubjects->assign_subject_id = $assignSubjectId;
+                    $HandleSubjects->start_time        = $start_time;
+                    $HandleSubjects->end_time          = $end_time;
+                    $HandleSubjects->schedule_id       = $ScheduleId;
+                    $HandleSubjects->weekdays_id       = $weekdays_id;
+                    $HandleSubjects->employee_id       = $employee_id;
+                    $HandleSubjects->save();
+
+                }
+
+                
+            }
         }
 
         $return = new rrdReturn();
@@ -141,5 +160,7 @@ class AcademicsController extends Controller
         $datatableFormat = new DatatableFormat();
         return $datatableFormat->format($data);
     }
+            
+
 
 }
