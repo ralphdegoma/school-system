@@ -24,7 +24,7 @@
     <div class="portlet-body">
       <div class="row">
        <div class="col-md-12">
-           <table id="" class="table table-striped table-bordered table-hover" >
+           <table id="feesTable" class="table table-striped table-bordered table-hover" >
                 <thead>
                   <tr>
                       <th>Reciept Account</th>
@@ -63,9 +63,10 @@
         <form id="setupSubject">
          <div class="form-group">
            <label>Reciept Account</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
+            <select class="form-control input-sm" name="account">
+              @foreach($accounts as $account)
+                <option value="{{$account->account_code}}">{{$account->account_desc}}</option>
+              @endforeach 
             </select>
             <small>
               Note: If you want to add new Charts of Account. Please proceed to Pythagoras Accounting Management System. or click this icon <a href="{{substr_replace(Request::root(), "", -2)}}84" target="_blank"><i class="fa fa-mail-forward"></i></a>
@@ -73,20 +74,25 @@
           </div>
           <div class="form-group">
            <label>Fee Categories</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
+            <select class="form-control input-sm" name="category">
+               @foreach($categories as $category)
+                <option value="{{$category->fee_categories_id}}">{{$category->title}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
-           <label>Fees Name</label>
-             <input type="text" class="form-control input-sm" name="">
+           <label>Fee Title</label>
+             <input type="text" class="form-control input-sm" name="title">
+          </div>
+          <div class="form-group">
+           <label>Fee Description</label>
+             <input type="text" class="form-control input-sm" name="description">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
+        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/setup/billing/save-fees" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -112,7 +118,7 @@
      $('#billingMenu').addClass('active');
      $('#feesMenu').addClass('active');
 
-
+     feesTableFunc();
 
 
      $(".drag-me").draggable({
@@ -172,6 +178,66 @@
   
 
  });
+ $('#add-fees').on('hidden.bs.modal',function(){
+        feesTableFunc();
+  });
+  function feesTableFunc(){
+      
+      $('#feesTable').dataTable().fnClearTable();
+      $("#feesTable").dataTable().fnDestroy();
+
+          var subjectTable = $('#feesTable').DataTable({
+          responsive: true,
+          bAutoWidth:false,
+
+          "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            nRow.setAttribute('data-id',aData.row_id);
+            nRow.setAttribute('class','ref_provider_info_class');
+          },
+
+          "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+            oSettings.jqXHR = $.ajax( {
+              "dataType": 'json',
+              "type": "GET",
+              "url": sSource,
+              "data": aoData,
+              "success": function (data) {
+                subjectTableData = data;
+                console.log(subjectTableData);
+                fnCallback(subjectTableData);           
+              }
+            });
+          },
+                     
+          "sAjaxSource": "/sms/setup/billing/get-fees",
+          "sAjaxDataProp": "",
+          "iDisplayLength": 10,
+          "scrollCollapse": false,
+          "paging":         true,
+          "searching": true,
+
+          "columns": [
+             
+
+               { "mData": "get_account.account_desc", sDefaultContent: ""},
+
+               { "mData": "title", sDefaultContent: ""},
+
+                { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.subject_id+'" data-url="/softdelete/deleteSubject" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                  }
+                },  
+
+               { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-subject" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                  }
+                },  
+          ]
+      });
+
+    }
 </script>
 
     
