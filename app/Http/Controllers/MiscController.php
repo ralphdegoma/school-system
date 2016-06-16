@@ -11,7 +11,10 @@ use App\DtAssignSubject;
 use App\Schedule;
 use App\StudentSchedule;
 
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 use DB;
+use Schema;
 
 class MiscController extends Controller
 {
@@ -25,5 +28,27 @@ class MiscController extends Controller
     	Parents_Students::truncate();
     	DtAssignSubject::truncate();
     	DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    }
+
+    public function updatedAt(){
+
+        $tables = DB::select('SHOW TABLES');
+        
+        foreach($tables as $table){
+
+            try {
+                
+                    Schema::table($table->Tables_in_sms, function ($table) {
+                        $table->date('updated_at');
+                    });
+
+            } catch (\Illuminate\Database\QueryException $e) {
+                    
+                    echo "duplicate bai!";
+            }
+
+        }
+
+        
     }
 }
