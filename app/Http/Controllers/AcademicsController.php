@@ -110,6 +110,7 @@ class AcademicsController extends Controller
         $Schedule->save();
 
         $ScheduleId = Request::input('schedule_id');
+        
         HandleSubjects::where('schedule_id',Request::input('schedule_id'))->delete();
 
         $count  = 0;

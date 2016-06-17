@@ -67,27 +67,20 @@
 
       @else
           
-        <?php
-            $counts = 0;
-        ?>
 
-         @foreach($weekdays as $week)
+           <?php 
 
-            <?php 
-
-                return $counts;
-
-                if(count($week->HandleSubjects[0]->Schedule->start_time_type) > 0){
-                    $start_time_type = $week->HandleSubjects[0]->Schedule->start_time_type;
-                    $start_time = $week->HandleSubjects[0]->Schedule->start_time;
+                if(count($weekdays[0]->HandleSubjects)  > 0){
+                    $start_time_type = $weekdays[0]->HandleSubjects[0]->Schedule->start_time_type;
+                    $start_time = $weekdays[0]->HandleSubjects[0]->Schedule->start_time;
                 }else{
                     $start_time_type = "";
                     $start_time = "";
                 }
 
-                if(count($week->HandleSubjects[0]->Schedule->end_time_type) > 0){
-                    $end_time_type = $week->HandleSubjects[0]->Schedule->end_time_type;
-                    $end_time = $week->HandleSubjects[0]->Schedule->end_time;
+                if(count($weekdays[0]->HandleSubjects)  > 0){
+                    $end_time_type = $weekdays[0]->HandleSubjects[0]->Schedule->end_time_type;
+                    $end_time = $weekdays[0]->HandleSubjects[0]->Schedule->end_time;
                 }else{
                     $end_time_type = "";
                     $end_time = "";
@@ -95,7 +88,6 @@
 
                 
 
-                $counts++;
             ?>
 
             <div class="col-md-12">
@@ -137,6 +129,11 @@
                 </div>
               </div>
 
+
+
+         @foreach($weekdays as $week)
+
+           
             <input type="hidden" name="weekdays[]"  value="{{$week->weekdays_id}}">
               <div class="text-center weekday-header">
                 <h3>{{$week->weekdays}}</h3>
