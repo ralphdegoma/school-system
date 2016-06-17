@@ -1,5 +1,6 @@
   
 <!-- HAHAHAH -->
+<p></p>
 @if($update == "false")
       @foreach($weekdays as $week)
             <input type="hidden" name="weekdays[]"  value="{{$week->weekdays_id}}">
