@@ -13,11 +13,11 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift"></i> Fees List
+        <i class="fa fa-gift"></i> Setup Payment Types
       </div>
       <div class="tools">
          <div class="pull-right" style="margin-top:-5px;">
-              <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#add-fees"><i class="fa fa-plus"></i> New Fee</button>
+              <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#add-fees"><i class="fa fa-plus"></i></button>
          </div>
       </div>
     </div>
@@ -25,166 +25,36 @@
       <div class="row">
        <div class="col-md-12">
            <table id="" class="table table-striped table-bordered table-hover" >
+            <form id="paymentSched">
                 <thead>
                   <tr>
                       <th>MONTH</th>
-                      <th class="text-center">SEMI-ANNUAL</th>
-                      <th class="text-center">QUARTERLY</th>
-                      <th class="text-center">MONTHLY</th>
+                      @foreach($paymentTypes as $type)
+                        <th class="text-center">{{$type->payment_type}}
+                        </th>
+                      @endforeach
                   </tr>
                 </thead>
                 <tbody>
-                 
-                <tr>
-                      <td>January</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
+                 @foreach($months as $month)
                     <tr>
-                      <td>February</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
+                        <td>{{$month->month_name}}</td>
+                      @foreach($paymentTypes as $type)
+                        <td class="text-center">
+                        <!-- <input type="hidden" name="payment_type[]" value="{{$type->payment_type_id}}"> -->
+                        <input type="checkbox" name="month[]" value="{{$month->month_id}}/{{$type->payment_type_id}}">
+                         </td>
+                      @endforeach
                     </tr>
-                    <tr>
-                      <td>March</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>April</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>May</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>June</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>July</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>August</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>September</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>October</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>November</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>December</td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="">
-                      </td>
-                      <td class="text-center">
-                        <input type="checkbox" name="" checked="" disabled="">
-                      </td>
-                    </tr>
+                 @endforeach
+               
                 </tbody>
+                </form>
           </table>
         </div>
         <div class="col-md-12">
           <div class="pull-right">
-           <button class="btn btn-primary"> Save Payment Schedule</button>
+           <button class="btn btn-primary wyredModalCallback" data-toggle="modal"  data-url="/sms/setup/billing/save-payment-sched" data-form="paymentSched" data-target="#wyredSaveModal"> Save Payment Schedule</button>
           </div>
         </div> 
      </div>
@@ -192,6 +62,30 @@
    
   </div>
 </div>
+</div>
+<div class="col-xs-12">
+<div class="portlet box red">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-gift"></i>Payment Types
+      </div>
+      <div class="tools">
+      </div>
+    </div>
+  <div class="portlet-body">
+      <div class="row">
+        <table id="" class="table table-striped table-bordered table-hover" >
+        <thead>
+        </thead>
+        <tbody>
+          
+        </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+</div>
+
 <!-- END Portlet PORTLET-->
 
 
@@ -272,6 +166,8 @@
   
 
  });
+
+
 </script>
 
     

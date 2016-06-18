@@ -13,7 +13,9 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
+
         <i class="fa fa-gift"></i> Due Dates
+
       </div>
       <div class="tools">
       
@@ -23,6 +25,7 @@
       <div class="row">
        <div class="col-md-12">
            <table id="" class="table table-striped table-bordered table-hover" >
+           <form id="dueDates">
                 <thead>
                   <tr>
                       <th>Month</th>
@@ -30,105 +33,29 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 @foreach($months as $month)
               <tr>
-                      <td>January</td>
+                    <td>{{$month->month_name}}</td>
                       <td class="text-center">
                          <div class="form-group">
                            <div class="input-group date">
                                 <span class="input-group-addon">
                                  <i class="fa fa-calendar"></i>
                                 </span>
-                                <input type="text" class="form-control" value=""   name="birthday" required>            
+                                <input type="hidden" name="month[]" value="{{$month->month_id}}">
+                                <input type="text" class="form-control month" name="dues[]" required>            
                               </div>
                            </div>
                       </td>
-                     
                     </tr>
-                    <tr>
-                      <td>February</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>March</td>
-                      <td class="text-center">
-                        
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td>April</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>May</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>June</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>July</td>
-                      <td class="text-center">
-                        
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td>August</td>
-                      <td class="text-center">
-                        
-                      </td>
-                      
-                    </tr>
-                    <tr>
-                      <td>September</td>
-                      <td class="text-center">
-                        
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td>October</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>November</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-                    <tr>
-                      <td>December</td>
-                      <td class="text-center">
-                        
-                      </td>
-                     
-                    </tr>
-          
+                @endforeach      
                 </tbody>
+                </form>
           </table>
         </div>
         <div class="col-md-12">
           <div class="pull-right">
-           <button class="btn btn-primary"> Save Due Dates</button>
+           <button class="btn btn-primary wyredModalCallback" data-toggle="modal"  data-url="/sms/setup/billing/save-due-date" data-form="dueDates" data-target="#wyredSaveModal"> Save Due Dates</button>
           </div>
         </div> 
          
@@ -202,7 +129,7 @@
         showMeridian:false
     });
 
-    $('.date .input-group.date').datepicker({
+    $('.month').datepicker({
       startView: 2,
       todayBtn: "linked",
       keyboardNavigation: false,
@@ -210,7 +137,7 @@
       autoclose: true
     });
 
-    $('.date .input-group.date').datepicker({
+    $('.month').datepicker({
     format: "mm/dd"
     });
   

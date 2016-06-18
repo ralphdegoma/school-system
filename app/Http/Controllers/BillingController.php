@@ -9,6 +9,8 @@ use App\RfFeeCategories;
 use Validator;
 use App\RfFees;
 use App\DtBilling;
+use App\DtPaymentTypeSched;
+use App\DtDueDates;
 class BillingController extends Controller
 {
     //
@@ -161,5 +163,38 @@ class BillingController extends Controller
                           ->show();
             }
     }
+    public function savePaymentSched(Request $request){
+          $return = new rrdReturn();
+          foreach ($request['month'] as $month) {
+              $month = explode('/', $month);
+              $new = new DtPaymentTypeSched;
+              $new->month_id = $month[0];
+              $new->payment_type_id = $month[1];
+              $new->save();  
+          }
+
+         return $return->status(true)
+                          ->message("Successfully Save!.")
+                          ->show(); 
+
+    }
+
+  public function saveDueDates(Request $request){
+       $return = new rrdReturn();
+       $month = $request['month'];
+       $counter = 0;
+       foreach ($request['dues'] as $dues) {
+          $new = new DtDueDates;
+          $new->month_id  = $month[$counter];
+          $new->due_dates = $dues;
+          $new->save();
+          $counter++;
+       }
+
+        return $return->status(true)
+                          ->message("Successfully Save!.")
+                          ->show(); 
+
+  }
 
 }

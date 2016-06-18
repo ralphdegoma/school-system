@@ -31,6 +31,10 @@ use App\RfFeeCategories;
 use App\RfFees;
 use App\Students;
 
+use App\RfPaymentType;
+use App\RfMonth;
+
+
 class MainloaderController extends Controller
 {
     //
@@ -157,11 +161,15 @@ class MainloaderController extends Controller
     public function levelFees(){
         $gradeType    = RfGradeType::all();
         $fees = RfFees::all();
-      return view('sms.setup.grade-level-fees',compact('gradeType','fees'));
+        $categories = RfFeeCategories::all();
+        $accounts    = RfAccount::all();
+      return view('sms.setup.grade-level-fees',compact('gradeType','fees','categories','accounts'));
     }
 
     public function paymentTypeSchedules(){
-      return view('sms.setup.payment-type-schedule');
+      $months = RfMonth::all();
+      $paymentTypes = RfPaymentType::all();
+      return view('sms.setup.payment-type-schedule',compact('months','paymentTypes'));
     }
 
     public function tuitionReference(){
@@ -169,11 +177,9 @@ class MainloaderController extends Controller
     }
 
     public function dueDates(){
-      return view('sms.setup.due-dates');
+         $months = RfMonth::all();
+      return view('sms.setup.due-dates',compact('months'));
     }
-
-
-
 
     // K R O N O S
 

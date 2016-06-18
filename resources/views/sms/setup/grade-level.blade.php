@@ -125,7 +125,7 @@
 
 
 
-    $('#add-grade-level ,#wyredDeleteModal').on('hidden.bs.modal',function(){
+    $('#add-grade-level ,#wyredSaveModal').on('hidden.bs.modal',function(){
         gradeTableFunc();
         $('#grade_level_id').val('');
     });

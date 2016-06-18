@@ -64,7 +64,7 @@
         <h4 class="modal-title">Fees</h4>
       </div>
       <div class="modal-body">
-        <form id="setupSubject">
+        <form id="setupFee">
          <div class="form-group">
            <label>Reciept Account</label>
            <input type="hidden" name="fee_id" id="fee_id">
@@ -97,7 +97,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/setup/billing/save-fees" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
+        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/setup/billing/save-fees" data-form="setupFee" data-target="#wyredSaveModal">Save Fees</button>
       </div>
     </div>
     <!-- /.modal-content -->
