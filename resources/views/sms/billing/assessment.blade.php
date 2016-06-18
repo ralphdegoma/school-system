@@ -13,7 +13,7 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-desktop"></i> Enrollment Details
+        <i class="fa fa-desktop"></i> Assessment Details
       </div>
       <div class="tools">
          

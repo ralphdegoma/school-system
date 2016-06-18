@@ -292,8 +292,8 @@
  $(document).ready(function(){
 
      $('#setupMenu').addClass('active');
-     $('#billingMenu').addClass('active');
-     $('#feesMenu').addClass('active');
+     $('#academicsMenu').addClass('active');
+     $('#Schedule').addClass('active');
 
 
 

@@ -13,7 +13,7 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift"></i> Fees List
+        <i class="fa fa-gift"></i> Subject List
       </div>
       <div class="tools">
          <div class="pull-right" style="margin-top:-5px;">
@@ -50,39 +50,6 @@
   </div>
 </div>
 <!-- END Portlet PORTLET-->
-<div class="modal fade draggable-modal mo-z drag-me" id="add-fees" tabindex="-1" role="basic" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Fees</h4>
-      </div>
-      <div class="modal-body">
-        <form id="setupSubject">
-         <div class="form-group">
-           <label>Reciept Account</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
-            </select>
-          </div>
-          <div class="form-group">
-           <label>Fees Name</label>
-             <input type="text" class="form-control input-sm" name="">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn default" data-dismiss="modal">Close</button>
-        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<!-- MODALS -->
 
 
 <div class="modal fade draggable-modal mo-z drag-me" id="add-subject" tabindex="-1" role="basic" aria-hidden="true">
@@ -90,7 +57,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Subect</h4>
+        <h4 class="modal-title">Subject</h4>
       </div>
       <div class="modal-body">
         <form id="addSubject">

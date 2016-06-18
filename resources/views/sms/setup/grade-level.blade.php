@@ -13,7 +13,7 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift"></i> Fees List
+        <i class="fa fa-gift"></i> Grade Level List
       </div>
       <div class="tools">
          <div class="pull-right" style="margin-top:-5px;">
@@ -67,7 +67,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Request Slot</h4>
+        <h4 class="modal-title">Grade Level</h4>
       </div>
       <div class="modal-body">
         <form id="setupGradeLevel">

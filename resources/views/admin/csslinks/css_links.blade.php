@@ -29,6 +29,11 @@
 		border-radius: 0px;
 	}
 
+	input, select {
+    	text-transform: capitalize;
+
+	}
+
 
 
 

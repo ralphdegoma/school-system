@@ -29,6 +29,8 @@ use App\RfGradeLevel;
 use App\RfAccount;
 use App\RfFeeCategories;
 use App\RfFees;
+use App\Students;
+
 class MainloaderController extends Controller
 {
     //
@@ -55,10 +57,15 @@ class MainloaderController extends Controller
     
 
     public function enrollment(){
+
       $classType  = RfClassType::all();
       $gradeType  = RfGradeType::all();
       $subject    = RfSubjects::all();
-      return view('sms.registrar.enrollment', compact('classType','gradeType','subject'));
+      $student    = Students::all();
+
+      dd($student);
+
+      return view('sms.registrar.enrollment', compact('student','classType','gradeType','subject'));
     }
 
     public function enrolledStudent(){

@@ -13,7 +13,7 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift"></i> Fees List
+        <i class="fa fa-gift"></i> Due Dates
       </div>
       <div class="tools">
       

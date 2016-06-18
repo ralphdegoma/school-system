@@ -11,7 +11,7 @@
   <div class="portlet box red">
     <div class="portlet-title">
       <div class="caption">
-        <i class="fa fa-gift"></i> Fees List
+        <i class="fa fa-gift"></i> Assign Subject List
       </div>
       <div class="tools">
          <div class="pull-right" style="margin-top:-5px;">

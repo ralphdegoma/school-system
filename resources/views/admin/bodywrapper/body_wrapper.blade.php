@@ -471,7 +471,7 @@
                                     <i class="fa fa-circle"></i>
                                     School Year </a>
                                 </li>
-                                 <li id="gradelevelMenu">
+                                 <li id="syMonthTemp">
                                     <a href="/sms/setup/academics/sy-month-template">
                                     <i class="fa fa-circle"></i>
                                     SY Month Template </a>
@@ -537,11 +537,11 @@
                                     <i class="fa fa-circle"></i>
                                     Payment Type Schedule</a>
                                 </li>
-                                <li id="tuitionrefMenu">
+                                <!-- <li id="tuitionrefMenu">
                                     <a href="/sms/setup/billing/tuition-reference">
                                     <i class="fa fa-circle"></i>
                                     Tuition Reference </a>
-                                </li>
+                                </li> -->
                                 <li id="duedatesMenu">
                                     <a href="/sms/setup/billing/due-dates">
                                     <i class="fa fa-circle"></i>
@@ -602,7 +602,7 @@
             <div class="page-head">
                 <!-- BEGIN PAGE TITLE -->
                 <div class="page-title">
-                    <h1>Blank Page <small>blank page</small></h1>
+                    <!-- <h1>Blank Page <small>blank page</small></h1> -->
                 </div>
                 <!-- END PAGE TITLE -->
                 <!-- BEGIN PAGE TOOLBAR -->
@@ -612,7 +612,7 @@
             <!-- END PAGE HEAD -->
             <!-- BEGIN PAGE BREADCRUMB -->
             <ul class="page-breadcrumb breadcrumb">
-                <li>
+             <!--    <li>
                     <a href="index.html">Home</a>
                     <i class="fa fa-circle"></i>
                 </li>
@@ -622,7 +622,7 @@
                 </li>
                 <li>
                     <a href="#">Blank Page</a>
-                </li>
+                </li> -->
             </ul>
             <!-- END PAGE BREADCRUMB -->
             <!-- END PAGE HEADER-->

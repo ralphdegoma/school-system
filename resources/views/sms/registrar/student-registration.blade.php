@@ -82,7 +82,7 @@
       <div class="form-group form-md-line-input col-md-6">
       <div class="input-group date">
         <span class="input-group-addon">
-         <i class="fa fa-calendar"></i>
+         <i class="fa fa-mobile"></i>
         </span>
         <input type="text" class="form-control input-sm" value="{{$student->cp_no or ""}}" name="cp_no" >      
       <label>CELLPHONE NO</label>
@@ -91,7 +91,7 @@
     <div class="form-group form-md-line-input col-md-6">
       <div class="input-group date">
         <span class="input-group-addon">
-         <i class="fa fa-calendar"></i>
+         <i class="fa fa-phone"></i>
         </span>
         <input type="text" class="form-control input-sm" value="{{$student->tel_no or ""}}" name="tel_no" >
         <label>TEL. NO. LANDLINE</label>
@@ -177,7 +177,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="fathers_residence_tel">
                    <label>TEL. NO. (RESIDENCE)</label>
@@ -186,7 +186,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->office_tel or ""}}" name="fathers_office_tel">
                   <label>TEL. NO. (OFFICE)</label>
@@ -243,7 +243,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="fathers_residence_tel">
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -252,7 +252,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->office_tel or ""}}" name="fathers_office_tel">
                   <label>TEL. NO. (OFFICE)</label>
@@ -288,7 +288,7 @@
                <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->dob or ""}}" name="mothers_dob" >
                   <label>BIRTHDAY</label>
@@ -313,7 +313,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="mothers_residence_tel" >
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -322,7 +322,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->office_tel or ""}}" name="mothers_office_tel" >
                   <label>TEL. NO. (OFFICE)</label>
@@ -353,7 +353,7 @@
                <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->dob or ""}}" name="mothers_dob" >
                 <label>BIRTHDAY</label>
@@ -378,7 +378,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="mothers_residence_tel" >
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -387,7 +387,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->office_tel or ""}}" name="mothers_office_tel" >
                    <label>TEL. NO. (OFFICE)</label>
@@ -446,7 +446,7 @@
                <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_birthday" value="{{$parents->parents->dob or ""}}">
                   <label>BIRTHDAY</label>
@@ -477,7 +477,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="guardian_residence_tel" >
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -486,7 +486,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_office_tel" value="{{$parents->parents->office_tel or ""}}">
                   <label>TEL. NO. (OFFICE)</label>
@@ -526,7 +526,7 @@
                <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_birthday" value="">
                    <label>BIRTHDAY</label>
@@ -556,7 +556,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="" name="guardian_residence_tel" >
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -565,7 +565,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_office_tel" value="">
                    <label>TEL. NO. (OFFICE)</label>
@@ -603,7 +603,7 @@
                <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_birthday" value="{{$parents->parents->dob or ""}}">
                    <label>BIRTHDAY</label>
@@ -633,7 +633,7 @@
                <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->residence_tel or ""}}" name="guardian_residence_tel" >
                   <label>TEL. NO. (RESIDENCE)</label>
@@ -642,7 +642,7 @@
             <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
-                   <i class="fa fa-calendar"></i>
+                   <i class="fa fa-phone"></i>
                   </span>
                   <input type="text" class="form-control input-sm" name="guardian_office_tel" value="{{$parents->parents->office_tel or ""}}">
                    <label>TEL. NO. (OFFICE)</label>
@@ -692,7 +692,7 @@
 
 </form>
 
-<div class="col-md-8" style="margin-top:-50px;">
+<div class="col-md-8" style="margin-top:-40px;">
    <div class="wyred-box-footer">
     <div class="pull-right wyred-button col-md-2 ">
       <button class="btn btn-info btn-block wyredModalCallback" data-toggle="modal"  data-url="/admin/new-student/registration" data-form="studentRegistrationForm" data-target="#wyredSaveModal">SAVE</button>
