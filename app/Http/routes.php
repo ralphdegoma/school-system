@@ -76,7 +76,12 @@ Route::get('/sms/setup/billing/payment-type-schedule','MainloaderController@paym
 Route::get('/sms/setup/billing/grade-level-fees','MainloaderController@levelFees');
 Route::get('/sms/setup/billing/tuition-reference','MainloaderController@tuitionReference');
 Route::get('/sms/setup/billing/due-dates','MainloaderController@dueDates');
-
+Route::post('/sms/setup/billing/save-category','BillingController@saveCategory');
+Route::get('/sms/setup/billing/get-category','BillingController@getCategory');
+Route::post('/sms/setup/billing/save-fees','BillingController@saveFees');
+Route::get('/sms/setup/billing/get-fees','BillingController@getFees');
+Route::get('/sms/setup/billing/get-grade-fees','BillingController@getGradeFees');
+Route::post('/sms/setup/billing/save-grade-fees','BillingController@saveGradeFees');
 
 
 //A C A D E M E I C    S E T U P
@@ -126,7 +131,6 @@ Route::get('/sms/setup/academics/assign-subject','MainloaderController@assignSub
 Route::get('/sms/setup/academics/schedule','MainloaderController@schedule');
 Route::post('/sms/academics/assign-subjects/to-sections','AcademicsController@subjectAssigningSections');
 Route::get('/sms/setup/academics/schedules','AcademicsController@getSchedules');
-
 
 
 

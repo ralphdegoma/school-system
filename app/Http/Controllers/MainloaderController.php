@@ -26,7 +26,9 @@ use App\RfSectionType;
 use App\RfSchoolYear;
 use App\RfSubjects;
 use App\RfGradeLevel;
-
+use App\RfAccount;
+use App\RfFeeCategories;
+use App\RfFees;
 class MainloaderController extends Controller
 {
     //
@@ -127,11 +129,16 @@ class MainloaderController extends Controller
     }
 
     public function setupFees(){
-      return view('sms.setup.fees');
+
+      $categories = RfFeeCategories::all();
+      $accounts    = RfAccount::all();
+      return view('sms.setup.fees',compact('categories','accounts'));
     }
 
     public function levelFees(){
-      return view('sms.setup.grade-level-fees');
+        $gradeType    = RfGradeType::all();
+        $fees = RfFees::all();
+      return view('sms.setup.grade-level-fees',compact('gradeType','fees'));
     }
 
     public function paymentTypeSchedules(){

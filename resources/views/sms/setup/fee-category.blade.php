@@ -24,7 +24,7 @@
     <div class="portlet-body">
       <div class="row">
        <div class="col-md-12">
-           <table id="" class="table table-striped table-bordered table-hover" >
+           <table id="categoryTable" class="table table-striped table-bordered table-hover" >
                 <thead>
                   <tr>
                       <th>Fee Category Name</th>
@@ -38,7 +38,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        
                 </tr>
           
                 </tbody>
@@ -62,13 +62,13 @@
         <form id="setupSubject">
           <div class="form-group">
            <label>Fee Category Name</label>
-             <input type="text" class="form-control input-sm" name="">
+             <input type="text" class="form-control input-sm" name="title">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
+        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/setup/billing/save-category" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -94,7 +94,7 @@
      $('#billingMenu').addClass('active');
      $('#feesMenu').addClass('active');
 
-
+     categoryTableFunc();
 
 
      $(".drag-me").draggable({
@@ -154,6 +154,64 @@
   
 
  });
+$('#add-fees').on('hidden.bs.modal',function(){
+        categoryTableFunc();
+  });
+ function categoryTableFunc(){
+      
+      $('#categoryTable').dataTable().fnClearTable();
+      $("#categoryTable").dataTable().fnDestroy();
+
+          var subjectTable = $('#categoryTable').DataTable({
+          responsive: true,
+          bAutoWidth:false,
+
+          "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            nRow.setAttribute('data-id',aData.row_id);
+            nRow.setAttribute('class','ref_provider_info_class');
+          },
+
+          "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+            oSettings.jqXHR = $.ajax( {
+              "dataType": 'json',
+              "type": "GET",
+              "url": sSource,
+              "data": aoData,
+              "success": function (data) {
+                subjectTableData = data;
+                console.log(subjectTableData);
+                fnCallback(subjectTableData);           
+              }
+            });
+          },
+                     
+          "sAjaxSource": "/sms/setup/billing/get-category",
+          "sAjaxDataProp": "",
+          "iDisplayLength": 10,
+          "scrollCollapse": false,
+          "paging":         true,
+          "searching": true,
+
+          "columns": [
+             
+
+               { "mData": "title", sDefaultContent: ""},
+
+                { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.subject_id+'" data-url="/softdelete/deleteSubject" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                  }
+                },  
+
+               { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-subject" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                  }
+                },  
+          ]
+      });
+
+    }
 </script>
 
     
