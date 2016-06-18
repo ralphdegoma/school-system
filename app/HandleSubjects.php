@@ -47,6 +47,8 @@ class HandleSubjects extends Model
         return $endTime;
     }
 
+    
+
 
 
     public function DtAssignSubject(){

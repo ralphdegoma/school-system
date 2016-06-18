@@ -37,13 +37,6 @@
               <option></option>
             </select>
           </div>
-           <div class="form-group">
-           <label>Payment Option</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
-            </select>
-          </div>
        </div>
        <div class="col-md-6">
        <div class="well">
@@ -59,23 +52,29 @@
           Grade 10<br>
           <strong>Section Name:</strong>
           Albert<br>
+          <strong>Payment Type:</strong>
+          Albert<br>
           </address>
         </div>
        
        </div>
        <div class="col-md-12">
-           <table id="" class="table table-striped table-bordered table-hover" >
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#assign-fees"><i class="fa fa-plus"></i>Add Fees</button>
+          <div class="col-md-12">
+           <table id="" class="table table-striped table-bordered table-hover" style="margin-top:10px" >
                 <thead>
                   <tr>
                       <th>Fees</th>
                       <th>Amount</th>
                       <th>Discounts</th>
                       <th>Total</th>
+                      <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                  
-                <tr contenteditable="true">
+                <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -85,6 +84,7 @@
                 </tbody>
           </table>
         </div>
+        </div>
          
      </div>
    
@@ -92,7 +92,7 @@
   </div>
 </div>
 <!-- END Portlet PORTLET-->
-<div class="modal fade draggable-modal mo-z drag-me" id="add-fees" tabindex="-1" role="basic" aria-hidden="true">
+<div class="modal fade draggable-modal mo-z drag-me" id="assign-fees" tabindex="-1" role="basic" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -102,16 +102,22 @@
       <div class="modal-body">
         <form id="setupSubject">
          <div class="form-group">
-           <label>Reciept Account</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
+           <label>Grade Type</label>
+             <select class="form-control input-sm" id="gradeType" name="gradeType" onchange="changeGradeLevel()" id="gradeType" required>
+                
             </select>
           </div>
           <div class="form-group">
-           <label>Fees Name</label>
-             <input type="text" class="form-control input-sm" name="">
-          </div>
+             <label>Grade Level</label>
+               <select class="form-control input-sm"  name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" id="gradeLevels" required>
+                    </select>
+             </div>
+           <div class="form-group">
+            <label>Fees</label>
+              <select class="form-control input-sm" id="gradeType" name="gradeType" onchange="changeGradeLevel()" id="gradeType" required>
+                 
+            </select>
+            </div>
         </form>
       </div>
       <div class="modal-footer">

@@ -69,7 +69,12 @@ Route::post('/admin/sms/new-enroll','RegistrarController@enrollStudent');
 Route::get('/sms/registrar/enrolled-student','MainloaderController@enrolledStudent');
 
 //B I L L I N G
+Route::get('/sms/billing/assessment','MainloaderController@studentAssessment');
+Route::get('/sms/billing/assign-fees','MainloaderController@assignFees');
 Route::get('/sms/billing/student-bill','MainloaderController@studentBill');
+
+
+//S E T U P
 Route::get('/sms/setup/billing/fee-category','MainloaderController@categoryFee');
 Route::get('/sms/setup/billing/fees','MainloaderController@setupFees');
 Route::get('/sms/setup/billing/payment-type-schedule','MainloaderController@paymentTypeSchedules');

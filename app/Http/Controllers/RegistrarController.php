@@ -671,35 +671,44 @@ class RegistrarController extends Controller
 		$KronosEmployee =  KronosEmployee::get();
 
 		$schedule =  Schedule::find(Request::input('schedule_id'));						
-		$section = RfSection::where('section_id',$schedule->section_id)->first();
+		$section = RfSection::where('section_id',$schedule->section_id)->first();	
 
 
-		/*$weekdays = Weekdays::with('HandleSubjects.Schedule','HandleSubjects.DtAssignSubject','HandleSubjects.DtAssignSubject.getSubjects','HandleSubjects.DtAssignSubject.getGradeLevel','HandleSubjects.DtAssignSubject.getSectionType')
+		/*$weekdays = Weekdays::with('HandleSubjects','HandleSubjects.Schedule','HandleSubjects.DtAssignSubject','HandleSubjects.DtAssignSubject.getSubjects','HandleSubjects.DtAssignSubject.getGradeLevel','HandleSubjects.DtAssignSubject.getSectionType')
 								->whereHas('HandleSubjects', function ($query) {
-								    $query->orwhere('schedule_id', Request::input('schedule_id'));
+								    $query->where('schedule_id','=' ,Request::input('schedule_id'));
 
 								     })
 								
 								->get();*/
+		$weekdays = Weekdays::all();
 
-		$weekdays = weekdays::whereHas('HandleSubjects', function ($query) {
-							    $query->orwhere('schedule_id', Request::input('schedule_id'))
-							    	  ->groupby('assign_subject_id');
-							     })
+		$HandleSubjectsMain = HandleSubjects::with('Schedule','DtAssignSubject','DtAssignSubject.getSubjects','DtAssignSubject.getGradeLevel','DtAssignSubject.getSectionType')
+								->where('schedule_id','=' ,Request::input('schedule_id'))						
 								->get();
+
+		/*$HandleSubjectsEmptyMain = DtAssignSubject::with('HandleSubjects.Schedule','getSubjects','getGradeLevel','getSectionType')
+									->getUnassignedSubject()
+									->get();*/
+						
 
 								
 		$defaultSubjects = DtAssignSubject::with('getSubjects')
 								->where('grade_level_id',Request::input('gradelevel'))
-								->where('section_type_id',$section->section_type_id)->get();
-	
+								->where('section_type_id',$section->section_type_id)
+								->groupby('assign_subject_id')
+								->get();
+
+
+
 		$schedule = Schedule::find(Request::input('schedule_id'));
 
 		return view('sms.setup.section-subjects-readonly')
 						->with('update',Request::input('update'))
-						->with('defaultSubjects',$defaultSubjects)
-						->with('schedule',$schedule)
+						->with('schedule_id',Request::input('schedule_id'))
 						->with('weekdays',$weekdays)
+						->with('schedule',$schedule)
+						->with('HandleSubjectsMain',$HandleSubjectsMain)
 						->with('KronosEmployee',$KronosEmployee);						
 	}
 	

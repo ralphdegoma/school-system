@@ -11,6 +11,6 @@ class Weekdays extends Model
     
 
     public function HandleSubjects(){
-    	return $this->hasMany('App\HandleSubjects','weekdays_id','weekdays_id');
+    	return $this->hasMany('App\HandleSubjects');
     }
 }

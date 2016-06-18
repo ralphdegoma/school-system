@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Input;
 class DtAssignSubject extends Model
 {
     //
@@ -31,5 +32,20 @@ class DtAssignSubject extends Model
     }
 
     
-    
+    public function scopegetUnassignedSubject($query,$weekdays_id,$schedule_id){
+            
+
+            $schedule =  Schedule::find($schedule_id);                     
+            $section = RfSection::where('section_id',$schedule->section_id)->first();
+
+            return $query->whereNotIn('assign_subject_id', function($q) use ($weekdays_id,$schedule_id){
+                                          $q->select('assign_subject_id')
+                                            ->where('schedule_id',$schedule_id)
+                                            ->where('weekdays_id',$weekdays_id)
+                                            ->whereNull('deleted_at')
+                                            ->from('dt_handle_subject');
+                                            // more where conditions
+                                     })
+                                    ->where('grade_level_id',$section->grade_level_id);
+    }
 }

@@ -15,7 +15,7 @@
   <div class="portlet box red">
   <div class="portlet-title">
     <div class="caption">
-      <i class="fa fa-user"></i>ENROLLED STUDENT'S
+      <i class="fa fa-user"></i>Grade Level Fees List
     </div>
     <div class="tools">
     

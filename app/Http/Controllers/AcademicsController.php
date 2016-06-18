@@ -33,8 +33,8 @@ use DatatableFormat;
 class AcademicsController extends Controller
 {
     
-
     public function subjectAssigningSections(){
+
 
         if(Request::input('schedule_id') != ""){
             return $this->updateSubjectAssigningSections();
@@ -97,8 +97,6 @@ class AcademicsController extends Controller
     public function updateSubjectAssigningSections(){
 
 
-       
-
         $Schedule                 = Schedule::find(Request::input('schedule_id'));
         $Schedule->section_id     = Request::input('section_id');
         $Schedule->employee_id    = Request::input('adviser');
@@ -111,7 +109,7 @@ class AcademicsController extends Controller
 
         $ScheduleId = Request::input('schedule_id');
         
-        HandleSubjects::where('schedule_id',Request::input('schedule_id'))->delete();
+        HandleSubjects::where('schedule_id',$ScheduleId)->delete();
 
         $count  = 0;
 

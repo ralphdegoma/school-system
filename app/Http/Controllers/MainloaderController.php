@@ -120,9 +120,21 @@ class MainloaderController extends Controller
 
     //B I L L I N G and F E E S
 
+    public function studentAssessment(){
+      return view('sms.billing.assessment');
+    }
+    public function assignFees(){
+      return view('sms.billing.assign-fees');
+    }
     public function studentBill(){
       return view('sms.billing.student-bill');
     }
+
+
+
+
+    // S E T U P - B I L L I N G
+
 
     public function categoryFee(){
       return view('sms.setup.fee-category');
