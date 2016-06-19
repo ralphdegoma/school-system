@@ -12,4 +12,7 @@ class RfFees extends Model
     public function getAccount(){
     	return $this->belongsTo('App\RfAccount','account_code','account_code');
     }
+    public function getCategory(){
+    	return $this->belongsTo('App\RfFeeCategories','fee_categories_id','fee_categories_id');
+    }
 }

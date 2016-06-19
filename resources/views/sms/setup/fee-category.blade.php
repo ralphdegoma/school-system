@@ -62,7 +62,8 @@
         <form id="setupSubject">
           <div class="form-group">
            <label>Fee Category Name</label>
-             <input type="text" class="form-control input-sm" name="title">
+           <input type="hidden" name="category_id" id="category_id">
+             <input type="text" class="form-control input-sm" id="fee" name="title">
           </div>
         </form>
       </div>
@@ -157,12 +158,16 @@
 $('#add-fees').on('hidden.bs.modal',function(){
         categoryTableFunc();
   });
+ function editFee(row_id){
+        $('#fee').val(feeTableData[row_id].title);
+        $('#category_id').val(feeTableData[row_id].fee_categories_id);
+    }
  function categoryTableFunc(){
       
       $('#categoryTable').dataTable().fnClearTable();
       $("#categoryTable").dataTable().fnDestroy();
 
-          var subjectTable = $('#categoryTable').DataTable({
+          var feeTable = $('#categoryTable').DataTable({
           responsive: true,
           bAutoWidth:false,
 
@@ -178,9 +183,9 @@ $('#add-fees').on('hidden.bs.modal',function(){
               "url": sSource,
               "data": aoData,
               "success": function (data) {
-                subjectTableData = data;
-                console.log(subjectTableData);
-                fnCallback(subjectTableData);           
+                feeTableData = data;
+                console.log(feeTableData);
+                fnCallback(feeTableData);           
               }
             });
           },
@@ -205,7 +210,7 @@ $('#add-fees').on('hidden.bs.modal',function(){
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-subject" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-fees" onclick="editFee('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]

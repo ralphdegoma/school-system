@@ -29,6 +29,8 @@
                   <tr>
                       <th>Reciept Account</th>
                       <th>Fees Name</th>
+                      <th>Categories</th>
+                      <th>Description</th>
                       <th>Action</th>
                       <th>Action</th>
                   </tr>
@@ -36,6 +38,8 @@
                 <tbody>
                  
                 <tr>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -63,7 +67,8 @@
         <form id="setupSubject">
          <div class="form-group">
            <label>Reciept Account</label>
-            <select class="form-control input-sm" name="account">
+           <input type="hidden" name="fee_id" id="fee_id">
+            <select class="form-control input-sm" id="account" name="account">
               @foreach($accounts as $account)
                 <option value="{{$account->account_code}}">{{$account->account_desc}}</option>
               @endforeach 
@@ -74,7 +79,7 @@
           </div>
           <div class="form-group">
            <label>Fee Categories</label>
-            <select class="form-control input-sm" name="category">
+            <select class="form-control input-sm" id="category" name="category">
                @foreach($categories as $category)
                 <option value="{{$category->fee_categories_id}}">{{$category->title}}</option>
               @endforeach
@@ -82,11 +87,11 @@
           </div>
           <div class="form-group">
            <label>Fee Title</label>
-             <input type="text" class="form-control input-sm" name="title">
+             <input type="text" class="form-control input-sm" id="title" name="title">
           </div>
           <div class="form-group">
            <label>Fee Description</label>
-             <input type="text" class="form-control input-sm" name="description">
+             <input type="text" class="form-control input-sm" id="description" name="description">
           </div>
         </form>
       </div>
@@ -181,12 +186,19 @@
  $('#add-fees').on('hidden.bs.modal',function(){
         feesTableFunc();
   });
+ function editFee(row_id){
+        $('#account').val(feeTableData[row_id].get_account.account_code);
+        $('#category').val(feeTableData[row_id].get_category.fee_categories_id);
+        $('#title').val(feeTableData[row_id].title);
+        $('#description').val(feeTableData[row_id].description);
+        $('#fee_id').val(feeTableData[row_id].fees_id);
+    }
   function feesTableFunc(){
       
       $('#feesTable').dataTable().fnClearTable();
       $("#feesTable").dataTable().fnDestroy();
 
-          var subjectTable = $('#feesTable').DataTable({
+          var feeTable = $('#feesTable').DataTable({
           responsive: true,
           bAutoWidth:false,
 
@@ -202,9 +214,9 @@
               "url": sSource,
               "data": aoData,
               "success": function (data) {
-                subjectTableData = data;
-                console.log(subjectTableData);
-                fnCallback(subjectTableData);           
+                feeTableData = data;
+                console.log(feeTableData);
+                fnCallback(feeTableData);           
               }
             });
           },
@@ -220,8 +232,9 @@
              
 
                { "mData": "get_account.account_desc", sDefaultContent: ""},
-
+               { "mData": "get_category.title", sDefaultContent: ""},
                { "mData": "title", sDefaultContent: ""},
+               { "mData": "description", sDefaultContent: ""},
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
@@ -231,7 +244,7 @@
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-subject" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-fees" onclick="editFee('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]

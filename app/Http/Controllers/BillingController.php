@@ -14,6 +14,12 @@ class BillingController extends Controller
     //
     public function saveCategory(Request $request){
 
+        if($request['category_id'] != ""){
+            $id=$request['category_id'];
+            $title = $request['title'];
+            return $this->updateCategory($id,$title);
+        }
+
     	$return = new rrdReturn();
     	$validator = Validator::make($request->all(), [
             'title' => 'required|unique:rf_fee_categories',
@@ -34,6 +40,14 @@ class BillingController extends Controller
     }
 
     public function saveFees(Request $request){
+        if($request['fee_id'] != ""){
+            $id=$request['fee_id'];
+            $title = $request['title'];
+            $description = $request['description'];
+            $account_code = $request['account'];
+            $category = $request['category'];
+            return $this->updateFee($id,$title,$description,$account_code,$category);
+        }
     	$return = new rrdReturn();
     	$checker = RfFees::where('title',$request['title'])
     						->where('description',$request['description'])
@@ -94,7 +108,7 @@ class BillingController extends Controller
       	return $datatableFormat->format($category);
     }
       public function getFees(){
-    		$category = RfFees::with('getAccount')->get();
+    		$category = RfFees::with('getAccount','getCategory')->get();
 
     		$datatableFormat = new DatatableFormat();
       	return $datatableFormat->format($category);
@@ -104,6 +118,48 @@ class BillingController extends Controller
 
     		$datatableFormat = new DatatableFormat();
       	return $datatableFormat->format($category);
+    }
+
+    public function updateCategory($id,$title){
+        $return = new rrdReturn();
+        $checker  = RfFeeCategories::where('title',$title)->count();
+         if ($checker >0) {
+                return $return->status(false)
+                          ->message("Fee Already been Created!.")
+                          ->show();
+         }
+         else{
+            $categ = RfFeeCategories::where("fee_categories_id",$id)->update(['title'=> $title]);
+           
+            return $return->status(true)
+                          ->message("Successfull Updated!.")
+                          ->show();
+         }
+
+    }
+
+    public function updateFee($id,$title,$description,$account_code,$category){
+             $return = new rrdReturn();
+            $checker = RfFees::where('title',$title)
+                            ->where('description',$description)
+                            ->where('fee_categories_id',$category)
+                            ->where('account_code',$account_code)
+                            ->count();
+
+            if($checker > 0){
+                return $return->status(false)
+                          ->message("Fee Already been Created!.")
+                          ->show();
+            }
+            else{
+                $update = RfFees::where('fees_id',$id)
+                        ->update(['title'=>$title,'description'=>$description,
+                            'fee_categories_id'=> $category, 
+                            'account_code'=> $account_code]);
+                        return $return->status(true)
+                          ->message("Successfull Updated!.")
+                          ->show();
+            }
     }
 
 }

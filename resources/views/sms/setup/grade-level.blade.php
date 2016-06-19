@@ -74,7 +74,7 @@
          <div class="form-group">
                  <label>GRADE TYPE</label>
                   <input type="hidden" class="form-control input-sm" name="grade_level_id" id="grade_level_id">
-                  <select class="form-control input-sm" id=grade_type name="grade_type">
+                  <select class="form-control input-sm" id="grade_type" name="grade_type">
                     @foreach($gradeType as $keyVal)
                       <option value="{{$keyVal->grade_type_id}}">{{$keyVal->grade_type}}</option>
                     @endforeach
