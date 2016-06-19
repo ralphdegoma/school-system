@@ -26,7 +26,9 @@ class DtAssignSubject extends Model
 
 
 
-
+    public function HandleSubjects(){
+        return $this->hasMany('App\HandleSubjects','assign_subject_id','assign_subject_id');
+    }
 
     
     

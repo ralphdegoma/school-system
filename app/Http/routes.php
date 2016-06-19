@@ -187,4 +187,5 @@ Route::get('auth/facebook/callback', 'Auth\AuthFacebookController@handleProvider
 
 //MISC
 Route::get('truncate', 'MiscController@truncate');
+Route::get('updated-at', 'MiscController@updatedAt');
 

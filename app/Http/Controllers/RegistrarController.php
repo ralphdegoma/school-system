@@ -670,21 +670,29 @@ class RegistrarController extends Controller
 
 		$KronosEmployee =  KronosEmployee::get();
 
-		$weekdays = Weekdays::with('HandleSubjects.Schedule','HandleSubjects.DtAssignSubject','HandleSubjects.DtAssignSubject.getSubjects','HandleSubjects.DtAssignSubject.getGradeLevel','HandleSubjects.DtAssignSubject.getSectionType')
+		$schedule =  Schedule::find(Request::input('schedule_id'));						
+		$section = RfSection::where('section_id',$schedule->section_id)->first();
+
+
+		/*$weekdays = Weekdays::with('HandleSubjects.Schedule','HandleSubjects.DtAssignSubject','HandleSubjects.DtAssignSubject.getSubjects','HandleSubjects.DtAssignSubject.getGradeLevel','HandleSubjects.DtAssignSubject.getSectionType')
 								->whereHas('HandleSubjects', function ($query) {
 								    $query->orwhere('schedule_id', Request::input('schedule_id'));
-								})->get();
-		
-		$schedule =  Schedule::find(Request::input('schedule_id'));						
 
+								     })
+								
+								->get();*/
 
-		$section = RfSection::where('section_id',$schedule->section_id)->first();
-		
+		$weekdays = weekdays::whereHas('HandleSubjects', function ($query) {
+							    $query->orwhere('schedule_id', Request::input('schedule_id'))
+							    	  ->groupby('assign_subject_id');
+							     })
+								->get();
+
+								
 		$defaultSubjects = DtAssignSubject::with('getSubjects')
 								->where('grade_level_id',Request::input('gradelevel'))
 								->where('section_type_id',$section->section_type_id)->get();
-		
-
+	
 		$schedule = Schedule::find(Request::input('schedule_id'));
 
 		return view('sms.setup.section-subjects-readonly')
