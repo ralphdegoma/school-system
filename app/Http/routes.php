@@ -111,6 +111,26 @@ Route::get('/sms/get-list-schedules','RegistrarController@getListSchedules');
 
 
 
+
+//E N R O L L M E N T
+Route::get('/sms/registrar/enrolled-students','EnrollmentController@getEnrollees');
+
+
+
+
+
+
+
+
+
+
+//R E P O R T S 
+Route::get('/sms/reports/enrolled-students','ReportController@enrolledStudents');
+
+
+
+
+
 // K R O N O S
 Route::get('/sms/kronos/time-attendance','MainloaderController@timeAttendance');
 Route::get('/sms/kronos/schedulling','MainloaderController@schedulling');

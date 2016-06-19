@@ -51,5 +51,9 @@ class Schedule extends Model
     public function RfSchoolYear(){
         return $this->belongsTo('App\RfSchoolYear','school_year_id','school_year_id');
     }
+
+    public function StudentSchedule(){
+        return $this->hasOne('App\StudentSchedule','schedule_id','schedule_id');
+    }
 }
 

@@ -20,4 +20,15 @@ class RfSection extends Model
     public function getSectionType(){
     	return $this->belongsTo('App\RfSectionType','section_type_id','section_type_id');
     }
+
+    public function Schedule(){
+        return $this->hasOne('App\Schedule','section_id','section_id');
+    }
+
+    public function scopegetEnrollees($query,$schedule_id){
+        
+            return $query->whereHas('Schedule', function($q) use ($schedule_id){
+                                $q->where('schedule_id',$schedule_id);
+                            });
+    }
 }

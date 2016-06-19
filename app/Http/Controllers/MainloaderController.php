@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Http\Controllers\controller_retrieve;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -13,13 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 
 
 //=====data=====
-
 use Auth;
 use DB;
 use Session;
 use Mail;
-
-
 use App\RfClassType;
 use App\RfGradeType;
 use App\RfSectionType;
@@ -30,17 +25,13 @@ use App\RfAccount;
 use App\RfFeeCategories;
 use App\RfFees;
 use App\Students;
-
 use App\RfPaymentType;
 use App\RfMonth;
 
 
 class MainloaderController extends Controller
 {
-    //
-
-  	
-
+    
     public function view(){
 
     	return view('sms.main.index');
@@ -58,8 +49,7 @@ class MainloaderController extends Controller
       return view('sms.registrar.student-registration');
     }
 
-    
-
+  
     public function enrollment(){
 
       $classType  = RfClassType::all();
@@ -67,7 +57,7 @@ class MainloaderController extends Controller
       $subject    = RfSubjects::all();
       $student    = Students::all();
 
-      dd($student);
+
 
       return view('sms.registrar.enrollment', compact('student','classType','gradeType','subject'));
     }
@@ -194,5 +184,6 @@ class MainloaderController extends Controller
    public function hr(){
       return view('sms.kronos.human-resource');
     }
+    
 
 }
