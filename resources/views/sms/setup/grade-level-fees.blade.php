@@ -129,6 +129,7 @@
 
 
 
+<!-- END Portlet PORTLET-->
 <div class="modal fade draggable-modal mo-z drag-me" id="add-fees" tabindex="-1" role="basic" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -137,33 +138,40 @@
         <h4 class="modal-title">Fees</h4>
       </div>
       <div class="modal-body">
-        <form id="setupSubject">
+        <form id="setupFee">
          <div class="form-group">
            <label>Reciept Account</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
+           <input type="hidden" name="fee_id" id="fee_id">
+            <select class="form-control input-sm" id="account" name="account">
+              @foreach($accounts as $account)
+                <option value="{{$account->account_code}}">{{$account->account_desc}}</option>
+              @endforeach 
             </select>
             <small>
               Note: If you want to add new Charts of Account. Please proceed to Pythagoras Accounting Management System. or click this icon <a href="{{substr_replace(Request::root(), "", -2)}}84" target="_blank"><i class="fa fa-mail-forward"></i></a>
             </small>
           </div>
-           <div class="form-group">
+          <div class="form-group">
            <label>Fee Categories</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
+            <select class="form-control input-sm" id="category" name="category">
+               @foreach($categories as $category)
+                <option value="{{$category->fee_categories_id}}">{{$category->title}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
-           <label>Fees Name</label>
-             <input type="text" class="form-control input-sm" name="">
+           <label>Fee Title</label>
+             <input type="text" class="form-control input-sm" id="title" name="title">
+          </div>
+          <div class="form-group">
+           <label>Fee Description</label>
+             <input type="text" class="form-control input-sm" id="description" name="description">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Close</button>
-        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/registrar/save-subject" data-form="setupSubject" data-target="#wyredSaveModal">Save Fees</button>
+        <button class="btn btn-info wyredModalCallback" data-toggle="modal" data-url="/sms/setup/billing/save-fees" data-form="setupFee" data-target="#wyredSaveModal">Save Fees</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -172,7 +180,7 @@
 </div>
 
 
-
+<!-- END Portlet PORTLET-->
 
 
 @stop
@@ -250,7 +258,7 @@ function changeGradeLevel(){
       $('#gradeLevels').select_binder(selValue);
 }
 $('#wyredSaveModal').on('hidden.bs.modal',function(){
-        feesTableFunc();
+        gradeFeesTableFunc();
   });
  function gradeFeesTableFunc(){
       
@@ -302,7 +310,7 @@ $('#wyredSaveModal').on('hidden.bs.modal',function(){
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#add-subject" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#update-fees" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]

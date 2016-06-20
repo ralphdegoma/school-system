@@ -82,7 +82,8 @@ Route::post('/sms/setup/billing/save-fees','BillingController@saveFees');
 Route::get('/sms/setup/billing/get-fees','BillingController@getFees');
 Route::get('/sms/setup/billing/get-grade-fees','BillingController@getGradeFees');
 Route::post('/sms/setup/billing/save-grade-fees','BillingController@saveGradeFees');
-
+Route::post('/sms/setup/billing/save-payment-sched','BillingController@savePaymentSched');
+Route::post('/sms/setup/billing/save-due-date','BillingController@saveDueDates');
 
 //A C A D E M E I C    S E T U P
 Route::get('sms/registrar/getgrade','RegistrarController@getGrade');
