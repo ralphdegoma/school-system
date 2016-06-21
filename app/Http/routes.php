@@ -108,8 +108,8 @@ Route::get('/sms/get-list-subject','RegistrarController@getListSubjects');
 Route::get('/sms/get-list-subject-edit','RegistrarController@getListSubjectsEdit');
 Route::get('/sms/get-list-schedules','RegistrarController@getListSchedules');
 
-
-
+// R E P O R T S
+Route::get('/sms/reports/enrolled-students','MainloaderController@populationFilter');
 
 // K R O N O S
 Route::get('/sms/kronos/time-attendance','MainloaderController@timeAttendance');

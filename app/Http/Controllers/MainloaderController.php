@@ -195,4 +195,8 @@ class MainloaderController extends Controller
       return view('sms.kronos.human-resource');
     }
 
+    public function populationFilter(){
+      return view('sms.reports.population-filter');
+    }
+
 }

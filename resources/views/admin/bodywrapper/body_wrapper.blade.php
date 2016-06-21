@@ -551,6 +551,37 @@
                         </li>
                     </ul>
                 </li>
+                <li id="billingMenu">
+                            <a href="#"> <i class="fa fa-bar-chart-o"></i>
+                            Reports
+                            <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li id="feesMenu">
+                                    <a href="#">
+                                     <i class="fa fa-circle"></i>
+                                     <span class="arrow open"></span>
+                                    Enrolled Students </a>
+                                    <ul class="sub-menu">
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="/sms/reports/enrolled-students">
+                                        <i class="fa fa-circle"></i>
+                                          Population</a>
+                                      </li>
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="#">
+                                        <i class="fa fa-circle"></i>
+                                           </a>
+                                      </li>
+                                    </ul>
+                                </li>
+                               <!--  <li id="gradelevelfeeMenu">
+                                    <a href="/sms/setup/billing/grade-level-fees">
+                                    <i class="fa fa-circle"></i>
+                                    Grade Level Fees </a>
+                                </li> -->
+                            </ul>
+                        </li>
                 <li>
                     <a href="{{substr_replace(Request::root(), "", -2)}}83" target="_blank">
                     <i class="fa fa-clock-o"></i>
