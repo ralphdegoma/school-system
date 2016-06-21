@@ -594,6 +594,34 @@
                     <span class="title">Pythagoras</span>
                     </a>
                 </li>
+
+                 <li id="billingMenu">
+                            <a href="#">
+                            SMS REPORTS
+                            <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li id="feesMenu">
+                                    <a href="#">
+                                     <i class="fa fa-circle"></i>
+                                     <span class="arrow open"></span>
+                                    Enrolled Students </a>
+                                    <ul class="sub-menu">
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="/sms/reports/population">
+                                        <i class="fa fa-circle"></i>
+                                    Population</a>
+                                      </li>
+                                      <li id="gradelevelfeeMenu">
+                                        <a href="/sms/reports/population">
+                                        <i class="fa fa-circle"></i>
+                                          Fees </a>
+                                      </li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
                 
               
                

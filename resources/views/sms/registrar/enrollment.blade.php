@@ -2,6 +2,8 @@
 
 @section('css_filtered')
 @include('admin.csslinks.css_crud')
+@include('admin.csslinks.datatables_css')
+
 <link href="/assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
 <link href="/assets/css/plugins/iCheck/custom.css" rel="stylesheet">
  <link href="/assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -61,7 +63,7 @@
       </div>
        <div class="form-group">
        <label>SECTION</label>
-        <select  class="form-control input-sm section" name="schedule_id" data-id="schedule_id" data-name="section_name" data-url="/select-binder/get-section" required> 
+        <select  class="form-control input-sm section" id="schedule_id" name="schedule_id" data-id="schedule_id" onchange="enrollmentTable()" data-name="section_name" data-url="/select-binder/get-section" required> 
           <option></option>
         </select>
       </div>
@@ -109,88 +111,27 @@
     <div class="col-md-12">
     <div style="height: 425px;overflow-y: scroll;">
      <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover dataTables-example" >
+        <table id="enrollee-table" class="table table-striped table-bordered table-hover dataTables-example" >
         <thead>
         <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
+            <th>ID NO</th>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Date Enrolled</th>
+            <th>Remove</th>
+            <th>Edit</th>
         </tr>
         </thead>
         <tbody>
         <tr class="gradeX">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 4.0
-            </td>
-            <td>Win 95+</td>
-            <td class="center">4</td>
-            <td class="center">X</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
-        <tr class="gradeC">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 5.0
-            </td>
-            <td>Win 95+</td>
-            <td class="center">5</td>
-            <td class="center">C</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 5.5
-            </td>
-            <td>Win 95+</td>
-            <td class="center">5.5</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet
-                Explorer 6
-            </td>
-            <td>Win 98+</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 7</td>
-            <td>Win XP SP2+</td>
-            <td class="center">7</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Trident</td>
-            <td>AOL browser (AOL desktop)</td>
-            <td>Win XP</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.5</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-        </tr>
-        <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 2.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-        </tr>
+       
         </tbody>
         </table>
       </div>
@@ -239,6 +180,7 @@
 @section('js_filtered')
 @include('admin.jslinks.js_crud')
 
+@include('admin.jslinks.js_datatables')
 <!-- Date range picker -->
 <script src ="/assets/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="/assets/js/plugins/daterangepicker/daterangepicker.js"></script>
@@ -246,6 +188,69 @@
 
     
 <script>
+
+function enrollmentTable(){
+
+
+    $('#enrollee-table').dataTable().fnClearTable();
+    $("#enrollee-table").dataTable().fnDestroy();
+    schedule_id = $('#schedule_id').val();
+
+          EnrolleeTable = $('#enrollee-table').DataTable({
+          responsive: true,
+          bAutoWidth:false,
+
+          "fnRowCallback": function(nRow, aData, iDisplayIndex) {
+            nRow.setAttribute('data-id',aData.row_id);
+            nRow.setAttribute('class','ref_provider_info_class');
+          },
+
+          "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+            oSettings.jqXHR = $.ajax( {
+              "dataType": 'json',
+              "type": "GET",
+              "url": sSource,
+              "data": aoData,
+              "success": function (data) {
+                EnrolleeTableData = data;
+                console.log(EnrolleeTableData);
+                fnCallback(EnrolleeTableData);           
+              }
+            });
+          },
+                     
+          "sAjaxSource": "/sms/registrar/enrolled-students?schedule_id="+schedule_id,
+          "sAjaxDataProp": "",
+          "iDisplayLength": 10,
+          "scrollCollapse": false,
+          "paging":         true,
+          "searching": true,
+          "columns": [
+             
+    
+              { "mData": "student_id", sDefaultContent: ""},
+              { "mRender" : function ( data, type, full ) { 
+                        console.log(full);
+                        return full.schedule.student_schedule.students.last_name + ", " + full.schedule.student_schedule.students.first_name + " " +full.schedule.student_schedule.students.first_name + " " + full.schedule.student_schedule.students.name_extension; 
+              }
+              },
+
+              { "mData": "schedule.student_schedule.students.gender", sDefaultContent: ""},
+              { "mData": "schedule.created_at", sDefaultContent: ""},
+              { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                }
+              },  
+
+              { sDefaultContent: "" ,
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html('<a href="/admin/student/'+oData.student_id+'/edit" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                }
+              },  
+          ]
+      });
+}
 
 $('.gradeType').change(function(){
       var selValue = $(this).val();

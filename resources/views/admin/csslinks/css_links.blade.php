@@ -29,7 +29,7 @@
 		border-radius: 0px;
 	}
 
-	input, select {
+	input, select  , textarea ,label , option{
     	text-transform: capitalize;
 
 	}

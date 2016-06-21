@@ -86,6 +86,7 @@ class SelectBinderController extends Controller
 
         $data = RfSection::select(DB::raw("CONCAT( dt_schedule.start_time,'-',dt_schedule.end_time) AS time"))
                 ->leftjoin('dt_schedule','dt_schedule.section_id','=','rf_section.section_id')
+                ->where('dt_schedule.schedule_id',"<>",null)
                 ->where('rf_section.grade_level_id',Request::input('filter_id'))
                 ->groupBy('dt_schedule.start_time')
                 ->groupBy('dt_schedule.end_time')
