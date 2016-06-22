@@ -95,6 +95,10 @@
                     <input type="text" class="form-control input-sm" name="syTo" id="syTo" maxlength="4" required="">
                   </div>
               </div>
+              <div class="form-group">
+                  <label>Check if this your current School Year</label>
+                  <input type="checkbox" name="is_current" id="is_current" class="pull-right">
+              </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -247,7 +251,14 @@
         $('#school_year_id').val(schoolYearTableData[row_id].school_year_id);
         $('#syFrom').val(schoolYearTableData[row_id].sy_from);
         $('#syTo').val(schoolYearTableData[row_id].sy_to);
+        $('#syTo').val(schoolYearTableData[row_id].sy_to);
 
+        if(schoolYearTableData[row_id].is_current  == "1"){
+            $( "#is_current" ).prop( "checked", true);
+        }
+        else{
+            $( "#is_current" ).prop( "checked", false);
+        }
     }
 </script>
 

@@ -15,6 +15,15 @@
 
 Route::get('/','MainloaderController@home');
 
+Route::get('test', function(){
+	$data = App\RfGradeLevel::with('getSection','getSection.Schedule','getSection.Schedule.StudentSchedule')
+							->whereHas('getSection.Schedule' , function($q){
+								$q->where('school_year_id','2');
+							})
+							->get();
+
+	dd($data);
+});
 
 
 
@@ -214,3 +223,9 @@ Route::get('auth/facebook/callback', 'Auth\AuthFacebookController@handleProvider
 Route::get('truncate', 'MiscController@truncate');
 Route::get('updated-at', 'MiscController@updatedAt');
 
+
+
+
+//logs
+
+Route::get('sms/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

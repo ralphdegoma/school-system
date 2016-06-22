@@ -17,6 +17,8 @@ class EnrollmentController extends Controller
     	$scheduleSection = $section->with('getGradeLevel','getSectionType','Schedule','Schedule.StudentSchedule','Schedule.StudentSchedule.Students')
     			->getEnrollees($request['schedule_id'])
     			->get();
+
+    	dd($scheduleSection);		
 		$datatableFormat = new DatatableFormat();
   		return $datatableFormat->format($scheduleSection);
 

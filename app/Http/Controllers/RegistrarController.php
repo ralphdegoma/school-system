@@ -125,10 +125,19 @@ class RegistrarController extends Controller
         }
 
         
+		$schoolYearUpdate = new RfSchoolYear;
+		$schoolYearUpdate = $schoolYearUpdate->where('is_current', '=', '1')->update(array('is_current' => '0'));
 
 		$schoolYear = new RfSchoolYear;
 		$schoolYear->sy_from = $request['syFrom'];
-		$schoolYear->sy_status_id = '1';
+
+		if($request['is_current'] == "on"){
+			$schoolYear->is_current = '1';
+		}else{
+			$schoolYear->is_current = '0';
+		}
+		
+
 		$schoolYear->sy_to 	= $request['syTo'];
 		$schoolYear->save();
 
@@ -157,9 +166,20 @@ class RegistrarController extends Controller
                       ->show();
         }
 
+        $schoolYearUpdate = new RfSchoolYear;
+        $schoolYearUpdate = $schoolYearUpdate->where('is_current', '=', '1')->update(array('is_current' => '0'));
+
+        $schoolYear = new RfSchoolYear;
 		$schoolYear = RfSchoolYear::find($request['school_year_id']);
 		$schoolYear->sy_from = $request['syFrom'];
 		$schoolYear->sy_to 	= $request['syTo'];
+
+		if($request['is_current'] == "on"){
+			$schoolYear->is_current 	= '1';
+		}else{
+			$schoolYear->is_current 	= '0';
+		}
+
 		$schoolYear->save();
 
 
