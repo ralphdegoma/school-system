@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Schedule;
 class Schedule extends Model
 {
     protected $table = 'dt_schedule';
@@ -53,7 +53,8 @@ class Schedule extends Model
     }
 
     public function StudentSchedule(){
-        return $this->hasOne('App\StudentSchedule','schedule_id','schedule_id');
+        return $this->hasMany('App\StudentSchedule','schedule_id','schedule_id');
     }
+    
 }
 

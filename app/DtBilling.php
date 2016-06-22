@@ -8,6 +8,7 @@ class DtBilling extends Model
 {
     //
     protected $table = 'dt_billing';
+    protected $primaryKey = 'billing_id';
 
     public function getFees(){
     	return $this->belongsTo('App\RfFees','fees_id','fees_id');

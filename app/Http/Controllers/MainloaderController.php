@@ -186,4 +186,9 @@ class MainloaderController extends Controller
     }
     
 
+    public function masterlist(){
+      $gradeType    = RfGradeType::all();
+      return view('sms.reports.masterlist',compact('gradeType'));
+    }
+
 }

@@ -42,7 +42,7 @@
                       @foreach($paymentTypes as $type)
                         <td class="text-center">
                         <!-- <input type="hidden" name="payment_type[]" value="{{$type->payment_type_id}}"> -->
-                        <input type="checkbox" name="month[]" value="{{$month->month_id}}/{{$type->payment_type_id}}">
+                        <input type="checkbox" name="month[]" value="{{$month->month_id}}/{{$type->payment_type_id}}" @if($type->getChecked($type->payment_type_id,$month->month_id) > 0) checked="" @endif >
                          </td>
                       @endforeach
                     </tr>
@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-12">
           <div class="pull-right">
-           <button class="btn btn-primary wyredModalCallback" data-toggle="modal"  data-url="/sms/setup/billing/save-payment-sched" data-form="paymentSched" data-target="#wyredSaveModal"> Save Payment Schedule</button>
+           <button class="btn btn-primary wyredModalCallback" data-toggle="modal"  data-url="/sms/setup/billing/save-payment-sched" data-form="paymentSched" data-target="#wyredSaveModal"> Setup Payment Schedule</button>
           </div>
         </div> 
      </div>

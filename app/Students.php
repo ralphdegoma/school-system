@@ -16,7 +16,9 @@ class Students extends Model
         return $birthday;
     }
 
-    
+    public function getShedule(){
+        return $this->hasMany('App\StudentSchedule','student_id','student_id');
+    }
 
    	public function Father(){
     	return $this->belongsTo('App\Father','parent_id','parent_id');
@@ -31,5 +33,8 @@ class Students extends Model
         $this->attributes['birthday'] = strtolower($birthday);
     }
 
-
+    public function getGender($gender = null){
+        return  $this->where('gender',$gender)->count();
+       
+    }
 }

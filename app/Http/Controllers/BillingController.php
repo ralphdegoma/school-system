@@ -78,14 +78,22 @@ class BillingController extends Controller
     }
 
     public function saveGradeFees(Request $request){
-    		$return = new rrdReturn();
 
+         if($request['billing_id'] != ""){
+          $id = $request['billing_id'];
+          $grade_level = $request['grade_level'];
+          $fees_id = $request['fees'];
+          $amount = $request['amount'];
+          return $this->updateGradeFees($id,$grade_level,$fees_id,$amount);
+         }
+
+    		$return = new rrdReturn();
     		$checker = DtBilling::where('fees_id',$request['fees'])
     								->where('grade_level_id',$request['grade_level'])
     								->count();
     		if($checker > 0){
     				return $return->status(false)
-	                      ->message("Grade Level Fee Has Been Created!.")
+	                      ->message("Grade Level Fee Has Already Been Created!.")
 	                      ->show();
     		}
     		else{
@@ -102,7 +110,31 @@ class BillingController extends Controller
     		}
 
     }
+    public function updateGradeFees($id,$grade_level,$fees_id,$amount){
+        $return = new rrdReturn();
+          $checker = DtBilling::where('fees_id',$fees_id)
+                    ->where('grade_level_id',$grade_level)
+                    ->where('billing_id','!=',$id)
+                    ->count();
+        if($checker > 0){
+            return $return->status(false)
+                        ->message("Grade Level Fee Has Already Been Created!.")
+                        ->show();
+        }
+        else{
+          $update = DtBilling::find($id);
+          $update->amount = $amount;
+          $update->fees_id = $fees_id;
+          $update->grade_level_id = $grade_level;
+          $update->save();
 
+          return $return->status(true)
+                        ->message("Successfull!.")
+                        ->show();
+
+        }
+
+    }
     public function getCategory(){
     		$category = RfFeeCategories::all();
 
@@ -116,7 +148,7 @@ class BillingController extends Controller
       	return $datatableFormat->format($category);
     }
     public function getGradeFees(){
-    		$category = DtBilling::with('getFees','getGrade')->get();
+    		$category = DtBilling::with('getFees','getGrade.getGradeType')->get();
 
     		$datatableFormat = new DatatableFormat();
       	return $datatableFormat->format($category);
@@ -165,6 +197,7 @@ class BillingController extends Controller
     }
     public function savePaymentSched(Request $request){
           $return = new rrdReturn();
+          $delete = DtPaymentTypeSched::truncate();
           foreach ($request['month'] as $month) {
               $month = explode('/', $month);
               $new = new DtPaymentTypeSched;
@@ -181,6 +214,7 @@ class BillingController extends Controller
 
   public function saveDueDates(Request $request){
        $return = new rrdReturn();
+        $delete = DtDueDates::truncate();
        $month = $request['month'];
        $counter = 0;
        foreach ($request['dues'] as $dues) {
