@@ -96,6 +96,7 @@ Route::post('/sms/setup/billing/save-fees','BillingController@saveFees');
 Route::get('/sms/setup/billing/get-fees','BillingController@getFees');
 Route::get('/sms/setup/billing/get-grade-fees','BillingController@getGradeFees');
 Route::post('/sms/setup/billing/save-grade-fees','BillingController@saveGradeFees');
+Route::post('/sms/setup/billing/save-payment-sched','BillingController@savePaymentSched');
 
 
 //A C A D E M E I C    S E T U P
@@ -119,24 +120,16 @@ Route::get('/sms/get-list-schedules','RegistrarController@getListSchedules');
 
 
 
-
-
 //E N R O L L M E N T
 Route::get('/sms/registrar/enrolled-students','EnrollmentController@getEnrollees');
 
 
 
 
-
-
-
-
-
-
 //R E P O R T S 
 Route::get('/sms/reports/enrolled-students','ReportController@enrolledStudents');
-
-
+Route::get('/sms/reports/masterlist','MainloaderController@masterlist');
+Route::post('/sms/reports/generate-masterlist','ReportController@generateMasterlist');
 
 
 

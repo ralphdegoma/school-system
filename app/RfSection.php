@@ -22,7 +22,7 @@ class RfSection extends Model
     }
 
     public function Schedule(){
-        return $this->hasOne('App\Schedule','section_id','section_id');
+        return $this->hasMany('App\Schedule','section_id','section_id');
     }
 
     public function scopegetEnrollees($query,$schedule_id){
