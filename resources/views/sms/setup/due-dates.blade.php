@@ -29,7 +29,7 @@
                 <thead>
                   <tr>
                       <th>Month</th>
-                      <th>Date</th>
+                      <th>Day</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                                  <i class="fa fa-calendar"></i>
                                 </span>
                                 <input type="hidden" name="month[]" value="{{$month->month_id}}">
-                                <input type="text" class="form-control month" name="dues[]" required>            
+                                <input type="text" class="form-control" name="dues[]" required>            
                               </div>
                            </div>
                       </td>

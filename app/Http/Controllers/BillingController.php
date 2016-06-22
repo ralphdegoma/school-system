@@ -165,6 +165,7 @@ class BillingController extends Controller
     }
     public function savePaymentSched(Request $request){
           $return = new rrdReturn();
+          $delete = DtPaymentTypeSched::truncate();
           foreach ($request['month'] as $month) {
               $month = explode('/', $month);
               $new = new DtPaymentTypeSched;
@@ -181,6 +182,7 @@ class BillingController extends Controller
 
   public function saveDueDates(Request $request){
        $return = new rrdReturn();
+        $delete = DtDueDates::truncate();
        $month = $request['month'];
        $counter = 0;
        foreach ($request['dues'] as $dues) {
