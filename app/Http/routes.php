@@ -109,8 +109,6 @@ Route::get('/sms/get-list-subject','RegistrarController@getListSubjects');
 Route::get('/sms/get-list-subject-edit','RegistrarController@getListSubjectsEdit');
 Route::get('/sms/get-list-schedules','RegistrarController@getListSchedules');
 
-// R E P O R T S
-Route::get('/sms/reports/enrolled-students','MainloaderController@populationFilter');
 
 
 //E N R O L L M E N T
@@ -119,16 +117,10 @@ Route::get('/sms/registrar/enrolled-students','EnrollmentController@getEnrollees
 
 
 
-
-
-
-
-
-
 //R E P O R T S 
 Route::get('/sms/reports/enrolled-students','ReportController@enrolledStudents');
-
-
+Route::get('/sms/reports/masterlist','MainloaderController@masterlist');
+Route::post('/sms/reports/generate-masterlist','ReportController@generateMasterlist');
 
 
 

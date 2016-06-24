@@ -92,6 +92,7 @@
       </div>
       <div class="form-group">
        <label>Grade Type</label>
+       <input type="hidden" name="billing_id" id="billing_id">
          <select class="form-control input-sm" id="gradeType" name="gradeType" onchange="changeGradeLevel()" id="gradeType" required>
                 <option></option>
                    @foreach($gradeType as $keyVal)
@@ -106,7 +107,7 @@
          </div>
        <div class="form-group">
         <label>Fees</label>
-          <select class="form-control input-sm" name="fees" id="feesSelect">
+          <select class="form-control input-sm" name="fees" id="fee">
           @foreach($fees as $fee)
               <option value="{{$fee->fees_id}}">{{$fee->title}}</option>
           @endforeach
@@ -115,7 +116,7 @@
         </div>
        <div class="form-group">
          <label>Amount</label>
-           <input type="text" class="form-control input-sm" name="amount">
+           <input type="text" class="form-control input-sm" id="amount_fee" name="amount">
        </div>
        </form>
        </div>  
@@ -252,6 +253,14 @@ $(document).ready(function(){
         }
     });
 });
+function editFees(row_id){
+        $('#amount_fee').val(subjectTableData[row_id].amount);
+        $('#billing_id').val(subjectTableData[row_id].billing_id);
+        $('#gradeType').val(subjectTableData[row_id].get_grade.get_grade_type.grade_type_id);
+          changeGradeLevel();
+        $('#gradeLevels').val(subjectTableData[row_id].get_grade.grade_level_id);
+        $('#fee').val(subjectTableData[row_id].get_fees.fees_id)
+}
 function changeGradeLevel(){
 
       var selValue = $('#gradeType').val();
@@ -259,6 +268,12 @@ function changeGradeLevel(){
 }
 $('#wyredSaveModal').on('hidden.bs.modal',function(){
         gradeFeesTableFunc();
+          $('#amount_fee').val('');
+        $('#billing_id').val('');
+        $('#gradeType').val('');
+          changeGradeLevel();
+        $('#gradeLevels').val('');
+        $('#fee').val('')
   });
  function gradeFeesTableFunc(){
       
@@ -310,7 +325,7 @@ $('#wyredSaveModal').on('hidden.bs.modal',function(){
 
                { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" data-toggle="modal" data-target="#update-fees" onclick="editSubject('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
+                      $(nTd).html('<a href="#" data-toggle="modal" onclick="editFees('+oData.row_id+')" class="btn btn-info btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
                   }
                 },  
           ]

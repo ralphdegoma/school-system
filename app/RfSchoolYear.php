@@ -20,4 +20,7 @@ class RfSchoolYear extends Model
     public function getSchoolYearAttribute(){
     	return $this->sy_from . " - " . $this->sy_to;
 	}
+    public function getSchedule(){
+        return $this->hasMany('App\Schedule','school_year_id','school_year_id');
+    }
 }

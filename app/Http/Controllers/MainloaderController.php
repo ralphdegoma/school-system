@@ -186,8 +186,9 @@ class MainloaderController extends Controller
     }
     
 
-    public function populationFilter(){
-      return view('sms.reports.population-filter');
+    public function masterlist(){
+      $gradeType    = RfGradeType::all();
+      return view('sms.reports.masterlist',compact('gradeType'));
     }
 
 }

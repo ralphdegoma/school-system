@@ -31,5 +31,8 @@ class Students extends Model
         $this->attributes['birthday'] = strtolower($birthday);
     }
 
-
+    public function getGender($gender = null){
+        return  $this->where('gender',$gender)->count();
+       
+    }
 }

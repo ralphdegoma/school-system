@@ -12,6 +12,9 @@
 				  vertical-align: bottom;
 
 				 }
+				 body{
+				 	padding-top:20px;
+				 }
 				 table{
 				 	width: 100%;
 				 	border:1px solid #000000;
@@ -19,6 +22,9 @@
 				 }
 				 th,td{
 				 	border: 1px solid #000000;
+				 }
+				 .white{
+				 	background-color:white !important; 
 				 }
 
 				 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
@@ -36,7 +42,7 @@
 				}
 
 		</style>
-		<title>FARMERS SEMINAR</title>
+		<title>Population Report</title>
 	</head>
 
 
@@ -47,41 +53,113 @@
 	<div class="body-legal col-100" >
 		<div class ="header col-md-12">
 			<div class="col-md-12">
-					<h3 class="t-center bold">DIOCESAN SOCIAL ACTION</h3>
-					<h4 class="t-center bold">DIOCESE OF BUTUAN</h4>
-					<p class="t-center">2/F, Sacred Heart BLdg., J.C Aquino , Butuan City</p>
-					<p class="t-center"><i>SUSTAINABLE AGRICULTURAL PROGRAM</i></p>
-
+					<h3 class="t-center bold">SCHOOL OF THE MORNING STAR</h3>
+					<h4 class="t-center bold">BUTUAN CITY</h4>
+					<p class="t-center"></p>
+					<p class="t-center"><i></i></p>
+					<h2 class="text-center">{{$sy->sy_from}}-{{$sy->sy_to}} Enrollment Report</h2>
 			</div>
 		</div>
 
-		<div class="col-md-12" style="margin-bottom: 10px">
-			<div class="col-md-12">
-
-				<label >Seminar: <label>
-			</div>
-
-			<div class="col-md-12">
-				<label >Date: </label>
-			</div>
-			
-		</div>
-
-			<div class="col-md-12">
-			<h3 class="text-center bold">FARMERS ATTENDANCE</h3>
-
-			<table class="">
-				<tr>
-					<th class="text-center">Name</th>
-					<th class="text-center">Organization</th>
-				</tr>
-
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			@foreach($populations as $gradetype)
+			<div class="col-xs-12"><h2>{{$gradetype->grade_type}}</h2></div>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th></th>
+						@foreach($gradetype->getGradeLevel as $gradelevel)
+							<th class="text-center">{{$gradelevel->grade_level}}</th>
+						@endforeach
+						<th class="text-center">TOTAL</th>
+					</tr>
+					<tr>
+						<td>Male</td>
+						@foreach($gradetype->getGradeLevel as $gradelevel)
+							<td class="white">
+							<?php $count=0;$gender='Male';$totalM = 0; ?>
+								@foreach($gradelevel->getSection as $section)
+									@foreach($section->Schedule as $sched)
+										@foreach($sched->StudentSchedule as $studentsched)
+											<?php $count = $count + $studentsched->Students()->where('gender',$gender)->count(); $totalM =+ $count;?>
+										@endforeach
+									@endforeach
+								@endforeach
+								{{$count}}
+							</td>
+						@endforeach
+						<td class="white">{{$totalM}}</td>
+					</tr>
+					<tr>
+						<td>Female</td>
+						@foreach($gradetype->getGradeLevel as $gradelevel)
+							<td class="white">
+							<?php $count=0;$gender='Female';$totalF = 0; ?>
+								@foreach($gradelevel->getSection as $section)
+									@foreach($section->Schedule as $sched)
+										@foreach($sched->StudentSchedule as $studentsched)
+											<?php $count = $count + $studentsched->Students()->where('gender',$gender)->count(); $totalF =+ $count;?>
+										@endforeach
+									@endforeach
+								@endforeach
+								{{$count}}
+							</td>
+						@endforeach
+						<td class="white">{{$totalF}}</td>
+					</tr>
+					<tr>
+						<td>TOTAL</td>
+						@foreach($gradetype->getGradeLevel as $gradelevel)
+							<td class="white">
+							<?php $count=0;$totalF = 0; ?>
+								@foreach($gradelevel->getSection as $section)
+									@foreach($section->Schedule as $sched)
+										@foreach($sched->StudentSchedule as $studentsched)
+											<?php $count = $count + $studentsched->Students()->count();?>
+										@endforeach
+									@endforeach
+								@endforeach
+								{{$count}}
+							</td>
+						@endforeach
+						<td class="white">{{$totalF+$totalM}}</td>
+					</tr>
+				</thead>	
 			</table>
-			</div>
+			@endforeach
+			<div class="col-xs-12">
+				<div class="col-xs-5">
+					<h3 class="text-center">SUMMARY REPORT</h3>
+					<table class="table table-bordered">
+					<?php $total=0; ?>
+						@foreach($populations as $gradetype)
+							<tr>
+								<th>{{$gradetype->grade_type}}</th>
+								<td>
+								<?php $count=0;?>
+								@foreach($gradetype->getGradeLevel as $gradelevel)
+								@foreach($gradelevel->getSection as $section)
+									@foreach($section->Schedule as $sched)
+										@foreach($sched->StudentSchedule as $studentsched)
+											<?php $count = $count + $studentsched->Students()->count();
+												$total = $total + $count;
+											 ?>
+										@endforeach
+									@endforeach
+								@endforeach					
+						@endforeach
+								{{$count}}
+								</td>
+							</tr>
+						@endforeach
+						<tr>
+							<th>TOTAL</th>
+							<th class="text-center">{{$total}}</th>
+						</tr>
+					</table>
+				</div>
+			</div>	
+		</div>
 
 </body>
 

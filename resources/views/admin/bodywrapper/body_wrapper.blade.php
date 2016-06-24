@@ -564,14 +564,15 @@
                                     Enrolled Students </a>
                                     <ul class="sub-menu">
                                       <li id="gradelevelfeeMenu">
-                                        <a href="/sms/reports/enrolled-students">
+                                        <a href="/sms/reports/enrolled-students" target="_blank">
                                         <i class="fa fa-circle"></i>
                                           Population</a>
                                       </li>
                                       <li id="gradelevelfeeMenu">
-                                        <a href="#">
+                                        <a href="/sms/reports/masterlist">
                                         <i class="fa fa-circle"></i>
-                                           </a>
+                                            Masterlist
+                                        </a>
                                       </li>
                                     </ul>
                                 </li>
