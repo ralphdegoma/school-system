@@ -28,8 +28,7 @@ class RfSection extends Model
     public function scopegetEnrollees($query,$schedule_id){
         
             return $query->whereHas('Schedule', function($q) use ($schedule_id){
-                                $q->where('schedule_id',$schedule_id)
-                                  ->where('is_current','1');
+                                $q->where('schedule_id',$schedule_id);
                             });
     }
 }

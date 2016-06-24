@@ -73,7 +73,7 @@
 			<div class="col-xs-12">
 				
 						@foreach($populations as $schedule)
-							@foreach($schedule->Schedule()->where('school_year_id','2')->get() as $sched)
+							@foreach($schedule->Schedule()->where('school_year_id',$sy->school_year_id)->get() as $sched)
 									<table>
 									<tr>
 										<th width="30"></th>

@@ -162,14 +162,14 @@
 
          ?>
 
-        <div class="col-md-3 col-sm-3 col-lg-3 student-body" >
+        <div class="col-md-2 col-sm-12 col-lg-3 student-body" >
               <div class="col-md-12 text-center" >
                     <div class="col-md-12 text-center" >
                       <img src="{{$image_link}}" class="profile-pic img-responsive text-center" style="height:240px;width:auto">
                       
                     </div>
                   
-                  <div class="col-md-12 text-center">
+                  <div class="col-md-12 text-center" style="margin:10px">
                      <br>
                       <label><b>{{$student->last_name}}, {{$student->first_name}} {{$student->middle_name}}</b></label><br>
                       <label><b>000{{$student->student_id}}</b></label>

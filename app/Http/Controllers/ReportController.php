@@ -17,11 +17,13 @@ class ReportController extends Controller
 {
 
     public function enrolledStudents(){
-        $sy = RfSchoolYear::find(2);
+        $sy = RfSchoolYear::where('is_current','1')->first();
 
         $populations = RfGradeType::with('getGradeLevel.getSection.Schedule.StudentSchedule.Students')
             ->wherehas('getGradeLevel.getSection.Schedule', function($q){
-                $q->where('school_year_id','2');
+               $sy = RfSchoolYear::where('is_current','1')->first();
+                $sy_id = $sy->school_year_id;
+                $q->where('school_year_id',$sy_id);
             })
         ->where('grade_type','!=','All')
         ->get();
@@ -38,6 +40,7 @@ class ReportController extends Controller
     
     public function generateMasterlist(){
             $request = Request::all();
+             $sy = RfSchoolYear::where('is_current','1')->first();
             $grade_type = $request['gradeType'];
             $grade_level = $request['grade_level'];
             $section = $request['section_name'];
@@ -52,7 +55,7 @@ class ReportController extends Controller
                         ->get();
                    
 
-          $pdf = Pdf::loadView('sms.reports.masterlist-generate',compact('grade_type','grade_level','section','grade','sec','populations'));
+          $pdf = Pdf::loadView('sms.reports.masterlist-generate',compact('grade_type','grade_level','section','grade','sec','populations','sy'));
         
             return $pdf->setPaper('letter')->setOrientation('portrait')
                         ->setOption('margin-bottom', 2)

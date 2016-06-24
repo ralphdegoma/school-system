@@ -44,9 +44,28 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+
+<style> 
+
+            canvas {
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                }
+
+            body{
+                background-color: #ffffff;
+            }
+
+    </style>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
+
+<canvas id="myCanvas" width="700" height="100"></canvas>
 <body class="login">
 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 <div class="menu-toggler sidebar-toggler">
@@ -91,6 +110,11 @@ License: You must have a valid license purchased only from themeforest(the above
      2016 © WYRED INNOVATIONS - THE FUTURE OF SOFTWARE DEVELOPMENT.
 </div>
 <!-- END JAVASCRIPTS -->
+
+    <script src="/assets/js/custom/zipto.js"></script>
+    <script src="/assets/js/custom/stats.js"></script>
+    <script src="/assets/js/custom/constellation.js"></script>
+
 </body>
 <!-- END BODY -->
 </html>
