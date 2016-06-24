@@ -10,7 +10,9 @@ use App\RfSection;
 use App\RfSubjects;
 use App\DtAssignSubject;
 use DB;
-
+use App\RfFeeCategories;
+use App\RfFees;
+use App\DtBilling;
 class SoftdeleteController extends Controller
 {
     public function deleteSchoolYear(){
@@ -67,6 +69,27 @@ class SoftdeleteController extends Controller
                           ->show();
     }
 
+    public function deleteFeeCategories(){
+      RfFeeCategories::destroy(Request::input('id'));
+       $return = new rrdReturn();
+        return $return->status(true)
+                          ->message("Fee Category has been temporarily removed from the system!.")
+                          ->show();
 
+    }
+     public function deleteFees(){
+      RfFees::destroy(Request::input('id'));
+       $return = new rrdReturn();
+        return $return->status(true)
+                          ->message("Fee has been temporarily removed from the system!.")
+                          ->show();
 
+    }
+    public function deleteBilling(){
+      DtBilling::destroy(Request::input('id'));
+      $return = new rrdReturn();
+        return $return->status(true)
+                          ->message("Grade Fee has been temporarily removed from the system!.")
+                          ->show();
+    }
 }

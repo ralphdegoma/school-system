@@ -229,9 +229,10 @@ function enrollmentTable(){
              
     
               { "mData": "student_id", sDefaultContent: ""},
+              
               { "mRender" : function ( data, type, full ) { 
                         console.log(full);
-                        return full.students.last_name + ", " + full.first_name + " " +full.students.first_name + " " + full.students.name_extension; 
+                        return full.students.last_name + ", " + full.students.first_name + " " +full.students.first_name + " " + full.students.name_extension; 
               }
               },
 

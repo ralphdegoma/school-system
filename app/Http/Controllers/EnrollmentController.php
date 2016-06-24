@@ -12,12 +12,11 @@ class EnrollmentController extends Controller
 {
     public function getEnrollees(Request $request){
 
-
     	$sched = StudentSchedule::with('Students')
     					->where('schedule_id',$request['schedule_id'])
     					->get();			
     		
-		 $datatableFormat = new DatatableFormat();
+		$datatableFormat = new DatatableFormat();
   		return $datatableFormat->format($sched);
 
     }

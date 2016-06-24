@@ -169,8 +169,9 @@ Route::get('/softdelete/deleteGradeLevel','SoftdeleteController@deleteGradeLevel
 Route::get('/softdelete/deleteSection','SoftdeleteController@deleteSection');
 Route::get('/softdelete/deleteSubject','SoftdeleteController@deleteSubject');
 Route::get('/softdelete/deleteAssignSubject','SoftdeleteController@deleteAssignSubject');
-
-
+Route::get('/softdelete/delete-fee-categories','SoftdeleteController@deleteFeeCategories');
+Route::get('/softdelete/delete-fees','SoftdeleteController@deleteFees');
+Route::get('/softdelete/delete-billing','SoftdeleteController@deleteBilling');
 
 
 

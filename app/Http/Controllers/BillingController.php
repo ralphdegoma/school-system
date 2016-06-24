@@ -11,6 +11,7 @@ use App\RfFees;
 use App\DtBilling;
 use App\DtPaymentTypeSched;
 use App\DtDueDates;
+use App\RfSchoolYear;
 class BillingController extends Controller
 {
     //
@@ -23,10 +24,10 @@ class BillingController extends Controller
         }
 
     	$return = new rrdReturn();
-    	$validator = Validator::make($request->all(), [
-            'title' => 'required|unique:rf_fee_categories',
-        ]);
-         if ($validator->fails()) {
+    	$validator = RfFeeCategories::where('title',$request['title'])
+                  ->where('deleted_at','0000-00-00')
+                  ->count();
+         if ($validator > 0) {
 				return $return->status(false)
 	                      ->message("Title Already been Created!.")
 	                      ->show();
@@ -55,6 +56,7 @@ class BillingController extends Controller
     						->where('description',$request['description'])
     						->where('fee_categories_id',$request['category'])
     						->where('account_code',$request['account'])
+                ->where('deleted_at','=','0000-00-00')
     						->count();
 
     		if($checker > 0){
@@ -79,6 +81,8 @@ class BillingController extends Controller
 
     public function saveGradeFees(Request $request){
 
+        $sy = RfSchoolYear::where('is_current','1')->first();
+        $sy_id = $sy->school_year_id;
          if($request['billing_id'] != ""){
           $id = $request['billing_id'];
           $grade_level = $request['grade_level'];
@@ -90,6 +94,7 @@ class BillingController extends Controller
     		$return = new rrdReturn();
     		$checker = DtBilling::where('fees_id',$request['fees'])
     								->where('grade_level_id',$request['grade_level'])
+                    ->where('school_year_id',$sy_id)                      
     								->count();
     		if($checker > 0){
     				return $return->status(false)
@@ -101,6 +106,7 @@ class BillingController extends Controller
     			$new->amount = $request['amount'];
     			$new->fees_id = $request['fees'];
     			$new->grade_level_id = $request['grade_level'];
+          $new->school_year_id = $sy_id;
     			$new->save();
 
     			return $return->status(true)
@@ -111,10 +117,14 @@ class BillingController extends Controller
 
     }
     public function updateGradeFees($id,$grade_level,$fees_id,$amount){
+        $sy = RfSchoolYear::where('is_current','1')->first();
+        $sy_id = $sy->school_year_id;
         $return = new rrdReturn();
           $checker = DtBilling::where('fees_id',$fees_id)
                     ->where('grade_level_id',$grade_level)
+                    ->where('school_year_id',$sy_id) 
                     ->where('billing_id','!=',$id)
+                    ->where('school_year_id',$sy_id)
                     ->count();
         if($checker > 0){
             return $return->status(false)
