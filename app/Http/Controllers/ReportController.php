@@ -42,6 +42,9 @@ class ReportController extends Controller
             $grade_level = $request['grade_level'];
             $section = $request['section_name'];
 
+            if($section == 'All'){
+                return $this->generateGradeList($grade_type,$grade_level);
+            }
             $grade = RfGradeLevel::find($grade_level);
             $sec = RfSection::find($section);
                 $populations = RfSection::with('Schedule.StudentSchedule.Students')
@@ -50,6 +53,25 @@ class ReportController extends Controller
                    
 
           $pdf = Pdf::loadView('sms.reports.masterlist-generate',compact('grade_type','grade_level','section','grade','sec','populations'));
+        
+            return $pdf->setPaper('letter')->setOrientation('portrait')
+                        ->setOption('margin-bottom', 2)
+                        ->setOption('margin-left', 1)
+                        ->setOption('margin-right', 1)
+                       ->setOption('margin-top', 2)
+                        ->stream('report.pdf');
+    }
+
+    public function generateGradeList($grade_type, $grade_level ){
+
+
+            $grade = RfGradeLevel::find($grade_level);
+                $populations = RfGradeLevel::with('getSection.Schedule.StudentSchedule.Students')
+                        ->where('grade_level_id',$grade_level)
+                        ->get();
+                   
+
+          $pdf = Pdf::loadView('sms.reports.gradelevel-masterlist',compact('grade_type','grade_level','grade','sec','populations'));
         
             return $pdf->setPaper('letter')->setOrientation('portrait')
                         ->setOption('margin-bottom', 2)

@@ -74,6 +74,7 @@
 $('.gradelevel').change(function(){
       var selValue = $(this).val();
       $('.sectionName').select_binder(selValue);
+      $('.sectionName').append('<option val="All">All</option>');
       getSubjectsWithFilters();//call change of subjects
 });
 

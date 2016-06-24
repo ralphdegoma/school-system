@@ -61,37 +61,36 @@
 					<h4 class="t-center bold">BUTUAN CITY</h4>
 					<p class="t-center"></p>
 					<p class="t-center"><i></i></p>
-					<h2 class="text-center">Student Masterlist</h2>
+					<h2 class="text-center">{{$grade->grade_level}} List</h2>
 			</div>
 		</div>
 
 		<div class="col-md-12" style="margin-bottom: 10px;">
 			<div class="col-xs-12">
-				<h4>Grade Level: {{$grade->grade_level}}</h4>
-				<h4>Section : {{$sec->section_name}}</h4>
-			</div>
-			<div class="col-xs-12">
-				
-						@foreach($populations as $schedule)
-							@foreach($schedule->Schedule()->where('school_year_id','2')->get() as $sched)
-									<table>
-									<tr>
+						@foreach($populations as $sec)
+						<table>
+									<tr class="bg-primary">
 										<th width="30"></th>
 										<th class="text-center">First Name</th>
 										<th class="text-center">Last Name</th>
+										<th class="text-center">Section</th>
 									</tr>
 									<?php $counter=1; ?>
+						@foreach($sec->getSection as $schedule)
+							@foreach($schedule->Schedule()->where('school_year_id','2')->get() as $sched)
 								@foreach($sched->StudentSchedule as $studsched)
 						
 									<tr>
 										<td>{{$counter}}.</td>
 										<td class="text-left padding">{{$studsched->Students->first_name}}</td>
 										<td class="text-left padding">{{$studsched->Students->last_name}}</td>
+										<td>{{$schedule->section_name}}</td>
 									</tr>
 									<?php $counter++; ?>
 								@endforeach
 									</table>
 							@endforeach
+						@endforeach
 						@endforeach
 			</div>
 		</div>

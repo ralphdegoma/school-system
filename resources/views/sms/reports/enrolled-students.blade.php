@@ -63,7 +63,7 @@
 
 		<div class="col-md-12" style="margin-bottom: 10px;">
 			@foreach($populations as $gradetype)
-			<div class="col-xs-12"><h2>{{$gradetype->grade_type}}</h2></div>
+			<div class="col-xs-12 bg-primary"><h4>{{$gradetype->grade_type}}</h4></div>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
@@ -142,13 +142,13 @@
 									@foreach($section->Schedule as $sched)
 										@foreach($sched->StudentSchedule as $studentsched)
 											<?php $count = $count + $studentsched->Students()->count();
-												$total = $total + $count;
 											 ?>
 										@endforeach
 									@endforeach
 								@endforeach					
 						@endforeach
 								{{$count}}
+								<?php $total = $total + $count; ?>
 								</td>
 							</tr>
 						@endforeach
