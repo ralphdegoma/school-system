@@ -46,7 +46,7 @@ document.body.appendChild(stats.domElement);
 				width: window.innerWidth,
 				height: window.innerHeight,
 				velocity: 0.1,
-				length: 100,
+				length: 400,
 				distance: 120,
 				radius: 150,
 				stars: []

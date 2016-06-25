@@ -43,7 +43,7 @@ trait WyredAuth {
 		if ($validator->fails())
 		{	
 
-			$messages = $validator->errors()->all();
+			$messages = $validator->errors()->first();
 		   	return $this->errorLoginRedirect($messages);
 		}
 

@@ -59,7 +59,8 @@
        
        </div>
        <div class="col-md-12">
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#assign-fees"><i class="fa fa-plus"></i>Add Fees</button>
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#assign-fees"><i class="fa fa-plus"></i> Add Fees</button>
+          </div>
           <div class="col-md-12">
            <table id="" class="table table-striped table-bordered table-hover" style="margin-top:10px" >
                 <thead>
@@ -83,11 +84,11 @@
           
                 </tbody>
           </table>
-        </div>
-        </div>
-         
-     </div>
    
+   
+         <a href="#" class="btn blue-madison pull-right" data-toggle="modal" data-target="#new-payment"> [ Shift + A ] Assign Fees <i class="fa fa-cube"></i></a>
+     </div>
+        </div>
    
   </div>
 </div>

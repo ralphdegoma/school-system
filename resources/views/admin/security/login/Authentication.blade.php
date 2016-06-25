@@ -25,7 +25,6 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="{{ URL::asset('/assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="{{ URL::asset('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -84,6 +83,8 @@ License: You must have a valid license purchased only from themeforest(the above
             <span>
             Enter any username and password. </span>
         </div>
+                <p class="text-danger"><?php if(isset($messages)){ echo $messages; } ?></p>
+
         <div class="form-group">
             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
             <label class="control-label visible-ie8 visible-ie9">Username</label>

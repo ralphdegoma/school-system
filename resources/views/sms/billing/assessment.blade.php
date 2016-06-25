@@ -39,10 +39,7 @@
           </div>
            <div class="form-group">
            <label>Payment Option</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
-            </select>
+            
           </div>
        </div>
        <div class="col-md-6">
@@ -69,8 +66,6 @@
                   <tr>
                       <th>Fees</th>
                       <th>Amount</th>
-                      <th>Discounts</th>
-                      <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -78,12 +73,11 @@
                 <tr contenteditable="true">
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
                 </tr>
           
                 </tbody>
           </table>
+          <a href="#" class="btn blue-madison" data-toggle="modal" data-target="#new-payment"> [ Shift + A ] Add Assessment <i class="fa fa-cube"></i></a>
         </div>
          
      </div>

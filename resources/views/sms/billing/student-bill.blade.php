@@ -37,13 +37,6 @@
               <option></option>
             </select>
           </div>
-           <div class="form-group">
-           <label>Payment Option</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
-            </select>
-          </div>
        </div>
        <div class="col-md-6">
        <div class="well">
@@ -59,41 +52,119 @@
           Grade 10<br>
           <strong>Section Name:</strong>
           Albert<br>
+          <strong> Payment Type:</strong>
+          Albert<br>
           </address>
         </div>
        
        </div>
        <div class="col-md-12">
-           <table id="" class="table table-striped table-bordered table-hover" >
+           <table id="" class="table table-striped table-bordered" >
                 <thead>
                   <tr>
                       <th>Fees</th>
                       <th>Amount</th>
                       <th>Discounts</th>
-                      <th>Total</th>
+                      <th>Payments</th>
+                      <th>Balances</th>
+                      <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                  
-                <tr contenteditable="true">
+                <tr>
                         <td></td>
+                        <td></td>
+                        <td contenteditable="true"></td>
                         <td></td>
                         <td></td>
                         <td></td>
                 </tr>
-          
                 </tbody>
           </table>
         </div>
-         
+        <div class="col-md-12">
+           <div class="tabbable-line">
+                  <ul class="nav nav-tabs ">
+                    <li class="active">
+                      <a href="#tab_15_1" data-toggle="tab">
+                      Payments </a>
+                    </li>
+                    <li>
+                      <a href="#tab_15_2" data-toggle="tab">
+                      Promissories Record </a>
+                    </li>
+                   
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_15_1">
+                       <h2>Payments</h2>
+                       <table id="" class="table table-striped table-bordered" >
+                            <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <th>OR No</th>
+                                  <th>Amount</th>
+                                  <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                             
+                            <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                            </tr>
+                            </tbody>
+                      </table>
+
+                      <h4>[ Item Options ]</h4>
+                      <a href="#" class="btn blue-madison" data-toggle="modal" data-target="#new-payment"> [ Shift + N ] New Payments <i class="fa fa-cube"></i></a>
+                      <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#reset-products"> [ Shift + A ] Current Dues <i class="fa fa-calendar"></i></a>
+                      <a href="#" class="btn purple-plum "> [ Shift + P ] Print OR No. Items <i class="fa fa-print"></i></a>
+                    </div>
+                    <div class="tab-pane" id="tab_15_2">
+                         <h2>Promissories Record</h2>
+                         <table id="" class="table table-striped table-bordered" >
+                              <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Discounts</th>
+                                    <th>Promised Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                               
+                              <tr>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                              </tr>
+                              </tbody>
+                        </table>
+
+                        <a class="btn green" href="ui_tabs_accordions_navs.html#tab_15_2" target="_blank">
+                       Add New Promissory</a>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+      
+   
      </div>
    
    
   </div>
 </div>
+
+
 <!-- END Portlet PORTLET-->
-<div class="modal fade draggable-modal mo-z drag-me" id="add-fees" tabindex="-1" role="basic" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade draggable-modal mo-z drag-me" id="new-payment" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -101,17 +172,39 @@
       </div>
       <div class="modal-body">
         <form id="setupSubject">
-         <div class="form-group">
-           <label>Reciept Account</label>
-            <select class="form-control input-sm">
-              <option></option>
-              <option></option>
-            </select>
+        <div class="row">
+          <div class="col-md-4">
+              <div class="form-group">
+               <label>OR No</label>
+               <input type="text" class="form-control input-sm" name="">
+              </div>
           </div>
-          <div class="form-group">
-           <label>Fees Name</label>
-             <input type="text" class="form-control input-sm" name="">
-          </div>
+           <div class="col-md-12">
+           <table id="" class="table table-striped table-bordered" >
+                <thead>
+                  <tr>
+                      <th>Fees</th>
+                      <th>Amount</th>
+                      <th>Balances</th>
+                      <th>Amount Paid</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td contenteditable="true"></td>
+                </tr>
+                  <tr>
+                    <td colspan="1" style="background:#FFFFFF;border: 1px solid #FFFFFF;"></td>
+                    <td><b>OR TOTAL:</b></td>
+                  </tr>
+                </tbody>
+          </table>
+        </div>
+        </div>
         </form>
       </div>
       <div class="modal-footer">
