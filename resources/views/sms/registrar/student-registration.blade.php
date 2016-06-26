@@ -23,89 +23,78 @@
   <div class="portlet-body">
   <div class="row">
     <div class="col-md-12">
-          <!--    <div class="form-group  col-md-12">
+          <!--    <div class="form-group form-md-line-input col-md-12">
      <label>STUDENT ID</label> -->
       <input type="hidden"  class="form-control input-sm" value="{{$student->student_id or ""}}"  name="student_id_old" >
     <!--   <input type="text"  class="form-control input-sm" value="{{$student->student_id or ""}}"  name="student_id" required>
     </div> -->
     <div class="col-md-6">
-      <div class="form-group ">
-        <label>FIRST NAME</label>
+      <div class="form-group form-md-line-input ">
         <input type="text"  class="form-control input-sm" value="{{$student->first_name or ""}}" name="first_name" placeholder="Enter First Name" required>
-        
+        <label>FIRST NAME</label>
         <!-- <span class="help-block">Some help goes here...</span> -->
       </div>
-       <div class="form-group ">
-        <label >MIDDLE NAME</label>
+       <div class="form-group form-md-line-input">
         <input type="text"  class="form-control input-sm" value="{{$student->middle_name or ""}}" name="middle_name" required>
-        
+        <label >MIDDLE NAME</label>
       </div>
-      <div class="form-group ">
-        <label>LAST NAME</label>
+      <div class="form-group form-md-line-input">
         <input type="text"  class="form-control input-sm" value="{{$student->last_name or ""}}" name="last_name" required>
-        
+        <label>LAST NAME</label>
       </div>
-       <div class="form-group ">
-        <label>NAME EXTENSION</label>
+       <div class="form-group form-md-line-input">
         <input type="text"  class="form-control input-sm" value="{{$student->name_extension or ""}}" name="name_extension" >
-        
+        <label>NAME EXTENSION</label>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="form-group ">
-          <label>NICK NAME</label>
+      <div class="form-group form-md-line-input">
           <input type="text"  class="form-control input-sm" value="{{$student->nick_name or ""}}" name="nick_name" >
-         
+         <label>NICK NAME</label>
         </div>
-      <div class="form-group ">
-        <label>GENDER</label>
+      <div class="form-group form-md-line-input">
         <select class="form-control input-sm" name="gender"  required>
           <option >Male</option>
           <option>Female</option>
         </select>
-       
+       <label>GENDER</label>
       </div>
-      <div class="form-group  bday">
+      <div class="form-group form-md-line-input bday">
         <div class="input-group date">
-          <label>BIRTHDAY</label>
           <span class="input-group-addon">
            <i class="fa fa-calendar"></i>
           </span>
           <input type="text" class="form-control input-sm" value="{{$student->birthday or ""}}"   name="birthday" required>
-        
+        <label>BIRTHDAY</label>
         </div>
      </div>
    </div>
    <div class="col-md-12">
-      <div class="form-group ">
-        <label>BIRTHPLACE</label>
+      <div class="form-group form-md-line-input">
         <textarea class="form-control input-sm" rows="2" value="" name="birthplace" required>{{$student->birthplace or ""}}</textarea>
-      
+      <label>BIRTHPLACE</label>
       </div>
-      <div class="form-group  col-md-12">
-        <label>HOME ADDRESS</label>
+      <div class="form-group form-md-line-input col-md-12">
         <textarea class="form-control input-sm" rows="2" name="home_address" value="" required>{{$student->home_address or ""}}</textarea>    
-       
+       <label>HOME ADDRESS</label>
       </div>
     </div>
-      <div class="form-group  col-md-6">
+      <div class="form-group form-md-line-input col-md-6">
       <div class="input-group date">
-        
         <span class="input-group-addon">
          <i class="fa fa-mobile"></i>
         </span>
         <input type="text" class="form-control input-sm" value="{{$student->cp_no or ""}}" name="cp_no" >      
-        <label>CELLPHONE NO</label>
+      <label>CELLPHONE NO</label>
       </div>
   </div>
-    <div class="form-group  col-md-6">
+    <div class="form-group form-md-line-input col-md-6">
       <div class="input-group date">
-
         <span class="input-group-addon">
          <i class="fa fa-phone"></i>
         </span>
         <input type="text" class="form-control input-sm" value="{{$student->tel_no or ""}}" name="tel_no" >
-          <label>TEL. NO. LANDLINE</label>
+        <label>TEL. NO. LANDLINE</label>
       </div>
   </div>
 
@@ -148,19 +137,19 @@
   @foreach($student->parents_students as $parents)
       @if($parents->parental_type_id == '2')<!-- FATHER -->
             <div class="col-md-6">
-            <div class="form-group " id="father-select">
+            <div class="form-group form-md-line-input" id="father-select">
                 <select class="form-control input-sm select2 father_id"  data-url="/select-binder/get-father" data-id="parent_id" data-name='parents_name' name="father_id">
                   <option></option>
                 </select>
                 <label>FATHER NAME</label>
               </div>
               <div id="father-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="hidden" value="{{$parents->parents->parent_id or ""}}" class="form-control input-sm"  name="father_parent_id" >
                   <input type="text"  value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm father_input" name="fathers_name" required>
                  <label>FATHER NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-calendar"></i>
@@ -169,23 +158,23 @@
                    <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
                   <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
                   <label>OCCUPATION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}" name="fathers_firm">
                   <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -194,7 +183,7 @@
                    <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -203,7 +192,7 @@
                   <label>TEL. NO. (OFFICE)</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2"  name="fathers_home_address" >{{$parents->parents->home_address or ""}}</textarea>
                  <label>HOME ADDRESS</label>
               </div>
@@ -214,7 +203,7 @@
 
   @else<!-- BLANK TEMPLATE -->
       <div class="col-md-6">
-            <div class="form-group " id="father-select">
+            <div class="form-group form-md-line-input" id="father-select">
                 <select class="form-control input-sm select2 father_id" required  name="father_id">
                   <option></option>
                 </select>
@@ -222,11 +211,11 @@
               </div>
 
               <div id="father-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" value="{{$parents->parents->parents_name or ""}}" class="form-control input-sm father_input"  data-display='parents_name' name="fathers_name" required name="fathers_name" required="">
                   <label>FATHER NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-calendar"></i>
@@ -235,23 +224,23 @@
                   <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input"  value="{{$parents->parents->religion->religion_name or ""}}" name="fathers_religion" required>
                  <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="fathers_nationality" required>                
                  <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="fathers_occupation" >
                 <label>OCCUPATION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}" name="fathers_firm">
                 <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -260,7 +249,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -269,7 +258,7 @@
                   <label>TEL. NO. (OFFICE)</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2"  name="fathers_home_address" >{{$parents->parents->home_address or ""}}</textarea>
                 <label>HOME ADDRESS</label>
               </div>
@@ -284,19 +273,19 @@
     @foreach($student->parents_students as $parents)
       @if($parents->parental_type_id == '1')<!-- MOTHER -->
             <div class="col-md-6">
-            <div class="form-group " id="mother-select">
+            <div class="form-group form-md-line-input" id="mother-select">
                 <select class="form-control input-sm select2 mothers_id" name="mothers_id" name="mothers_name" data-url="/select-binder/get-mother" data-id="parent_id" data-name='parents_name' required>
                   <option></option>
                 </select>
                  <label>MOTHER NAME</label>
               </div>
               <div id="mother-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="hidden" value="{{$parents->parents->parent_id or ""}}" class="form-control input-sm"  name="mother_parent_id" >
                   <input type="text" class="form-control input-sm mother_input" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
                 <label>MOTHER NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -305,23 +294,23 @@
                   <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
                 <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
                 <label>OCCUPATION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}" name="mothers_firm">
                 <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -330,7 +319,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -339,7 +328,7 @@
                   <label>TEL. NO. (OFFICE)</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2" name="mothers_home_address" >{{$parents->parents->home_address or ""}}</textarea>
               <label>HOME ADDRESS</label>
               </div>
@@ -350,18 +339,18 @@
 
     @else<!-- BLANK TEMPLATE -->
          <div class="col-md-6">
-            <div class="form-group " id="mother-select">
+            <div class="form-group form-md-line-input" id="mother-select">
                 <select class="form-control input-sm select2 mothers_id" name="mothers_id" name="mothers_name" data-url="/select-binder/get-mother" data-id="parent_id" data-name='parents_name' required>
                   <option></option>
                 </select>
                 <label>MOTHER NAME</label>
               </div>
               <div id="mother-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm mother_input" value="{{$parents->parents->parents_name or ""}}" name="mothers_name"  required>
                  <label>MOTHER NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -370,23 +359,23 @@
                 <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="mothers_religion" required>
                 <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="mothers_nationality" required>
                   <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="mothers_occupation" >
                    <label>OCCUPATION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}" name="mothers_firm">
                   <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -395,7 +384,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -404,7 +393,7 @@
                    <label>TEL. NO. (OFFICE)</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2" name="mothers_home_address" >{{$parents->parents->home_address or ""}}</textarea>
                 <label>HOME ADDRESS</label>
               </div>
@@ -437,24 +426,24 @@
     @foreach($student->parents_students as $parents)
         @if($parents->parental_type_id == '3')<!-- guardian -->
             <div class="col-md-6">
-            <div class="form-group " id="guardian-select">
+            <div class="form-group form-md-line-input" id="guardian-select">
                 <select class="form-control input-sm select2 guardian_id" name="guardian_id" name="guardian_id" data-url="/select-binder/get-guardian" data-id="parent_id" data-name='parents_name' >
                   <option></option>
                 </select>
                 <label>GUARDIAN NAME</label>
               </div>
 
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <input type="text" class="form-control input-sm" value="{{$parents->relationships->relationship_name or ""}}" name="relationship_name" >
                 <label>RELATIONSHIP</label>
              </div>
             <div class="guardian-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="hidden" value="{{$parents->parents->parent_id or ""}}" class="form-control input-sm"  name="guardian_parent_id" >
                   <input type="text" class="form-control input-sm" name="guardian_name" value="{{$parents->parents->parents_name or ""}}" >
                  <label>GUARDIAN NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -463,15 +452,15 @@
                   <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
                  <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
                    <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >
                    <label>OCCUPATION</label>
                </div>
@@ -481,11 +470,11 @@
 
                <div class="col-md-6">
                 <div class="guardian-div">
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}"  name="guardian_firm">
                    <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -494,7 +483,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -506,7 +495,7 @@
 
 
 
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2" name="guardian_home_address" >{{$parents->parents->home_address or ""}}</textarea>
                 <label>HOME ADDRESS</label>
               </div>
@@ -518,23 +507,23 @@
   @else
 
             <div class="col-md-6">
-            <div class="form-group " id="guardian-select">
+            <div class="form-group form-md-line-input" id="guardian-select">
                 <select class="form-control input-sm select2 guardian_id" name="guardian_id" name="guardian_id" data-url="/select-binder/get-guardian" data-id="parent_id" data-name='parents_name' >
                   <option></option>
                 </select>
                 <label>GUARDIAN NAME</label>
               </div>
 
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <input type="text" class="form-control input-sm" value="" name="relationship_name" >
                <label>RELATIONSHIP</label>
              </div>
             <div class="guardian-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" name="guardian_name" value="" >
                  <label>GUARDIAN NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -543,15 +532,15 @@
                    <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="" name="guardian_religion" >
                   <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input"  value="" name="guardian_nationality" >
                     <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="" name="guardian_occupation" >                 
                  <label>OCCUPATION</label>
                </div>
@@ -560,11 +549,11 @@
 
                <div class="col-md-6">
                 <div class="guardian-div">
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value=""  name="guardian_firm">
                   <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -573,7 +562,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -585,7 +574,7 @@
 
 
 
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2" name="guardian_home_address" ></textarea>
                  <label>HOME ADDRESS</label>
               </div>
@@ -595,23 +584,23 @@
   @endif
 @else
           <div class="col-md-6">
-            <div class="form-group " id="guardian-select">
+            <div class="form-group form-md-line-input" id="guardian-select">
                 <select class="form-control input-sm select2 guardian_id" name="guardian_id" name="guardian_id" data-url="/select-binder/get-guardian" data-id="parent_id" data-name='parents_name' >
                   <option></option>
                 </select>
                 <label>GUARDIAN NAME</label>
               </div>
 
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <input type="text" class="form-control input-sm" value="{{$parents->parents->relationships->relationship_name or ""}}" name="relationship_name" >
                <label>RELATIONSHIP</label>
              </div>
             <div class="guardian-div">
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" name="guardian_name" value="{{$parents->parents->parents_name or ""}}" >
                  <label>GUARDIAN NAME</label>
                </div>
-               <div class="form-group  bday">
+               <div class="form-group form-md-line-input bday">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -620,15 +609,15 @@
                    <label>BIRTHDAY</label>
                 </div>
             </div>
-             <div class="form-group ">
+             <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm religion_input" value="{{$parents->parents->religion->religion_name or ""}}" name="guardian_religion" >
                   <label>RELIGION</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm nationality_input" value="{{$parents->parents->nationality->nationality_name or ""}}" name="guardian_nationality" >
                     <label>NATIONALITY</label>
                </div>
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm occupation_input" value="{{$parents->parents->occupation->designation_name or ""}}" name="guardian_occupation" >                 
                  <label>OCCUPATION</label>
                </div>
@@ -637,11 +626,11 @@
 
                <div class="col-md-6">
                 <div class="guardian-div">
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                   <input type="text" class="form-control input-sm" value="{{$parents->parents->firm_employer_name or ""}}"  name="guardian_firm">
                   <label>NAME OF FIRM OR EMPLOYER</label>
                </div>
-               <div class="form-group ">
+               <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -650,7 +639,7 @@
                   <label>TEL. NO. (RESIDENCE)</label>
                 </div>
             </div>
-            <div class="form-group ">
+            <div class="form-group form-md-line-input">
                 <div class="input-group date">
                   <span class="input-group-addon">
                    <i class="fa fa-phone"></i>
@@ -662,7 +651,7 @@
 
 
 
-                <div class="form-group ">
+                <div class="form-group form-md-line-input">
                 <textarea class="form-control input-sm" rows="2" name="guardian_home_address" >{{$parents->parents->home_address or ""}}</textarea>
                  <label>HOME ADDRESS</label>
               </div>

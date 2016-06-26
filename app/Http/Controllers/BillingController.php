@@ -84,19 +84,21 @@ class BillingController extends Controller
 
         $sy = RfSchoolYear::where('is_current','1')->first();
         $sy_id = $sy->school_year_id;
-         if($request['billing_id'] != ""){
-          $id = $request['billing_id'];
-          $grade_level = $request['grade_level'];
-          $fees_id = $request['fees'];
-          $amount = $request['amount'];
-          return $this->updateGradeFees($id,$grade_level,$fees_id,$amount);
-         }
+
+        if($request['billing_id'] != ""){
+              $id = $request['billing_id'];
+              $grade_level = $request['grade_level'];
+              $fees_id = $request['fees'];
+              $amount = $request['amount'];
+              return $this->updateGradeFees($id,$grade_level,$fees_id,$amount);
+        }
 
     		$return = new rrdReturn();
     		$checker = DtBilling::where('fees_id',$request['fees'])
     								->where('grade_level_id',$request['grade_level'])
                     ->where('school_year_id',$sy_id)                      
     								->count();
+
     		if($checker > 0){
     				return $return->status(false)
 	                      ->message("Grade Level Fee Has Already Been Created!.")
@@ -229,7 +231,7 @@ class BillingController extends Controller
 
   public function saveDueDates(Request $request){
        $return = new rrdReturn();
-        $delete = DtDueDates::truncate();
+      $delete = DtDueDates::truncate();
        $month = $request['month'];
        $counter = 0;
        foreach ($request['dues'] as $dues) {
@@ -243,6 +245,14 @@ class BillingController extends Controller
         return $return->status(true)
                           ->message("Successfully Save!.")
                           ->show(); 
+
+  }
+
+
+  public function getAssessments(){
+
+      $assessments = StudentBill::all();
+      
 
   }
 

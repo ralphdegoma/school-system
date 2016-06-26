@@ -81,9 +81,10 @@ Route::get('/sms/registrar/enrolled-student','MainloaderController@enrolledStude
 Route::get('/sms/billing/assessment','MainloaderController@studentAssessment');
 Route::get('/sms/billing/assign-fees','MainloaderController@assignFees');
 Route::get('/sms/billing/student-bill','MainloaderController@studentBill');
+Route::get('sms/get-assessments','BillingController@getAssessments');
 
 
-//S E T U P
+//B I L L I N G   S E T U P
 Route::get('/sms/setup/billing/fee-category','MainloaderController@categoryFee');
 Route::get('/sms/setup/billing/fees','MainloaderController@setupFees');
 Route::get('/sms/setup/billing/payment-type-schedule','MainloaderController@paymentTypeSchedules');
@@ -173,6 +174,9 @@ Route::get('/softdelete/delete-fee-categories','SoftdeleteController@deleteFeeCa
 Route::get('/softdelete/delete-fees','SoftdeleteController@deleteFees');
 Route::get('/softdelete/delete-billing','SoftdeleteController@deleteBilling');
 Route::get('/softdelete/delist-student','SoftdeleteController@delistStudent');
+
+
+
 
 
 

@@ -29,7 +29,6 @@ class SelectBinderController extends Controller
 			    $q->where('parental_type_id', '=', '2');//FATHER
 			})->where('parents_name', '<>', '')->groupBy('parents_name')->get();
 
-
         	return $Parents_Students;
     }
 

@@ -32,6 +32,12 @@ use App\Student_Status;
 class MainloaderController extends Controller
 {
     
+    public function __construct(){
+      
+      $this->middleware('auth');
+      
+    }
+    
     public function view(){
 
     	return view('sms.main.index');
@@ -122,7 +128,11 @@ class MainloaderController extends Controller
     //B I L L I N G and F E E S
 
     public function studentAssessment(){
-      return view('sms.billing.assessment');
+
+      $students = Students::all();
+
+      return view('sms.billing.assessment')
+            ->with('students',$students);
     }
     public function assignFees(){
       return view('sms.billing.assign-fees');
