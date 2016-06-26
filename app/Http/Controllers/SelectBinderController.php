@@ -18,7 +18,7 @@ use App\RfSection;
 use App\KronosEmployee;
 use App\Students;
 use App\Schedule;
-
+use App\RfSectionType;
 
 class SelectBinderController extends Controller
 {
@@ -107,5 +107,20 @@ class SelectBinderController extends Controller
         return $data;
     }
 
-    
+    public  function getSectionTypeName(){
+        $sec = Request::input('filter_id');
+        $type = explode('-',$sec);
+
+//            $section = RfGradeLevel::with(['getSection' => function ($q) {
+//                $sec = Request::input('filter_id');
+//                $type = explode('-', $sec);
+//                $q->where('section_type_id', $type[0]);
+//                 }])
+//                ->where('grade_level_id', $type[1])
+//                ->get();
+
+
+        dd($type);
+
+    }
 }

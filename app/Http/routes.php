@@ -43,7 +43,7 @@ Route::get('/select-binder/get-KronosEmployee','SelectBinderController@KronosEmp
 Route::get('/select-binder/get-students','SelectBinderController@getStudents');
 Route::get('/select-binder/get-section-time','SelectBinderController@getSectionTime');
 Route::get('/select-binder/get-section','SelectBinderController@getSection');
-
+Route::get('/select-binder/get-sectionTypeName','SelectBinderController@getSectionTypeName');
 
 
 //AUTOSUGGESTS
