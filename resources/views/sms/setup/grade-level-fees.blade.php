@@ -108,6 +108,7 @@
        <div class="form-group">
         <label>Fees</label>
           <select class="form-control input-sm" name="fees" id="fee">
+          <option></option>
           @foreach($fees as $fee)
               <option value="{{$fee->fees_id}}">{{$fee->title}}</option>
           @endforeach
@@ -217,13 +218,13 @@ $(document).ready(function(){
         minViewMode: "years"
     });
 
-    $('#feesSelect').change(function () {
+    $('#fee').change(function () {
         if ($(this).val() == "add-fees") {
              $('#add-fees').modal({
                 show: true
-            }); 
+            });
+            this.value = ""; 
         }
-         this.value = "";
     });
    
 
@@ -319,7 +320,7 @@ $('#wyredSaveModal').on('hidden.bs.modal',function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.subject_id+'" data-url="/softdelete/deleteSubject" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.billing_id+'" data-url="/softdelete/delete-billing" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 

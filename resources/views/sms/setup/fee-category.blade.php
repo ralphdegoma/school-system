@@ -158,6 +158,9 @@
 $('#add-fees').on('hidden.bs.modal',function(){
         categoryTableFunc();
   });
+$(' #wyredDeleteModal').on('hidden.bs.modal',function(){
+        categoryTableFunc();
+  });
  function editFee(row_id){
         $('#fee').val(feeTableData[row_id].title);
         $('#category_id').val(feeTableData[row_id].fee_categories_id);
@@ -204,7 +207,7 @@ $('#add-fees').on('hidden.bs.modal',function(){
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.subject_id+'" data-url="/softdelete/deleteSubject" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.fee_categories_id+'" data-url="/softdelete/delete-fee-categories" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 

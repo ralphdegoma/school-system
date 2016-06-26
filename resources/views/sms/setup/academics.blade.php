@@ -204,7 +204,7 @@
                           </div>
                     </div>
                 </div>
-                <div id="assign-subject" class="tab-pane">
+                <div id="assign-subject" class="tab-pane" >
                     <div class="panel-body">
                       <div class="col-md-12">
                            <div class="wyred-box-header-2">

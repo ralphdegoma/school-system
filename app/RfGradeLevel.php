@@ -24,9 +24,6 @@ class RfGradeLevel extends Model
     	return $this->hasMany('App\DtAssignSubject','grade_level_id','grade_level_id');
     }
 
-    public function getSection(){
-        return $this->hasMany('App\RfSection','grade_level_id','grade_level_id');
-    }
 
 
 }

@@ -229,14 +229,15 @@ function enrollmentTable(){
              
     
               { "mData": "student_id", sDefaultContent: ""},
+              
               { "mRender" : function ( data, type, full ) { 
                         console.log(full);
-                        return full.schedule.student_schedule.students.last_name + ", " + full.schedule.student_schedule.students.first_name + " " +full.schedule.student_schedule.students.first_name + " " + full.schedule.student_schedule.students.name_extension; 
+                        return full.students.last_name + ", " + full.students.first_name + " " +full.students.first_name + " " + full.students.name_extension; 
               }
               },
 
-              { "mData": "schedule.student_schedule.students.gender", sDefaultContent: ""},
-              { "mData": "schedule.created_at", sDefaultContent: ""},
+              { "mData": "students.gender", sDefaultContent: ""},
+              { "mData": "created_at", sDefaultContent: ""},
               { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                       $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');

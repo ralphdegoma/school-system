@@ -183,6 +183,9 @@
   
 
  });
+  $(' #wyredDeleteModal').on('hidden.bs.modal',function(){
+        feesTableFunc();
+  });
  $('#add-fees').on('hidden.bs.modal',function(){
         feesTableFunc();
   });
@@ -238,7 +241,7 @@
 
                 { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.subject_id+'" data-url="/softdelete/deleteSubject" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.fees_id+'" data-url="/softdelete/delete-fees" class="btn btn-danger btn-sm w-b"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></a>');
                   }
                 },  
 
