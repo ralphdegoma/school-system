@@ -27,7 +27,7 @@ use App\RfFees;
 use App\Students;
 use App\RfPaymentType;
 use App\RfMonth;
-
+use App\Student_Status;
 
 class MainloaderController extends Controller
 {
@@ -56,10 +56,10 @@ class MainloaderController extends Controller
       $gradeType  = RfGradeType::all();
       $subject    = RfSubjects::all();
       $student    = Students::all();
+      $status     = Student_Status::all();
 
 
-
-      return view('sms.registrar.enrollment', compact('student','classType','gradeType','subject'));
+      return view('sms.registrar.enrollment', compact('student','classType','gradeType','subject','status'));
     }
 
     public function enrolledStudent(){
@@ -151,9 +151,10 @@ class MainloaderController extends Controller
     public function levelFees(){
         $gradeType    = RfGradeType::all();
         $fees = RfFees::all();
+        $sy = RfSchoolYear::where('is_current','1')->first();
         $categories = RfFeeCategories::all();
         $accounts    = RfAccount::all();
-      return view('sms.setup.grade-level-fees',compact('gradeType','fees','categories','accounts'));
+      return view('sms.setup.grade-level-fees',compact('gradeType','fees','categories','accounts','sy'));
     }
 
     public function paymentTypeSchedules(){

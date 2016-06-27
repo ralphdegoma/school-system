@@ -13,4 +13,5 @@ class StudentSchedule extends Model
     public function Students(){
         return $this->belongsTo('App\Students','student_id','student_id')->orderby('last_name','asc');
     }
+
 }

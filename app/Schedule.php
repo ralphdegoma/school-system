@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Schedule;
+
 class Schedule extends Model
 {
     protected $table = 'dt_schedule';
@@ -55,6 +55,10 @@ class Schedule extends Model
     public function StudentSchedule(){
         return $this->hasMany('App\StudentSchedule','schedule_id','schedule_id');
     }
+    public  function getAdviser(){
+        return $this->belongsTo('App\KronosEmployee','employee_id','employee_id');
+    }
+
     
 }
 

@@ -81,6 +81,7 @@ class BillingController extends Controller
 
     public function saveGradeFees(Request $request){
 
+
         $sy = RfSchoolYear::where('is_current','1')->first();
         $sy_id = $sy->school_year_id;
          if($request['billing_id'] != ""){
@@ -106,7 +107,7 @@ class BillingController extends Controller
     			$new->amount = $request['amount'];
     			$new->fees_id = $request['fees'];
     			$new->grade_level_id = $request['grade_level'];
-          $new->school_year_id = $sy_id;
+                $new->school_year_id = $sy_id;
     			$new->save();
 
     			return $return->status(true)
@@ -158,7 +159,11 @@ class BillingController extends Controller
       	return $datatableFormat->format($category);
     }
     public function getGradeFees(){
-    		$category = DtBilling::with('getFees','getGrade.getGradeType')->get();
+            $sy = RfSchoolYear::where('is_current','1')->first();
+            $sy_id = $sy->school_year_id;
+    		$category = DtBilling::with('getFees','getGrade.getGradeType')
+                        ->where('school_year_id',$sy_id)
+                        ->get();
 
     		$datatableFormat = new DatatableFormat();
       	return $datatableFormat->format($category);

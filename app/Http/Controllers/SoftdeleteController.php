@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\StudentSchedule;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 use App\Students;
@@ -13,6 +14,7 @@ use DB;
 use App\RfFeeCategories;
 use App\RfFees;
 use App\DtBilling;
+
 class SoftdeleteController extends Controller
 {
     public function deleteSchoolYear(){
@@ -91,5 +93,14 @@ class SoftdeleteController extends Controller
         return $return->status(true)
                           ->message("Grade Fee has been temporarily removed from the system!.")
                           ->show();
+    }
+    public  function delistStudent(){
+            $id = explode('-',Request::input('id'));
+
+           StudentSchedule::where('schedule_id',$id[0])->where('student_id',$id[1])->delete();
+            $return = new rrdReturn();
+            return $return->status(true)
+            ->message("Student Successfully Delisted!.")
+            ->show();
     }
 }

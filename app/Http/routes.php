@@ -122,7 +122,7 @@ Route::get('/sms/get-list-schedules','RegistrarController@getListSchedules');
 
 //E N R O L L M E N T
 Route::get('/sms/registrar/enrolled-students','EnrollmentController@getEnrollees');
-
+Route::get('/sms/enrollment/get-adviser','EnrollmentController@getAdviser');
 
 
 
@@ -172,7 +172,7 @@ Route::get('/softdelete/deleteAssignSubject','SoftdeleteController@deleteAssignS
 Route::get('/softdelete/delete-fee-categories','SoftdeleteController@deleteFeeCategories');
 Route::get('/softdelete/delete-fees','SoftdeleteController@deleteFees');
 Route::get('/softdelete/delete-billing','SoftdeleteController@deleteBilling');
-
+Route::get('/softdelete/delist-student','SoftdeleteController@delistStudent');
 
 
 

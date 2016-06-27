@@ -33,6 +33,14 @@
           <option></option>
         </select>
       </div>
+        <div class="form-group">
+            <label>Student Status</label>
+            <select class="form-control input-sm" id="student-status" required name="class_type">
+                @foreach($status as $student_status)
+                    <option value="{{$student_status->student_status_id}}">{{$student_status->student_status}}</option>
+                @endforeach
+            </select>
+        </div>
      <div class="form-group">
        <label>CLASS TYPE</label>
         <select class="form-control input-sm" id="classType" required name="class_type">
@@ -94,19 +102,19 @@
       <i class="fa fa-user"></i>ENROLLED STUDENT'S
     </div>
     <div class="tools">
-    <a href="#" data-toggle="modal" data-target="#request-slot"><i class="fa fa-child" style="color:#FFFFFF"></i></a> SLOT 0/50
+    <a href="#" data-toggle="modal" data-target="#request-slot"><i class="fa fa-child" style="color:#FFFFFF"></i></a> SLOT <span id="enrolled"></span>/ <span id="slot"></span>
     </div>
   </div>
   <div class="portlet-body">
     <div class="row">
      <div class="col-md-4">
-   <h5>Class Adviser: Hossana Mae Farsario</h5>
+                <h5 id="adviser"></h5>
    </div>
    <div class="col-md-4">
-   <h5>Section Name: Crack Section</h5>
+   <h5 id="sectionName"></h5>
    </div>
    <div class="col-md-4">
-   <h5>Section Type: Crack Section</h5>
+   <h5 id="sections"></h5>
    </div>
     <div class="col-md-12">
     <div style="height: 425px;overflow-y: scroll;">
@@ -119,7 +127,7 @@
             <th>Gender</th>
             <th>Date Enrolled</th>
             <th>Remove</th>
-            <th>Edit</th>
+
         </tr>
         </thead>
         <tbody>
@@ -129,7 +137,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+
         </tr>
        
         </tbody>
@@ -189,6 +197,32 @@
     
 <script>
 
+ $('#schedule_id').change(function(){
+     var schedule_id = $('#schedule_id').val();
+     if(schedule_id == ''){
+         $("#adviser").html('');
+         $("#sectionName").html('');
+         $("#sections").html('');
+         $("#slot").html('');
+         $("#enrolled").html('');
+     }
+     else {
+         getAdviser();
+     }
+ })
+ function getAdviser(){
+     $.get('/sms/enrollment/get-adviser?schedule_id=' + schedule_id, function (data) {
+         $("#adviser").html('Class Adviser:<b> ' + data.get_adviser.first_name + ' ' + data.get_adviser.last_name+'</b>');
+         $("#sectionName").html('Section: <b> '+data.rf_section.section_name+'</b>');
+         $("#sections").html('Section Type:<b> '+data.rf_section.get_section_type.section_type+'</b>');
+         $("#slot").html(data.slot);
+         $("#enrolled").html(data.enrolled);
+     })
+ }
+ $('#wyredSaveModal, #wyredDeleteModal').on('hidden.bs.modal',function(){
+     enrollmentTable();
+     getAdviser();
+ });
 function enrollmentTable(){
 
 
@@ -232,7 +266,7 @@ function enrollmentTable(){
               
               { "mRender" : function ( data, type, full ) { 
                         console.log(full);
-                        return full.students.last_name + ", " + full.students.first_name + " " +full.students.first_name + " " + full.students.name_extension; 
+                        return full.students.last_name + ", " + full.students.first_name + " " + full.students.name_extension;
               }
               },
 
@@ -240,15 +274,11 @@ function enrollmentTable(){
               { "mData": "created_at", sDefaultContent: ""},
               { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
+                      $(nTd).html('<a href="#" onclick="softDeleteCallback(this)" data-toggle="modal" data-target="#wyredDeleteModal" data-id="'+oData.schedule_id+'-'+oData.student_id+'" data-url="/softdelete/delist-student" class="btn btn-danger btn-sm w-b "><b class="pull-left"><i class="fa fa-reply"></i></b> <b class="pull-right">DELIST</b></a>');
                 }
               },  
 
-              { sDefaultContent: "" ,
-                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<a href="/admin/student/'+oData.student_id+'/edit" class="btn btn-info btn-block btn-sm w-b"><b class="pull-left"><i class="fa fa-pencil-square"></i></b> <b class="pull-right">EDIT</b></a>');
-                }
-              },  
+
           ]
       });
 }

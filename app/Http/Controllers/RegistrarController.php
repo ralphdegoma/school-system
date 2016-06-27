@@ -673,17 +673,48 @@ class RegistrarController extends Controller
 
 	public function enrollStudent(){
 
-		$StudentSchedule              = new StudentSchedule;
-		$StudentSchedule->schedule_id = Request::input('schedule_id');
-		$StudentSchedule->student_id  = Request::input('student_id');
-		$StudentSchedule->save();
-
+		$sy = RfSchoolYear::where('is_current','1')->first();
+		$sy_id = $sy->school_year_id;
 		$student = Students::find(Request::input('student_id'));
+		$schedule = Schedule::with(['StudentSchedule'=> function($q){
+									$q->where('student_id',Request::input('student_id'));
+								}])
+							->where('school_year_id',$sy_id)->get();
+		$slot = Schedule::with('StudentSchedule')->where('schedule_id',Request::input('schedule_id'))->first();
+		$slotChecker =$slot->slot;
+		$counter = 0;
+		$counter = $slot->StudentSchedule->count();
 
-		$return = new rrdReturn();
-		return $return->status(true)
-	                      ->message($student->first_name. " " .$student->last_name." has been enrolled!. Thank you!.")
-	                      ->show();
+		$checker=0;
+		foreach($schedule as $sched){
+			foreach($sched->StudentSchedule as $st){
+				if($st->student_id == Request::input('student_id')){$checker=1;}
+			}
+		}
+		if($checker > 0 ){
+			$return = new rrdReturn();
+			return $return->status(false)
+				->message($student->first_name. " " .$student->last_name." already been enrolled!. Thank you!.")
+				->show();
+		}
+		elseif($counter >= $slotChecker){
+			$return = new rrdReturn();
+			return $return->status(false)
+				->message("This Section is Already full!.")
+				->show();
+		}
+		else {
+			$StudentSchedule = new StudentSchedule;
+			$StudentSchedule->schedule_id = Request::input('schedule_id');
+			$StudentSchedule->student_id = Request::input('student_id');
+			$StudentSchedule->student_status_id = Request::input('student-status');
+			$StudentSchedule->save();
+
+			$return = new rrdReturn();
+			return $return->status(true)
+				->message($student->first_name . " " . $student->last_name . " has been enrolled!. Thank you!.")
+				->show();
+		}
 	}
 
 	public function getListSchedules(){

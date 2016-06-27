@@ -88,7 +88,7 @@
     <div class="col-md-12">
     <form id="addGradeFees">
       <div class="form-group">
-          <b><label>School Year: 2016 - 2017</label></b>
+          <b><label>School Year: {{$sy->sy_from}} - {{$sy->sy_to}}</label></b>
       </div>
       <div class="form-group">
        <label>Grade Type</label>
@@ -267,7 +267,7 @@ function changeGradeLevel(){
       var selValue = $('#gradeType').val();
       $('#gradeLevels').select_binder(selValue);
 }
-$('#wyredSaveModal').on('hidden.bs.modal',function(){
+$('#wyredSaveModal, #wyredDeleteModal').on('hidden.bs.modal',function(){
         gradeFeesTableFunc();
           $('#amount_fee').val('');
         $('#billing_id').val('');
