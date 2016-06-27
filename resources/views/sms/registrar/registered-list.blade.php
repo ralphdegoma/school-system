@@ -34,250 +34,92 @@
 
     <div class="row">
       <div class="col-md-12">
-          
+
           <div class="panel panel-default">
               <div class="panel-body">
-                  <p>Use search to find Students. You can search by: name, address, grade level,section. Or use the advanced search.</p>
-                      <div class="form-group">
-                          <div class="col-md-8">
-                              <div class="input-group">
-                                  <div class="input-group-addon">
-                                      <span class="fa fa-search"></span>
-                                  </div>
-                                  <input type="text" class="form-control" id="searchInput" placeholder="Who are you looking for?"/>
-                                  <div class="input-group-btn">
-                                      <button class="btn btn-primary" id="SearchBtn">Search</button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <a href="/sms/registrar/student-registration" class="btn btn-success btn-block"><span class="fa fa-plus"></span> Add new Students</a>
-                          </div>
-                      </div>
-                      <div class="col-md-12" style="margin-top:10px;">
-                       <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h5 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Advanced Filter Search</a>
-                                    </h5>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                         <label>GENDER</label>
-                                          <select class="form-control input-sm">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                          </select>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                        <div class="form-group">
-                                         <label>STUDENT STATUS</label>
-                                          <select class="form-control input-sm">
-                                            <option>New</option>
-                                            <option>Old</option>
-                                            <option>In-Active</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                <div class="col-xs-12">
+                    <div class="col-xs-12"><h3>Student List Filter</h3></div>
+                   <div class="col-xs-6">
+                       <form id="formFilter">
+                        <div class="form-group">
+                            <label for="sy">School Year:</label>
+                            <select class="form-control" name="schoolYear" id="schoolYear">
+                                <option value="All">All</option>
+                                @foreach($sy as $year)
+                                    <option value="{{$year->school_year_id}}">{{$year->sy_from}}-{{$year->sy_to}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                       <div class="form-group">
+                           <label for="sy">Grade Type:</label>
+                           <select class="form-control gradeType"  name="gradeType" id="gradeType">
+                               <option value="All">All</option>
+                               @foreach($gradeType as $type)
+                                   <option value="{{$type->grade_type_id}}">{{$type->grade_type}}</option>
+                                @endforeach
+                           </select>
+                       </div>
+                       <div class="form-group">
+                           <label for="sy">Grade Level:</label>
+                           <select class="form-control input-sm gradelevel" name="grade_level" data-id="grade_level_id" data-name="grade_level" data-url="/select-binder/get-gradeLevel" required>
+                               <option >All</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label>Section:</label>
+                            <select class="form-control input-sm sectionName edit_section_id" name="sectionName"  data-id="section_id" data-name="section_name" data-url="/select-binder/get-sectionName" required>
+                                <option >All</option>
+                            </select>
+                        </div>
+
+                        </form>
+                        <div class="form-group">
+                            <button class="btn btn-primary pull-right" onclick="submitFormFilter()">Submit</button>
                         </div>
                     </div>
+
+                </div>
+                <div class="col-xs-12"><h3>Student List</h3></div>
+                  <table id="studentlist" class="table table-striped table-bordered table-hover" >
+                      <thead>
+                      <tr>
+                          <th class="text-center">ID Number</th>
+                          <th class="text-center">Last Name</th>
+                          <th class="text-center">First Name</th>
+                          <th class="text-center">Middle Name</th>
+                          <th class="text-center">Gender</th>
+                          <th class="text-center">Status</th>
+                          <th class="text-center">Standing</th>
+                          <th class="text-center">Action</th>
+                          <th class="text-center">Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+
+                      </tr>
+
+                      </tbody>
+                  </table>
+
               </div>
           </div>
           
       </div>
   </div> 
 
-
-
-<div class="row">
-      <div class="col-md-12">
-
-        <div class="text-center">
-          <ul class="pagination pagination-md" >
-              <li class="disabled"><a href="#">«</a></li>
-              <li class="page"><a href="#">A</a></li>
-              <li class="page"><a href="#">B</a></li>
-              <li class="page"><a href="#">C</a></li>
-              <li class="page"><a href="#">D</a></li>  
-              <li class="page"><a href="#">E</a></li>
-              <li class="page"><a href="#">F</a></li>                                  
-              <li class="page"><a href="#">G</a></li>
-              <li class="page"><a href="#">H</a></li>
-              <li class="page"><a href="#">I</a></li>
-              <li class="page"><a href="#">J</a></li>
-              <li class="page"><a href="#">K</a></li>
-              <li class="page"><a href="#">L</a></li>
-              <li class="page"><a href="#">M</a></li>
-              <li class="page"><a href="#">N</a></li>
-              <li class="page"><a href="#">O</a></li>
-              <li class="page"><a href="#">P</a></li>
-              <li class="page"><a href="#">Q</a></li>
-              <li class="page"><a href="#">R</a></li>
-              <li class="page"><a href="#">S</a></li>
-              <li class="page"><a href="#">T</a></li>
-              <li class="page"><a href="#">U</a></li>
-              <li class="page"><a href="#">V</a></li>
-              <li class="page"><a href="#">W</a></li>
-              <li class="page"><a href="#">X</a></li>
-              <li class="page"><a href="#">Y</a></li>
-              <li class="page"><a href="#">Z</a></li>
-              <li class="page disabled"><a href="#">»</a></li>
-          </ul> 
-        </div>                           
-      </div>
-</div>
-
-
-
-  <div id="loading-stage" style="display: none">
-      <div class="progress">
-          <div class="progress-bar progress-bar-striped active" role="progressbar"
-              aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-              <label>Processing your request. Please wait.</label>
-          </div>
-      </div>
-  </div>
-
-
-<div class="row" id="student-body" >
-
-    <div class="col-md-12" >
-      @foreach($students as $student)
-
-        <?php
-              
-              $image_link = "assets/people/students/".$student->student_id."/images/medium.jpg";
-              if (File::exists($image_link)){
-                  $image_link = "/assets/people/students/".$student->student_id."/images/medium.jpg";
-              }else{
-                  $image_link = "/assets/img/default.png";
-              }
-
-         ?>
-
-        <div class="col-md-2 col-sm-12 col-lg-3 student-body" >
-              <div class="col-md-12 text-center" >
-                    <div class="col-md-12 text-center" >
-                      <img src="{{$image_link}}" class="profile-pic img-responsive text-center" style="height:240px;width:auto">
-                      
-                    </div>
-                  
-                  <div class="col-md-12 text-center" style="margin:10px">
-                     <br>
-                      <label><b>{{$student->last_name}}, {{$student->first_name}} {{$student->middle_name}}</b></label><br>
-                      <label><b>000{{$student->student_id}}</b></label>
-                  
-
-                  </div>
-                  <div class="col-md-12 text-center"  style="margin-top: 5px">
-                      <button class="btn btn-primary  btn-block box-gui" id="SearchBtn"><i class="fa fa-external-link"></i> VIEW INFO</button>
-                  </div>
-                  <div class="col-md-12 text-center">
-                      <a href="/admin/student/{{$student->student_id}}/edit"><button class="btn btn-success btn-block box-gui" id="SearchBtn"><i class="fa fa-external-link"></i> EDIT INFO</button></a>
-                  </div>
-
-              </div>
-
-              </div>
-        @endforeach
-
-    </div>
-
-</div>
-
-
-
-                      
-
-
-<div class="modal inmodal fade" id="enrolled-student" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-
-
-              <div class="wyred-box-header" style="margin-top:-10px;">
-                <h3 class="wyred-box-title"><i class="fa fa-calendar"></i> STUDENT SCHEDULE</h3>
-              </div>
-              <div class="wyred-box-body">
-              <div class="row">
-              <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                    <tr>
-                        <th>STUDENT NAME</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="gradeX">
-                        <td>RALPH DEGOMA</td>
-                    </tr>
-                    </tbody>
-                    </table>
-                  </div>
-             <div class="form-group">
-                 <label>CLASS TYPE</label>
-                  <select class="form-control input-sm" id="classTypeR">
-                    <option value="REGULAR CLASS">Regular Class</option>
-                    <option value="SUMMER CLASS">Summer Class</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                 <label>GRADE TYPE</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-               <div class="form-group">
-                 <label>GRADE LEVEL</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-                 <div id="summer-div-request">
-                 <div class="form-group">
-                 <label class="text-red">SUBJECT</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-                </div>
-                 <div class="form-group">
-                 <label>TIME</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-                 <div class="form-group" id="section-div-request">
-                 <label>SECTION</label>
-                  <select class="form-control input-sm">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-              </div>
-             </div>
-             </div>
-             <div class="wyred-box-footer">
-                <div class="wyred-button col-md-12">
-                    <button class="btn btn-info btn-block">UPDATE ENROLLEE</button>
-                </div>
-            </div>
- 
-        </div>
-    </div>
-</div>
 
 @stop
 @section('js_filtered')
@@ -289,139 +131,45 @@
 
     
 <script>
-
-$('.page').click(function(){
-    var alphabet = $(this).text();
-    searchStudentAlphabet(alphabet);
-});
-
-$('.profile-pic').click(function(){
-    $('selector').css( 'cursor', 'pointer' );
-});
-
-
-$('#SearchBtn').click(function(){
-    var searchInput = $('#searchInput').val();
-    searchStudent(searchInput);
-})
-
-function searchStudent(searchInput){
-
-    $('#loading-stage').show();
-    $('#student-body').html('');
-    $.ajax({
-        url: "/sms/registrar/search-student?searchInput="+searchInput,
-        type: 'GET',
-        async: false,
-        success:function(data){
-          
-          if(data != ""){
-
-
-              setTimeout(function(){ $('#loading-stage').hide(); 
-                  var response = $(data).find('.student-body');
-                  console.log(response);
-                  $('#student-body').html(response);
-              }, 1500);
-            
-
-          }else{
-
-
-              var nodata = '<div class="col-md-12 text-center"><h4> We cannot find what you are looking for, try some another keys.</h4></div>';
-              $('#student-body').html(nodata);
-              $('#loading-stage').hide();
-
-          }    
-        }
-      });
-}
-
-
-
-function searchStudentAlphabet(searchInput){
-
-    $('#loading-stage').show();
-    $('#student-body').html('');
-    $.ajax({
-        url: "/sms/registrar/search-student-alphabet?searchInput="+searchInput,
-        type: 'GET',
-        async: false,
-        success:function(data){
-          
-          if(data != ""){
-
-
-              setTimeout(function(){ $('#loading-stage').hide(); 
-                  var response = $(data).find('.student-body');
-                  console.log(response);
-                  $('#student-body').html(response);
-              }, 500);
-            
-
-          }else{
-
-
-              var nodata = '<div class="col-md-12 text-center"><h4> We cannot find what you are looking for, try some another keys.</h4></div>';
-              $('#student-body').html(nodata);
-              $('#loading-stage').hide();
-
-          }    
-        }
-
-
-      });
-}
-
-$(document).ready(function(){
-    $('#summer-div').hide();
-
-    $('#year').datepicker( {
-        format: " yyyy", // Notice the Extra space at the beginning
-        viewMode: "years", 
-        minViewMode: "years"
-    });
-   
-     $('#classType').change(function(){
-      if(this.value == 'SUMMER CLASS'){
-        $('#summer-div').show();
-        $('#section-div').hide();
-      }else if(this.value == 'REGULAR CLASS'){
-        $('#summer-div').hide();
-         $('#section-div').show();
-      }
+    $('.gradeType').change(function(){
+        var selValue = $(this).val();
+        $('.gradelevel').select_binder(selValue);
+        $('.gradelevel').append('<option value="All">All</option>');
     });
 
-    $("#year").keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A, Command+A
-            (e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
-             // Allow: home, end, left, right, down, up
-            (e.keyCode >= 35 && e.keyCode <= 40)) {
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-            e.preventDefault();
-        }
+    $('.gradelevel').change(function(){
+        var selValue = $(this).val();
+      $('.sectionName').select_binder(selValue);
+        $('.sectionName').append('<option value="All">All</option>');
     });
-});
 
 
-    $(document).ready(function(){
+//    $('.sectionType').change(function(){
+//        var secType = $(this).val();
+//        var gradeLevel = $('.gradelevel').val();
+//        var selValue = secType+'-'+gradeLevel;
+//        $('.sectionName').select_binder(selValue);
+//        $('.sectionName').append('<option value="All">All</option>');
+//    });
+
+    $(document).ready(function() {
         studentTable();
+
     });
 
+    function submitFormFilter(){
+        var Formdata = $("form").serialize();
+
+       studentTable(Formdata);
+    }
 
     
-    function studentTable(){
+    function studentTable(Formdata){
       
-      $('#student-table-list').dataTable().fnClearTable();
-      $("#student-table-list").dataTable().fnDestroy();
+      $('#studentlist').dataTable().fnClearTable();
+      $("#studentlist").dataTable().fnDestroy();
 
-          studentTableData = $('#student-table-list').DataTable({
+          studentTableData = $('#studentlist').DataTable({
           responsive: true,
           bAutoWidth:false,
 
@@ -444,7 +192,7 @@ $(document).ready(function(){
             });
           },
                      
-          "sAjaxSource": "/sms/registrar/get-students",
+          "sAjaxSource": "/sms/registrar/get-students?"+Formdata,
           "sAjaxDataProp": "",
           "iDisplayLength": 10,
           "scrollCollapse": false,
@@ -452,25 +200,15 @@ $(document).ready(function(){
           "searching": true,
           "columns": [
              
-              {
-                      "className":      'details-control',
-                      "orderable":      false,
-                      "data":           null,
-                      "defaultContent": ''
-              },
-              { sDefaultContent: "" ,
-                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                      $(nTd).html('<img src="/assets/people/students/'+oData.student_id+'/images/small.jpg"  style="margin:auto;width:70px;height:auto;"/>');
-                }
-              },
+
+
               { "mData": "student_id", sDefaultContent: ""},
-              { "mRender" : function ( data, type, full ) { 
-                        return full.last_name+ ", " + full.first_name + " " +full.middle_name; 
-              }
-              },
-              { "mData": "home_address", sDefaultContent: ""},
-              { "mData": "cp_no", sDefaultContent: ""},
-              { "mData": "tel_no", sDefaultContent: ""},
+              { "mData": "last_name", sDefaultContent: ""},
+              { "mData": "first_name", sDefaultContent: ""},
+              { "mData": "middle_name", sDefaultContent: ""},
+              { "mData": "gender", sDefaultContent: ""},
+              { "mData": "", sDefaultContent: ""},
+              { "mData": "", sDefaultContent: ""},
               { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                       $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');
@@ -487,109 +225,13 @@ $(document).ready(function(){
 
     }
 
-    $('#student-table-list tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = studentTableData.row( tr );
-            var row_id = $(tr).attr("data-id");
-            
-            if ( row.child.isShown() ) {
-                  
-              $('div.slider', row.child()).slideUp( function () {
-                  row.child.hide();
-                  tr.removeClass('shown');
-              } );
-              }
-              else {
-                  var prop_id_name = $(tr).attr("data-id");
-                  row.child( format(row_id)).show();
-                  $('div.slider', row.child()).slideDown();
-                  tr.addClass('shown');
-              }
-
-          } );
-    
-    
-
-
-    function format (row_id) {
-        
-               return '<div class="sliderHolder"><div class="slider" style="">'+
-                        
-                                '<div class="col-lg-12">'
-                                    +'<div class="tabs-container">'
-                                        +'<ul class="nav nav-tabs">'
-                                            +'<li class="active"><a data-toggle="tab" href="#tab-3"> <i class="fa fa-laptop"></i></a></li>'
-                                            +'<li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-desktop"></i></a></li>'
-                                            +'<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-database"></i></a></li>'
-                                        +'</ul>'
-                                        +'<div class="tab-content">'
-                                            +'<div id="tab-3" class="tab-pane active">'
-                                                +'<div class="panel-body">'
-                                                    +'<strong>Lorem ipsum dolor sit amet, consectetuer adipiscing</strong>'
-
-                                                    +'<p>A wonderfusssssssl serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of'
-                                                        +'existence in this spot, which was created for the bliss of souls like mine.</p>'
-
-                                                    +'<p>I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at'
-                                                        'the present moment; and yet I feel that I never was a greater artist than now. When.</p>'
-                                                +'</div>'
-                                            +'</div>'
-                                            +'<div id="tab-4" class="tab-pane">'
-                                                +'<div class="panel-body">'
-                                                    +'<strong>Donec quam felis</strong>'
-
-                                                    +'<p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects'
-                                                        +'and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>'
-
-                                                    +'<p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite'
-                                                        'sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>'
-                                                +'</div>'
-                                            +'</div>'
-                                            +'<div id="tab-5" class="tab-pane">'
-                                                +'<div class="panel-body">'
-                                                    +'<strong>Donec quam felis</strong>'
-
-                                                    +'<p>Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects'
-                                                        +'and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>'
-
-                                                    +'<p>I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite'
-                                                        +'sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>'
-                                                +'</div>'
-                                            +'</div>'
-                                        +'</div>'
-                                    +'</div>'
-                                +'</div>'
 
 
 
 
-
-
-                      +'</div></div>';  
-      
-    }
 </script>
 
 
 
-<script type="text/javascript">
-$(function(){
-  $('#profiletabs ul li a').on('click', function(e){
-    e.preventDefault();
-    var newcontent = $(this).attr('href');
-    
-    $('#profiletabs ul li a').removeClass('sel');
-    $(this).addClass('sel');
-    
-    $('#content section').each(function(){
-      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
-    });
-    
-    $(newcontent).removeClass('hidden');
-  });
-});
 
-
-
-</script>
 @stop
