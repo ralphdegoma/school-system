@@ -23,24 +23,26 @@
       <div class="row">
        
         <div class="col-md-6">
-         <div class="form-group">
+       <!--   <div class="form-group">
            <label>Student Status</label>
             <select class="form-control input-sm">
               <option></option>
               <option></option>
             </select>
-          </div>
+          </div> -->
            <div class="form-group">
            <label>Student Name</label>
-            <select class="form-control input-sm">
+            <select class="form-control input-sm student">
               <option></option>
-              <option></option>
+              @foreach($students as $student)
+                    <option value="{{$student->student_id}}">{{$student->last_name}}, {{$student->first_name}} {{$student->middle_name}} </option>
+              @endforeach
             </select>
           </div>
-           <div class="form-group">
+         <!--   <div class="form-group">
            <label>Payment Option</label>
             
-          </div>
+          </div> -->
        </div>
        <div class="col-md-6">
        <div class="well">
@@ -60,7 +62,7 @@
         </div>
        
        </div>
-       <div class="col-md-12">
+       <div class="col-md-12 asssessment-table">
            <table id="" class="table table-striped table-bordered table-hover" >
                 <thead>
                   <tr>
@@ -77,7 +79,7 @@
           
                 </tbody>
           </table>
-          <a href="#" class="btn blue-madison" data-toggle="modal" data-target="#new-payment"> [ Shift + A ] Add Assessment <i class="fa fa-cube"></i></a>
+          <a href="#" class="btn blue-madison" data-toggle="modal" data-target="#new-payment"> [ Shift + A ] Generate Assessment <i class="fa fa-cube"></i></a>
         </div>
          
      </div>
@@ -130,65 +132,20 @@
 
 
 <script>
- $(document).ready(function(){
 
-     $(".drag-me").draggable({
-       handle: ".modal-header"
-      });
+    $('.student').change(function(){
+          var student_id = this.value;
+          displayAssessment(student_id);
+    }); 
 
-    $('#customizeSched').hide();
-    $('#setEmpFlexySched').hide();
 
-    $('#fixedOption').change(function(){
-      if(this.checked == true){
-         $('#customizeSched').hide();
-         $('#fixedSched').show();
-      }else {
-         $('#customizeSched').show();
-         $('#fixedSched').hide();
-      }
-    });
+    function displayAssessment(student_id){
 
-     $('#customizeOption').change(function(){
-      if(this.checked == true){
-         $('#customizeSched').show();
-         $('#fixedSched').hide();
-      }else {
-         $('#customizeSched').hide();
-         $('#fixedSched').show();
-      }
-    });
+        $.get( "/sms/get-assessments", function( data ) {
+            $( ".asssessment-table" ).html( data );
+        });
 
-    $('#schedType').change(function(){
-      if(this.value == '1'){
-         $('#setEmpFlexySched').show();
-      }else if(this.value == '2'){
-        $('#setEmpFlexySched').hide();
-      }
-    });
-
-      $('.clockpicker').clockpicker({
-        defaultTime: 'value',
-        minuteStep: 1,
-        disableFocus: true,
-        template: 'dropdown',
-        showMeridian:false
-    });
-
-    $('.customize .input-group.date').datepicker({
-      startView: 2,
-      todayBtn: "linked",
-      keyboardNavigation: false,
-      forceParse: false,
-      autoclose: true
-    });
-
-    $('.default .input-group.date').datepicker({
-    format: "mm/dd"
-    });
-  
-
- });
+    }
 </script>
 
     

@@ -91,8 +91,6 @@
                           <th class="text-center">First Name</th>
                           <th class="text-center">Middle Name</th>
                           <th class="text-center">Gender</th>
-                          <th class="text-center">Status</th>
-                          <th class="text-center">Standing</th>
                           <th class="text-center">Action</th>
                           <th class="text-center">Action</th>
                       </tr>
@@ -106,8 +104,7 @@
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+
 
                       </tr>
 
@@ -207,8 +204,6 @@
               { "mData": "first_name", sDefaultContent: ""},
               { "mData": "middle_name", sDefaultContent: ""},
               { "mData": "gender", sDefaultContent: ""},
-              { "mData": "", sDefaultContent: ""},
-              { "mData": "", sDefaultContent: ""},
               { sDefaultContent: "" ,
                   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
                       $(nTd).html('<button data-url="/sms/registrar/remove-section/'+oData.seminar_id+'" class="btn btn-danger btn-block btn-sm w-b laddaRemove" data-seminar-id="'+oData.seminar_id+'" id="ladda"><b class="pull-left"><i class="fa fa-trash"></i></b> <b class="pull-right">REMOVE</b></button>');

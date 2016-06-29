@@ -29,10 +29,16 @@ class StudentListController extends Controller
          $grade_level = $request['grade_level'];
 //         $sectionType = $request['sectionType'];
          $sectionName = $request['sectionName'];
+
+        if($sy == ''){
+            $sy = 'All';
+            $gradeType = 'All';
+        }
         if($sy != 'All'){
             $sy_ids = RfSchoolYear::findorFail($sy);
             $sy_id = $sy_ids->school_year_id;
         }
+
         if($sy == 'All' && $gradeType == 'All'){
             $students = DB::table('dt_students')->get();
         }

@@ -17,6 +17,15 @@ $.ajaxPrefilter(function(options, originalOptions, xhr) { // this will run befor
     }
 });
 
+$( document ).ajaxError(function( event, jqxhr, settings, exception ) {
+    if ( jqxhr.status== 500 ) {
+         console.log('Uncaught Error.\n' + jqxhr.responseText);
+    }
+});
+
+function isValidForm(){
+	return false;
+}
 
 $('.wyredModalCallback').click(function(){
 
@@ -34,7 +43,26 @@ $('.wyredModalCallback').click(function(){
 	message = 'Are you sure you want to continue ?';
 	$('.modalMessage').text(message);
 	$('.wyred-modal-footer').show();
+
+	$(form).on('hidden.bs.modal', function () {
+    	$('.popover').hide();
+	})
+
+
+
 });
+
+
+$('input, .select2').on('click', function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+});
+
 
 function modalBodyAnimation(){
 	var animation = $(this).attr("data-animation");
@@ -152,12 +180,16 @@ $(document).ready(function(){
 	        success:function(data){
            		
               	if(data[0] == true){
+
               		$('.wyredSaveBtn').hide();
               		$('.wyred-btn-close').show();
             		$('.loading').hide();
            			modalSuccess(data[1]);
            			var snd = new Audio("/assets/music/success.wav"); // buffers automatically when created
 					snd.play();
+					$(form)[0].reset();
+					success('That is quite wonderfull, transaction is successfull.')
+
               	}else if(data[0] == false){
               		$('.wyredSaveBtn').hide();
               		$('.wyred-btn-close').show();
@@ -189,7 +221,7 @@ $(document).ready(function(){
 
 	  		 	$('#wyredSaveModal').modal('hide');
 
-	  		}, 2000);
+	  		}, 7000);
 
     	});
     });
@@ -197,7 +229,7 @@ $(document).ready(function(){
 
 	
 
-    function success(id,message){
+    function success(message){
 
 		toastr.options = {
 		  "closeButton": true,

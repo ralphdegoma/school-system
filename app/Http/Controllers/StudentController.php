@@ -17,102 +17,111 @@ use App\Batch;
 use Image;
 use File;
 use Storage;
-
-
+use App\RfSchoolYear;
+use DB;
+use Log;
 
 class StudentController extends Controller
 {
-    
+
     public function newStudentSave(){
 
-        if(Request::input('student_id_old') != ""){
-            $Students = Students::find(Request::input('student_id_old'));
-            Parents_Students::where('student_id' , Request::input('student_id_old'))->delete();
-        }else{
-            $Students = new Students(); 
-        }
-
-        $checkBatch = new Batch(); 
-        $checkBatch = $checkBatch->where('isActive','=',"1")->first();
-
-        if(count($checkBatch) == 0){
-
-            $return = new rrdReturn();
-            return $return->status(false)
-                      ->message('Assign first batch id , cannot save student.')
-                      ->show();
-        }
-
-        /*$checkStudents = new Students(); 
-        $checkStudents = $checkStudents
-                        ->where('first_name',Request::input('first_name'))
-                        ->where('middle_name',Request::input('middle_name'))
-                        c
-                        ->get();
-
-        if(count($checkStudents) > 0){
-            $return = new rrdReturn();
-            return $return->status(false)
-                      ->message('Student Already exists, please specify another one.')
-                      ->show();
-        }*/
-
-        $Students->batch_id          = $checkBatch->batch_id;
-        $Students->student_status_id = '1';
-        $Students->first_name        = Request::input('first_name');
-        $Students->middle_name       = Request::input('middle_name');
-        $Students->nick_name         = Request::input('nick_name');
-        $Students->last_name         = Request::input('last_name');
-        $Students->name_extension    = Request::input('name_extension');
-        $Students->gender            = Request::input('gender');
-        $Students->birthday          = Request::input('birthday');
-        $Students->birthplace        = Request::input('birthplace');
-        $Students->home_address      = Request::input('home_address');
-        $Students->cp_no             = Request::input('cp_no');
-        $Students->tel_no            = Request::input('tel_no');
-        $Students->save();
-
-        $StudentsId = $Students->max('student_id');
-
-        if(Request::input('parental') == "default"){
-
-            $this->saveNewFather($StudentsId);
-            $this->saveNewMother($StudentsId);
-        }
-        else if(Request::input('parental') == "checkParents"){  
-
-            $this->assignMother($StudentsId);
-            $this->assignFather($StudentsId);
-        }
-        else if(Request::input('parental') == "with-out-father"){  
-
-            $this->assignMother($StudentsId);
-            $this->saveNewFather($StudentsId);
-        }
-        else if(Request::input('parental') == "with-out-mother"){  
-            $this->saveNewMother($StudentsId);
-            $this->assignFather($StudentsId);
-        }
-
-
-        if(Request::input('guardian_check') != ""){
-
-            if(Request::input('guardian_id') != ""){
-                $this->assignGuardian($StudentsId);
-            }
-            
-        }else{
-            $this->saveNewGuardian($StudentsId);
-        }
-
-        if(Request::file('image_upload') != ""){
-           $this->saveImage($StudentsId); 
-        }
-        
         $return = new rrdReturn();
-        return $return->status(true)
-                      ->message("Awesome!, Student has been saved!")
-                      ->show();
+        DB::beginTransaction();
+
+                try {
+                        if(Request::input('student_id_old') != ""){
+                            $Students = Students::find(Request::input('student_id_old'));
+                            Parents_Students::where('student_id' , Request::input('student_id_old'))->delete();
+                        }else{
+                            $Students = new Students();
+                        }
+
+                        $checkSchoolYear = new RfSchoolYear();
+                        $checkSchoolYear = $checkSchoolYear->where('is_current','=',"1")->first();
+
+                        if(count($checkSchoolYear) == 0){
+
+                            $return = new rrdReturn();
+                            return $return->status(false)
+                                      ->message('Assign current school year first , cannot save student.')
+                                      ->show();
+                        }
+
+
+                        $Students->batch_id          = substr($checkSchoolYear->sy_from, -2);
+                        $Students->student_status_id = '1';
+                        $Students->first_name        = Request::input('first_name');
+                        $Students->middle_name       = Request::input('middle_name');
+                        $Students->nick_name         = Request::input('nick_name');
+                        $Students->last_name         = Request::input('last_name');
+                        $Students->name_extension    = Request::input('name_extension');
+                        $Students->gender            = Request::input('gender');
+                        $Students->birthday          = Request::input('birthday');
+                        $Students->birthplace        = Request::input('birthplace');
+                        $Students->home_address      = Request::input('home_address');
+                        $Students->cp_no             = Request::input('cp_no');
+                        $Students->tel_no            = Request::input('tel_no');
+                        $Students->save();
+
+                        $StudentsId = $Students->max('student_id');
+
+                        if(Request::input('parental') == "default"){
+
+                            $this->saveNewFather($StudentsId);
+                            $this->saveNewMother($StudentsId);
+                        }
+                        else if(Request::input('parental') == "checkParents"){
+
+                            $this->assignMother($StudentsId);
+                            $this->assignFather($StudentsId);
+                        }
+                        else if(Request::input('parental') == "with-out-father"){
+
+                            $this->assignMother($StudentsId);
+                            $this->saveNewFather($StudentsId);
+                        }
+                        else if(Request::input('parental') == "with-out-mother"){
+                            $this->saveNewMother($StudentsId);
+                            $this->assignFather($StudentsId);
+                        }
+
+
+                        if(Request::input('guardian_check') != ""){
+
+                            if(Request::input('guardian_id') != ""){
+                                $this->assignGuardian($StudentsId);
+                            }
+
+                        }else{
+                            $this->saveNewGuardian($StudentsId);
+                        }
+
+                        if(Request::file('image_upload') != ""){
+                           $this->saveImage($StudentsId);
+                        }
+
+                         DB::commit();
+
+                }
+
+                catch (\Illuminate\Database\QueryException $e) {
+
+                        Log::error($e->getMessage());
+                        DB::rollback();
+                        return $return->status(false)
+                              ->message("An error has eccured, transactions immediately calls a database    rollback.
+                                        This feature was designed by the software developer to prevent data loss and
+                                        database uninttended data.".$e->getMessage() )
+                              ->show();
+
+                }
+
+
+
+                        return $return->status(true)
+                                      ->message("Awesome!, Student has been saved!")
+                                      ->show();
     }
 
     public function saveImage($StudentsId){
@@ -128,7 +137,7 @@ class StudentController extends Controller
                     File::makeDirectory($storagePath, 0755, true);
             }
         }
-        
+
         $small  = Image::make(Request::file('image_upload'));
         $medium = Image::make(Request::file('image_upload'));
         $big    = Image::make(Request::file('image_upload'));
@@ -192,7 +201,7 @@ class StudentController extends Controller
 
     public function saveNewGuardian($StudentsId){
 
-        $checkParents = new Parents(); 
+        $checkParents = new Parents();
         $checkParents = $checkParents
                         ->where('parents_name',Request::input('guardian_name'))
                         ->get();
@@ -219,7 +228,7 @@ class StudentController extends Controller
         $Occupation = Occupation::firstOrNew(['designation_name' => Request::input('guardian_occupation')]);
         $Occupation->save(['designation_name' => Request::input('guardian_occupation')]);
         $OccupationData = Occupation::where('designation_name', '=', Request::input('guardian_occupation'))->first();
-        
+
 
         if(Request::input('guardian_parent_id') != ""){
             $Guardian = Parents::find(Request::input('guardian_parent_id'));
@@ -243,7 +252,7 @@ class StudentController extends Controller
         }else{
             $parent_id = $Guardian->max('parent_id');
         }
-    
+
         $Parents_Students = new Parents_Students;
         $Parents_Students->student_id       = $StudentsId;
         $Parents_Students->parent_id        = $parent_id;
@@ -254,7 +263,7 @@ class StudentController extends Controller
 
     public function saveNewMother($StudentsId){
 
-        $checkParents = new Parents(); 
+        $checkParents = new Parents();
         $checkParents = $checkParents
                         ->where('parents_name',Request::input('mothers_name'))
                         ->get();
@@ -278,12 +287,12 @@ class StudentController extends Controller
         $Occupation->save(['designation_name' => Request::input('designation_name')]);
         $OccupationData = Occupation::where('designation_name', '=', Request::input('mothers_occupation'))->first();
 
-        
+
 
         if(Request::input('mother_parent_id') != ""){
             $Mother = Parents::find(Request::input('mother_parent_id'));
         }else{
-            $Mother = new Parents; 
+            $Mother = new Parents;
         }
 
         $Mother->parents_name       = Request::input('mothers_name');
@@ -314,7 +323,7 @@ class StudentController extends Controller
 
     public function saveNewFather($StudentsId){
 
-        $checkParents = new Parents(); 
+        $checkParents = new Parents();
         $checkParents = $checkParents
                         ->where('parents_name',Request::input('fathers_name'))
                         ->get();
@@ -327,7 +336,7 @@ class StudentController extends Controller
         }
 
         $Nationality = Nationality::firstOrNew(['nationality_name' => Request::input('fathers_nationality')]);
-            
+
         $Nationality->save(['nationality_name' => Request::input('fathers_nationality')]);
         $NationalityData = Nationality::where('nationality_name', '=', Request::input('fathers_nationality'))->first();
 
@@ -343,7 +352,7 @@ class StudentController extends Controller
         if(Request::input('father_parent_id') != ""){
             $Father = Parents::find(Request::input('father_parent_id'));
         }else{
-            $Father = new Parents; 
+            $Father = new Parents;
         }
 
         $Father->parents_name       = Request::input('fathers_name');
@@ -421,5 +430,5 @@ class StudentController extends Controller
         return view('sms.registrar.students-found')->with('students',$students);
     }
 
-    
+
 }
